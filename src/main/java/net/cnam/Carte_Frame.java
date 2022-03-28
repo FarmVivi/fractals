@@ -21,6 +21,6 @@ public class Carte_Frame extends JFrame {
         setTitle("Fractals");
         setSize(512, 1024); //(x , y)
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }
