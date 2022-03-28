@@ -5,3 +5,4 @@ public class Main {
         App.setInstance(new App());
     }
 }
+
