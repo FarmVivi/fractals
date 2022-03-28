@@ -6,25 +6,19 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.EventQueue;
 
-public class Menu_Panel extends JPanel {
+public class Main_Panel extends JPanel {
     private JButton carteButton;
 
-    public Menu_Panel() {
-        carteButton = new JButton("Carte");
-        carteButton.addActionListener(new ActionListener() {
+    public Main_Panel(App app) {
+        this.carteButton = new JButton("Carte");
+        this.carteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        Carte_Frame ex = new Carte_Frame();
-                        ex.setVisible(true);
-                    }
-                });
+                app.launchCarteWindow();
             }
         });
+
         this.add(carteButton);
     }
 

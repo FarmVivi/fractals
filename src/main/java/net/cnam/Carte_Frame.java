@@ -3,24 +3,27 @@ package net.cnam;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import javax.swing.Timer;
 
 public class Carte_Frame extends JFrame {
-    public Carte_Frame(){
-        Carte_Panel surface = new Carte_Panel();
-        add(surface);
+    private Carte_Panel panel;
+
+    public Carte_Frame(App app) {
+        panel = new Carte_Panel();
+
+        // Caractéristiques de la fenêtre
+        setTitle("Fractals - Carte");
+        setSize(1280, 720);
+        setLocationRelativeTo(app.getMainFrame());
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Ajout du panel
+        this.add(panel);
 
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Timer timer = surface.getTimer();
-                timer.stop();
+                panel.getTimer().stop();
             }
         });
-
-        setTitle("Fractals");
-        setSize(512, 1024); //(x , y)
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }
