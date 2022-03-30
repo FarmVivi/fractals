@@ -1,6 +1,7 @@
 package net.cnam.window.surface;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -48,7 +49,7 @@ public class NewSurfacePanel extends JPanel {
     }
 
     // Lignes 290 à 350
-    public void surfaceDeBase(Graphics g) {
+    public void surfaceDeBase(Graphics2D g) {
         for (int x = 0; x <= l; x += p) {
             for (int y = 0; y <= l; y += p) {
                 surface[x][y] = (int) (random.nextFloat() * h);
@@ -67,7 +68,7 @@ public class NewSurfacePanel extends JPanel {
     }
 
     // Lignes 360 à 690
-    public void calculFractal(Graphics g) {
+    public void calculFractal(Graphics2D g) {
         while (p > 1) {
             int q = p / 2;
             int e = d / 2;
@@ -167,8 +168,8 @@ public class NewSurfacePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        surfaceDeBase(g);
-        calculFractal(g);
+        surfaceDeBase((Graphics2D) g);
+        calculFractal((Graphics2D) g);
         this.app.getCarteFrame().getCartePanel().setValues(this.surface, this.n);
     }
 }

@@ -1,6 +1,7 @@
 package net.cnam.window.carte;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -15,7 +16,7 @@ public class CartePanel extends JPanel {
         this.n = n;
     }
 
-    public void carte(Graphics g) {
+    public void carte(Graphics2D g) {
         // Lignes 790 à 830
         for (int y = 0; y <= surface.length - 1; y++) {
             for (int x = 0; x <= surface.length - 1; x++) {
@@ -33,6 +34,6 @@ public class CartePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        carte(g);
+        carte((Graphics2D) g);
     }
 }

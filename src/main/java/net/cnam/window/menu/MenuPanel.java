@@ -76,5 +76,25 @@ public class MenuPanel extends JPanel {
             }
         });
         this.add(gameButton);
+
+        // TODO REMOVE THIS CODE
+        JButton test1Button = new JButton("Test1");
+        test1Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.getNewSurfaceFrame().repaint();
+            }
+        });
+        this.add(test1Button);
+
+        // TODO REMOVE THIS CODE
+        JButton test2Button = new JButton("Test2");
+        test2Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.getCarteFrame().repaint();
+            }
+        });
+        this.add(test2Button);
     }
 }
