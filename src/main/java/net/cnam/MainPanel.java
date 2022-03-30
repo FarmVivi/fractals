@@ -66,6 +66,12 @@ public class MainPanel extends JPanel {
 
         // Bouton "Le jeu"
         this.gameButton = new JButton("Le jeu");
+        this.gameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.launchGameWindow();
+            }
+        });
         this.add(gameButton);
     }
 }
