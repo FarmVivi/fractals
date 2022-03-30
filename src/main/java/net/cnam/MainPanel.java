@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Main_Panel extends JPanel {
+public class MainPanel extends JPanel {
     private JButton newSurfaceButton;
     private JButton carteButton;
     private JButton stratesViewButton;
@@ -13,7 +13,7 @@ public class Main_Panel extends JPanel {
     private JButton filFerViewButton;
     private JButton gameButton;
 
-    public Main_Panel(App app) {
+    public MainPanel(App app) {
         // Bouton "Nouvelle surface"
         this.newSurfaceButton = new JButton("Nouvelle surface");
         this.newSurfaceButton.addActionListener(new ActionListener() {

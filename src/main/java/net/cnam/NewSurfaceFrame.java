@@ -2,11 +2,11 @@ package net.cnam;
 
 import javax.swing.JFrame;
 
-public class NewSurface_Frame extends JFrame {
-    private NewSurface_Panel panel;
+public class NewSurfaceFrame extends JFrame {
+    private NewSurfacePanel panel;
 
-    public NewSurface_Frame(App app) {
-        panel = new NewSurface_Panel(3, 100, 100, 62548759613L, 127);
+    public NewSurfaceFrame(App app) {
+        panel = new NewSurfacePanel(3, 100, 100, 62548759613L, 127);
 
         // Caractéristiques de la fenêtre
         setTitle("Fractals - Nouvelle surface");

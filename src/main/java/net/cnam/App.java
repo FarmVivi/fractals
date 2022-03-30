@@ -1,12 +1,12 @@
 package net.cnam;
 
 public class App {
-    private Main_Frame mainFrame;
-    private NewSurface_Frame newSurfaceFrame;
+    private MainFrame mainFrame;
+    private NewSurfaceFrame newSurfaceFrame;
 
     public App() {
-        this.mainFrame = new Main_Frame(this);
-        this.newSurfaceFrame = new NewSurface_Frame(this);
+        this.mainFrame = new MainFrame(this);
+        this.newSurfaceFrame = new NewSurfaceFrame(this);
     }
 
     public void launchMainWindow() {
@@ -17,11 +17,11 @@ public class App {
         this.newSurfaceFrame.setVisible(true);
     }
 
-    public Main_Frame getMainFrame() {
+    public MainFrame getMainFrame() {
         return mainFrame;
     }
 
-    public NewSurface_Frame getCarteFrame() {
+    public NewSurfaceFrame getCarteFrame() {
         return newSurfaceFrame;
     }
 }

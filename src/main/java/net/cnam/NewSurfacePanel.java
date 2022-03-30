@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 // A partir de la ligne 180
-public class NewSurface_Panel extends JPanel {
+public class NewSurfacePanel extends JPanel {
     private int p; // pas
     private int m; // maille
     private int h; // hauteur
@@ -21,7 +21,7 @@ public class NewSurface_Panel extends JPanel {
 
     // Paramètres
     // Lignes 170 à 270
-    public NewSurface_Panel(int maille, int hauteur, int deviation, long graine, int taille)
+    public NewSurfacePanel(int maille, int hauteur, int deviation, long graine, int taille)
             throws IllegalArgumentException {
         if (maille < 0 || maille > 3)
             throw new IllegalArgumentException("maille doit être compris entre 0 et 3");
