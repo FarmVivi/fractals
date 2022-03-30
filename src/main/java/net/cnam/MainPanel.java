@@ -46,6 +46,12 @@ public class MainPanel extends JPanel {
 
         // Bouton "Vue en ombres"
         this.ombresViewButton = new JButton("Vue en ombres");
+        this.ombresViewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.launchOmbresViewWindow();
+            }
+        });
         this.add(ombresViewButton);
 
         // Bouton "Vue en fils de fer"
