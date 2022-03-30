@@ -11,10 +11,10 @@ public class CarteFrame extends JFrame {
         panel = new CartePanel();
 
         // Caractéristiques de la fenêtre
-        setTitle("Fractals - Carte");
-        setSize(1280, 720);
-        setLocationRelativeTo(app.getMainFrame());
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setTitle("Fractals - Carte");
+        this.setSize(1280, 720);
+        this.setLocationRelativeTo(app.getMainFrame());
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Ajout du panel
         this.add(panel);

@@ -11,10 +11,10 @@ public class OmbresViewFrame extends JFrame {
         panel = new OmbresViewPanel();
 
         // Caractéristiques de la fenêtre
-        setTitle("Fractals - Vue en ombres");
-        setSize(1280, 720);
-        setLocationRelativeTo(app.getMainFrame());
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setTitle("Fractals - Vue en ombres");
+        this.setSize(1280, 720);
+        this.setLocationRelativeTo(app.getMainFrame());
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Ajout du panel
         this.add(panel);
