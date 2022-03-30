@@ -1,12 +1,14 @@
-package net.cnam;
+package net.cnam.window.menu;
 
 import javax.swing.JFrame;
 
-public class MainFrame extends JFrame {
-    private MainPanel panel;
+import net.cnam.App;
 
-    public MainFrame(App app) {
-        panel = new MainPanel(app);
+public class MenuFrame extends JFrame {
+    private MenuPanel panel;
+
+    public MenuFrame(App app) {
+        panel = new MenuPanel(app);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Menu");

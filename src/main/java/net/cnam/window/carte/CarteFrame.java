@@ -1,15 +1,17 @@
-package net.cnam;
+package net.cnam.window.carte;
 
 import javax.swing.JFrame;
 
-public class StratesViewFrame extends JFrame {
-    private StratesViewPanel panel;
+import net.cnam.App;
 
-    public StratesViewFrame(App app) {
-        panel = new StratesViewPanel();
+public class CarteFrame extends JFrame {
+    private CartePanel panel;
+
+    public CarteFrame(App app) {
+        panel = new CartePanel();
 
         // Caractéristiques de la fenêtre
-        setTitle("Fractals - Vue en strates");
+        setTitle("Fractals - Carte");
         setSize(1280, 720);
         setLocationRelativeTo(app.getMainFrame());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

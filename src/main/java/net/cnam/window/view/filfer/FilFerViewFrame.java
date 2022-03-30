@@ -1,6 +1,8 @@
-package net.cnam;
+package net.cnam.window.view.filfer;
 
 import javax.swing.JFrame;
+
+import net.cnam.App;
 
 public class FilFerViewFrame extends JFrame {
     private FilFerViewPanel panel;

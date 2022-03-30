@@ -1,11 +1,11 @@
-package net.cnam;
+package net.cnam.window.view.filfer;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class StratesViewPanel extends JPanel {
+public class FilFerViewPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

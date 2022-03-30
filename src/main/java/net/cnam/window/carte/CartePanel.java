@@ -1,4 +1,4 @@
-package net.cnam;
+package net.cnam.window.carte;
 
 import java.awt.Color;
 import java.awt.Graphics;

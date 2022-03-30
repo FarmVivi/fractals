@@ -1,6 +1,8 @@
-package net.cnam;
+package net.cnam.window.surface;
 
 import javax.swing.JFrame;
+
+import net.cnam.App;
 
 public class NewSurfaceFrame extends JFrame {
     private NewSurfacePanel panel;

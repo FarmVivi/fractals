@@ -1,7 +1,15 @@
 package net.cnam;
 
+import net.cnam.window.carte.CarteFrame;
+import net.cnam.window.game.GameFrame;
+import net.cnam.window.menu.MenuFrame;
+import net.cnam.window.surface.NewSurfaceFrame;
+import net.cnam.window.view.filfer.FilFerViewFrame;
+import net.cnam.window.view.ombres.OmbresViewFrame;
+import net.cnam.window.view.strates.StratesViewFrame;
+
 public class App {
-    private MainFrame mainFrame;
+    private MenuFrame mainFrame;
     private NewSurfaceFrame newSurfaceFrame;
     private CarteFrame carteFrame;
     private StratesViewFrame stratesViewFrame;
@@ -10,7 +18,7 @@ public class App {
     private GameFrame gameFrame;
 
     public App() {
-        this.mainFrame = new MainFrame(this);
+        this.mainFrame = new MenuFrame(this);
         this.newSurfaceFrame = new NewSurfaceFrame(this);
         this.carteFrame = new CarteFrame(this);
         this.stratesViewFrame = new StratesViewFrame(this);
@@ -23,7 +31,7 @@ public class App {
         this.mainFrame.setVisible(true);
     }
 
-    public MainFrame getMainFrame() {
+    public MenuFrame getMainFrame() {
         return mainFrame;
     }
 

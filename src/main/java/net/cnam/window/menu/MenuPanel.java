@@ -1,11 +1,14 @@
-package net.cnam;
+package net.cnam.window.menu;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import net.cnam.App;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class MainPanel extends JPanel {
+public class MenuPanel extends JPanel {
     private JButton newSurfaceButton;
     private JButton carteButton;
     private JButton stratesViewButton;
@@ -13,7 +16,7 @@ public class MainPanel extends JPanel {
     private JButton filFerViewButton;
     private JButton gameButton;
 
-    public MainPanel(App app) {
+    public MenuPanel(App app) {
         // Bouton "Nouvelle surface"
         this.newSurfaceButton = new JButton("Nouvelle surface");
         this.newSurfaceButton.addActionListener(new ActionListener() {

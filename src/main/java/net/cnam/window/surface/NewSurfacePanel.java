@@ -1,4 +1,4 @@
-package net.cnam;
+package net.cnam.window.surface;
 
 import java.awt.Color;
 import java.awt.Graphics;
