@@ -71,8 +71,11 @@ public class Carte_Panel extends JPanel {
             int q = this.pas / 2;
             int e = this.deviation / 2;
 
+            // lignes 390 à 450
             for (int x = q; x < this.taille - q; x += this.pas) {
+                System.out.println("x: " + x + "/" + (this.taille - q - 1));
                 for (int y = q; y < this.taille - q; y += this.pas) {
+                    System.out.println("y: " + y + "/" + (this.taille - q - 1));
                     this.hauteur = (surface[x - q][y - q] + surface[x - q][y + q] + surface[x + q][y - q]
                             + surface[x + q][y + q]) / 4 + this.deviation * this.random.nextInt() - e;
                     if (this.hauteur < this.n) {
@@ -87,12 +90,14 @@ public class Carte_Panel extends JPanel {
                     plot(g, x * 4, y * 2, c);
                 }
             }
+
+            // lignes 460 à 560
         }
     }
 
     public void plot(Graphics g, int x, int y, int c) {
         Color color = new Color(c * 17, c * 17, c * 17);
-        System.out.println("x" + x + " y" + y + " c" + color.getRGB());
+        // System.out.println("x" + x + " y" + y + " c" + color.getRGB());
         g.setColor(color);
         g.drawLine(x, y, x, y);
     }
