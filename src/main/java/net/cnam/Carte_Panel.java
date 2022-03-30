@@ -121,6 +121,40 @@ public class Carte_Panel extends JPanel {
                     plot(g, y * 4, x * 2, c);
                 }
             }
+
+            // lignes 570 à 660
+            for (int i = q; i <= this.taille - q; i += this.pas) {
+                this.hauteur = (surface[0][i - q] + surface[0][i + q] + surface[q][i]) / 3
+                        + this.deviation * this.random.nextInt() - e;
+                if (this.hauteur < this.n) {
+                    this.hauteur = this.n;
+                }
+                surface[0][i] = this.hauteur;
+                this.hauteur = (surface[this.taille][i - q] + surface[this.taille][i + q] + surface[this.taille - q][i])
+                        / 3
+                        + this.deviation * this.random.nextInt() - e;
+                if (this.hauteur < this.n) {
+                    this.hauteur = this.n;
+                }
+                surface[this.taille][i] = this.hauteur;
+                this.hauteur = (surface[i - q][0] + surface[i + q][0] + surface[i][q]) / 3
+                        + this.deviation * this.random.nextInt() - e;
+                if (this.hauteur < this.n) {
+                    this.hauteur = this.n;
+                }
+                surface[i][0] = this.hauteur;
+                this.hauteur = (surface[i - q][this.taille] + surface[i + q][this.taille] + surface[i][this.taille - q])
+                        / 3
+                        + this.deviation * this.random.nextInt() - e;
+                if (this.hauteur < this.n) {
+                    this.hauteur = this.n;
+                }
+                surface[i][this.taille] = this.hauteur;
+            }
+
+            // lignes 670 à 680
+            this.pas /= 2;
+            this.deviation /= 2;
         }
     }
 
