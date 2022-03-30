@@ -4,11 +4,13 @@ public class App {
     private MainFrame mainFrame;
     private NewSurfaceFrame newSurfaceFrame;
     private CarteFrame carteFrame;
+    private StratesViewFrame stratesViewFrame;
 
     public App() {
         this.mainFrame = new MainFrame(this);
         this.newSurfaceFrame = new NewSurfaceFrame(this);
         this.carteFrame = new CarteFrame(this);
+        this.stratesViewFrame = new StratesViewFrame(this);
     }
 
     public void launchMainWindow() {
@@ -33,5 +35,13 @@ public class App {
 
     public void launchCarteWindow() {
         this.carteFrame.setVisible(true);
+    }
+
+    public StratesViewFrame getStratesViewFrame() {
+        return stratesViewFrame;
+    }
+
+    public void launchStratesViewWindow() {
+        this.stratesViewFrame.setVisible(true);
     }
 }

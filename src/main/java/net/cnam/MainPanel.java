@@ -36,6 +36,12 @@ public class MainPanel extends JPanel {
 
         // Bouton "Vue en strates"
         this.stratesViewButton = new JButton("Vue en strates");
+        this.stratesViewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.launchStratesViewWindow();
+            }
+        });
         this.add(stratesViewButton);
 
         // Bouton "Vue en ombres"
