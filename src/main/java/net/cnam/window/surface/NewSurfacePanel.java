@@ -1,13 +1,17 @@
 package net.cnam.window.surface;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
 import javax.swing.JPanel;
 
+import net.cnam.App;
+import net.cnam.Utils;
+
 // A partir de la ligne 180
 public class NewSurfacePanel extends JPanel {
+    private App app;
+
     private int p; // pas
     private int m; // maille
     private int h; // hauteur
@@ -21,10 +25,12 @@ public class NewSurfacePanel extends JPanel {
 
     // Paramètres
     // Lignes 170 à 270
-    public NewSurfacePanel(int maille, int hauteur, int deviation, long graine, int taille)
+    public NewSurfacePanel(App app, int maille, int hauteur, int deviation, long graine, int taille)
             throws IllegalArgumentException {
         if (maille < 0 || maille > 3)
             throw new IllegalArgumentException("maille doit être compris entre 0 et 3");
+
+        this.app = app;
 
         // + 1 car en basic il y a pas d'indice 0, ça va de 1 à taille
         this.surface = new int[taille + 1][taille + 1];
@@ -55,7 +61,7 @@ public class NewSurfacePanel extends JPanel {
                     c = 15;
                 }
 
-                plot(g, x * 4, y * 2, c);
+                Utils.plot(g, x * 4, y * 2, c);
             }
         }
     }
@@ -82,7 +88,7 @@ public class NewSurfacePanel extends JPanel {
 
                     surface[x][y] = h;
 
-                    plot(g, x * 4, y * 2, c);
+                    Utils.plot(g, x * 4, y * 2, c);
                 }
             }
 
@@ -102,7 +108,7 @@ public class NewSurfacePanel extends JPanel {
 
                     surface[x][y] = h;
 
-                    plot(g, x * 4, y * 2, c);
+                    Utils.plot(g, x * 4, y * 2, c);
 
                     h = (int) ((surface[y - q][x] + surface[y + q][x] + surface[y][x - q] + surface[y][x + q]) / 4
                             + d * random.nextFloat() - e);
@@ -117,7 +123,7 @@ public class NewSurfacePanel extends JPanel {
 
                     surface[y][x] = h;
 
-                    plot(g, y * 4, x * 2, c);
+                    Utils.plot(g, y * 4, x * 2, c);
                 }
             }
 
@@ -163,20 +169,6 @@ public class NewSurfacePanel extends JPanel {
 
         surfaceDeBase(g);
         calculFractal(g);
-    }
-
-    public Color getColor(int c) {
-        if (c < 0 || c > 15)
-            throw new IllegalArgumentException("c doit être compris entre 0 et 15");
-
-        // Méthode temporaire
-        // TODO Faire un switch avec les bonnes couleurs
-        return new Color(c * 17, c * 17, c * 17);
-    }
-
-    public void plot(Graphics g, int x, int y, int c) {
-        Color color = getColor(c);
-        g.setColor(color);
-        g.drawLine(x, y, x, y);
+        this.app.getCarteFrame().getCartePanel().setValues(this.surface, this.n);
     }
 }

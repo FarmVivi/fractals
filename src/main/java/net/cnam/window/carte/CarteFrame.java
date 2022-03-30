@@ -19,4 +19,8 @@ public class CarteFrame extends JFrame {
         // Ajout du panel
         this.add(panel);
     }
+
+    public CartePanel getCartePanel() {
+        return panel;
+    }
 }
