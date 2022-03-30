@@ -6,6 +6,7 @@ public class App {
     private CarteFrame carteFrame;
     private StratesViewFrame stratesViewFrame;
     private OmbresViewFrame ombresViewFrame;
+    private FilFerViewFrame filFerViewFrame;
 
     public App() {
         this.mainFrame = new MainFrame(this);
@@ -13,6 +14,7 @@ public class App {
         this.carteFrame = new CarteFrame(this);
         this.stratesViewFrame = new StratesViewFrame(this);
         this.ombresViewFrame = new OmbresViewFrame(this);
+        this.filFerViewFrame = new FilFerViewFrame(this);
     }
 
     public void launchMainWindow() {
@@ -53,5 +55,13 @@ public class App {
 
     public void launchOmbresViewWindow() {
         this.ombresViewFrame.setVisible(true);
+    }
+
+    public FilFerViewFrame getFilFerViewFrame() {
+        return filFerViewFrame;
+    }
+
+    public void launchFilFerViewWindow() {
+        this.filFerViewFrame.setVisible(true);
     }
 }

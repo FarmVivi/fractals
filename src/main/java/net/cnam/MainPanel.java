@@ -56,6 +56,12 @@ public class MainPanel extends JPanel {
 
         // Bouton "Vue en fils de fer"
         this.filFerViewButton = new JButton("Vue en fil de fer");
+        this.filFerViewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.launchFilFerViewWindow();
+            }
+        });
         this.add(filFerViewButton);
 
         // Bouton "Le jeu"
