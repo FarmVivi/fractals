@@ -42,13 +42,14 @@ public class Carte_Panel extends JPanel {
         this.repaint();
     }
 
-    // ligne 290 - 350 ||| revoir le pas
+    // TODO revoir le pas
     public void surfaceDeBase(Graphics g) {
 
         int[][] surface = new int[taille][taille];
 
-        for (int x = 0; x < this.taille; x += this.pas) {
-            for (int y = 0; y < this.taille; y += this.pas) {
+        // lignes 290 à 350
+        for (int x = 0; x <= this.taille; x += this.pas) {
+            for (int y = 0; y <= this.taille; y += this.pas) {
                 surface[x][y] = random.nextInt() * this.hauteur;
                 if (surface[x][y] < this.n) {
                     surface[x][y] = this.n;
@@ -67,15 +68,14 @@ public class Carte_Panel extends JPanel {
     }
 
     public void calculFractal(Graphics g, int[][] surface) {
+        // lignes 360 à 380
         while (this.pas > 1) {
             int q = this.pas / 2;
             int e = this.deviation / 2;
 
             // lignes 390 à 450
-            for (int x = q; x < this.taille - q; x += this.pas) {
-                System.out.println("x: " + x + "/" + (this.taille - q - 1));
-                for (int y = q; y < this.taille - q; y += this.pas) {
-                    System.out.println("y: " + y + "/" + (this.taille - q - 1));
+            for (int x = q; x <= this.taille - q; x += this.pas) {
+                for (int y = q; y <= this.taille - q; y += this.pas) {
                     this.hauteur = (surface[x - q][y - q] + surface[x - q][y + q] + surface[x + q][y - q]
                             + surface[x + q][y + q]) / 4 + this.deviation * this.random.nextInt() - e;
                     if (this.hauteur < this.n) {
@@ -92,6 +92,35 @@ public class Carte_Panel extends JPanel {
             }
 
             // lignes 460 à 560
+            for (int x = this.pas; x <= this.taille - this.pas; x += this.pas) {
+                for (int y = q; y <= this.taille - q; y += this.pas) {
+                    this.hauteur = (surface[x - q][y] + surface[x + q][y] + surface[x][y - q] + surface[x][y + q]) / 4
+                            + this.deviation * this.random.nextInt() - e;
+                    if (this.hauteur < this.n) {
+                        this.hauteur = this.n;
+                    }
+                    int c = this.hauteur / this.n;
+                    if (c > 15) {
+                        c = 15;
+                    }
+                    surface[x][y] = this.hauteur;
+
+                    plot(g, x * 4, y * 2, c);
+
+                    this.hauteur = (surface[y - q][x] + surface[y + q][x] + surface[y][x - q] + surface[y][x + q]) / 4
+                            + this.deviation * this.random.nextInt() - e;
+                    if (this.hauteur < this.n) {
+                        this.hauteur = this.n;
+                    }
+                    c = this.hauteur / this.n;
+                    if (c > 15) {
+                        c = 15;
+                    }
+                    surface[y][x] = this.hauteur;
+
+                    plot(g, y * 4, x * 2, c);
+                }
+            }
         }
     }
 
