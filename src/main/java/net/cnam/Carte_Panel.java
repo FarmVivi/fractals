@@ -1,7 +1,6 @@
 package net.cnam;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Random;
 
@@ -60,31 +59,41 @@ public class Carte_Panel extends JPanel {
                     c = 15;
                 }
 
-                plot(g, x * 4, y * 2, new Color(c * 17, c * 17, c * 17));
+                plot(g, x * 4, y * 2, c);
             }
         }
 
-        calculFractal(surface);
+        calculFractal(g, surface);
     }
 
-    // on s'est arrêté dans se gros bourbier rpz la ligne 410
-    public void calculFractal(int[][] h) {
-        while (this.pas>1) {
-            
+    public void calculFractal(Graphics g, int[][] surface) {
+        while (this.pas > 1) {
             int q = this.pas / 2;
             int e = this.deviation / 2;
 
-            for (int x = q ; x < this.taille - q ; x += this.pas){
-                for (int y = q ; y < this.taille - q ; y += this.pas){
-                    this.hauteur = (h[h[x-q,y-q]+h[x-q,y+q]+h[x+q,y-q]+h[x+q,y+q]]) / 4;
+            for (int x = q; x < this.taille - q; x += this.pas) {
+                for (int y = q; y < this.taille - q; y += this.pas) {
+                    this.hauteur = (surface[x - q][y - q] + surface[x - q][y + q] + surface[x + q][y - q]
+                            + surface[x + q][y + q]) / 4 + this.deviation * this.random.nextInt() - e;
+                    if (this.hauteur < this.n) {
+                        this.hauteur = this.n;
+                    }
+                    int c = this.hauteur / this.n;
+                    if (c > 15) {
+                        c = 15;
+                    }
+                    surface[x][y] = this.hauteur;
+
+                    plot(g, x * 4, y * 2, c);
                 }
             }
         }
     }
 
-    public void plot(Graphics g, int x, int y, Color c) {
-        System.out.println("x" + x + " y" + y + " c" + c.getRGB());
-        g.setColor(c);
+    public void plot(Graphics g, int x, int y, int c) {
+        Color color = new Color(c * 17, c * 17, c * 17);
+        System.out.println("x" + x + " y" + y + " c" + color.getRGB());
+        g.setColor(color);
         g.drawLine(x, y, x, y);
     }
 
