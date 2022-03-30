@@ -26,6 +26,12 @@ public class MainPanel extends JPanel {
 
         // Bouton "Carte"
         this.carteButton = new JButton("Carte");
+        this.carteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.launchCarteWindow();
+            }
+        });
         this.add(carteButton);
 
         // Bouton "Vue en strates"
