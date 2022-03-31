@@ -50,7 +50,7 @@ public class Utils {
     public static void plot(Graphics2D g, int x, int y, int c) {
         Color color = getColor(c);
         g.setColor(color);
-        g.drawLine(x, y, x+4, y);
-        g.drawLine(x, y+1, x+4, y+1);
+        g.drawLine(x, y, x + 1, y);
+        g.drawLine(x, y + 1, x + 1, y + 1);
     }
 }

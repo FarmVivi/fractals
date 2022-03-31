@@ -27,7 +27,7 @@ public class CartePanel extends JPanel {
                     c = 15;
                 }
 
-                Utils.plot(g, x * 4, y * 2, c);
+                Utils.plot(g, x, y, c);
             }
         }
     }

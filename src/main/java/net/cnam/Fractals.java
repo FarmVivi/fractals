@@ -26,7 +26,7 @@ public class Fractals {
                     c = 15;
                 }
 
-                Utils.plot(g, x * 4, y * 2, c);
+                Utils.plot(g, x, y, c);
             }
         }
 
@@ -59,7 +59,7 @@ public class Fractals {
 
                     surface[x][y] = hauteur;
 
-                    Utils.plot(g, x * 4, y * 2, c);
+                    Utils.plot(g, x, y, c);
                 }
             }
 
@@ -79,7 +79,7 @@ public class Fractals {
 
                     surface[x][y] = hauteur;
 
-                    Utils.plot(g, x * 4, y * 2, c);
+                    Utils.plot(g, x, y, c);
 
                     hauteur = (int) ((surface[y - q][x] + surface[y + q][x] + surface[y][x - q] + surface[y][x + q]) / 4
                             + deviation * random.nextFloat() - e);
@@ -94,7 +94,7 @@ public class Fractals {
 
                     surface[y][x] = hauteur;
 
-                    Utils.plot(g, y * 4, x * 2, c);
+                    Utils.plot(g, y, x, c);
                 }
             }
 
