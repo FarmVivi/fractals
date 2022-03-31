@@ -11,15 +11,20 @@ public class Utils {
         // TODO Faire un switch avec les bonnes couleurs
         switch (c) {
             case 0:
-                return Color.BLACK;
-            case 1:
+                // Bleu
                 return Color.BLUE;
+            case 1:
+                // Jaune vif
+                return new Color(97, 71, 0);
             case 2:
-                return Color.CYAN;
+                // Turquoise
+                return new Color(29, 73, 69);
             case 3:
-                return Color.DARK_GRAY;
+                // Rouge vif
+                return new Color(84, 12, 20);
             case 4:
-                return Color.GRAY;
+                // Blanc brillant
+                return new Color(76, 84, 84);
             case 5:
                 return Color.GREEN;
             case 6:
@@ -50,7 +55,6 @@ public class Utils {
     public static void plot(Graphics2D g, int x, int y, int c) {
         Color color = getColor(c);
         g.setColor(color);
-        g.drawLine(x, y, x + 1, y);
-        g.drawLine(x, y + 1, x + 1, y + 1);
+        g.drawRect(x, y, 1, 1);
     }
 }
