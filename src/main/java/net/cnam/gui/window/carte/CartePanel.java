@@ -1,4 +1,4 @@
-package net.cnam.window.carte;
+package net.cnam.gui.window.carte;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

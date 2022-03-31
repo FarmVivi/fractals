@@ -1,4 +1,4 @@
-package net.cnam.window.view.ombres;
+package net.cnam.gui.window.view.ombres;
 
 import javax.swing.JFrame;
 

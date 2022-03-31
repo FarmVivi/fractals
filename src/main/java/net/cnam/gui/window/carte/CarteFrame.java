@@ -1,22 +1,26 @@
-package net.cnam.window.game;
+package net.cnam.gui.window.carte;
 
 import javax.swing.JFrame;
 
 import net.cnam.App;
 
-public class GameFrame extends JFrame {
-    private GamePanel panel;
+public class CarteFrame extends JFrame {
+    private CartePanel panel;
 
-    public GameFrame(App app) {
-        panel = new GamePanel();
+    public CarteFrame(App app) {
+        panel = new CartePanel();
 
         // Caractéristiques de la fenêtre
-        this.setTitle("Fractals - Le jeu");
+        this.setTitle("Fractals - Carte");
         this.setSize(1280, 720);
         this.setLocationRelativeTo(app.getMainFrame());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Ajout du panel
         this.add(panel);
+    }
+
+    public CartePanel getCartePanel() {
+        return panel;
     }
 }

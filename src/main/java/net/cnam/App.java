@@ -1,12 +1,12 @@
 package net.cnam;
 
-import net.cnam.window.carte.CarteFrame;
-import net.cnam.window.game.GameFrame;
-import net.cnam.window.menu.MenuFrame;
-import net.cnam.window.surface.NewSurfaceFrame;
-import net.cnam.window.view.filfer.FilFerViewFrame;
-import net.cnam.window.view.ombres.OmbresViewFrame;
-import net.cnam.window.view.strates.StratesViewFrame;
+import net.cnam.gui.window.carte.CarteFrame;
+import net.cnam.gui.window.game.GameFrame;
+import net.cnam.gui.window.menu.MenuFrame;
+import net.cnam.gui.window.surface.NewSurfaceFrame;
+import net.cnam.gui.window.view.filfer.FilFerViewFrame;
+import net.cnam.gui.window.view.ombres.OmbresViewFrame;
+import net.cnam.gui.window.view.strates.StratesViewFrame;
 
 public class App {
     private MenuFrame mainFrame;
