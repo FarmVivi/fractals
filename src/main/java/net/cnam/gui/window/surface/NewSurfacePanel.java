@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import net.cnam.App;
 import net.cnam.Utils;
+import net.cnam.gui.component.CarteFractalComponent;
 
 // A partir de la ligne 180
 public class NewSurfacePanel extends JPanel {
@@ -40,6 +41,8 @@ public class NewSurfacePanel extends JPanel {
 
         int[][] surface = Utils.surfaceDeBase((Graphics2D) g, maille, hauteur, taille, random);
         surface = Utils.calculFractal((Graphics2D) g, maille, hauteur, deviation, taille, random, surface);
-        this.app.getCarteFrame().getCartePanel().setValues(surface, hauteur);
+
+        CarteFractalComponent carteFractal = this.app.getCarteFrame().getCartePanel().getCarteFractal();
+        carteFractal.setValues(surface, hauteur);
     }
 }

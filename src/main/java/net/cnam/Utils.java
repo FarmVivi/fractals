@@ -138,10 +138,10 @@ public class Utils {
     }
 
     // GUI
-    public static void plot(Graphics2D g, int x, int y, int color) {
+    public static void plot(Graphics2D g2d, int x, int y, int color) {
         Color c = getColor(1, color);
-        g.setColor(c);
-        g.drawRect(x, y, 1, 1);
+        g2d.setColor(c);
+        g2d.drawRect(x, y, 1, 1);
     }
 
     public static Color getColor(int mode, int color) {
