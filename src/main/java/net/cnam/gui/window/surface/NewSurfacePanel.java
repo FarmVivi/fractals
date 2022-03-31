@@ -19,8 +19,7 @@ public class NewSurfacePanel extends JPanel {
     private int taille;
     private long graine;
 
-    public NewSurfacePanel(App app, int maille, int hauteur, int deviation, int taille, long graine)
-            throws IllegalArgumentException {
+    public NewSurfacePanel(App app, int maille, int hauteur, int deviation, int taille, long graine) {
         if (maille < 0 || maille > 3)
             throw new IllegalArgumentException("maille doit être compris entre 0 et 3");
 
