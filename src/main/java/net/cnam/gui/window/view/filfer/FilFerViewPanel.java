@@ -1,4 +1,4 @@
-package net.cnam.window.view.filfer;
+package net.cnam.gui.window.view.filfer;
 
 import java.awt.Graphics;
 

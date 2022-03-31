@@ -1,4 +1,4 @@
-package net.cnam.window.game;
+package net.cnam.gui.window.game;
 
 import java.awt.Graphics;
 

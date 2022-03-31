@@ -1,4 +1,4 @@
-package net.cnam.window.surface;
+package net.cnam.gui.window.surface;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 import net.cnam.App;
-import net.cnam.Fractals;
+import net.cnam.Utils;
 
 // A partir de la ligne 180
 public class NewSurfacePanel extends JPanel {
@@ -39,8 +39,8 @@ public class NewSurfacePanel extends JPanel {
 
         Random random = new Random(graine);
 
-        int[][] surface = Fractals.surfaceDeBase((Graphics2D) g, maille, hauteur, taille, random);
-        surface = Fractals.calculFractal((Graphics2D) g, maille, hauteur, deviation, taille, random, surface);
+        int[][] surface = Utils.surfaceDeBase((Graphics2D) g, maille, hauteur, taille, random);
+        surface = Utils.calculFractal((Graphics2D) g, maille, hauteur, deviation, taille, random, surface);
         this.app.getCarteFrame().getCartePanel().setValues(surface, hauteur);
     }
 }

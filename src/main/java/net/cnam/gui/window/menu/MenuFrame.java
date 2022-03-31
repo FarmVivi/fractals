@@ -1,4 +1,4 @@
-package net.cnam.window.menu;
+package net.cnam.gui.window.menu;
 
 import javax.swing.JFrame;
 
