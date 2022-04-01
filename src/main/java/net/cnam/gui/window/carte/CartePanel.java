@@ -11,7 +11,7 @@ public class CartePanel extends JPanel {
         this.setLayout(null);
 
         carteFractal = new CarteFractalComponent(new int[0][0], 0);
-        carteFractal.setLocation(50, 50);
+        carteFractal.setLocation(0, 0);
         this.add(carteFractal);
     }
 
