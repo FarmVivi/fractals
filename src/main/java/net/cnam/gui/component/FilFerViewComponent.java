@@ -1,7 +1,9 @@
 package net.cnam.gui.component;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 import javax.swing.JComponent;
 
 import net.cnam.App;
@@ -32,8 +34,8 @@ public class FilFerViewComponent extends JComponent {
         int k = 0;
         int originX = 0;
         int originY = 40;
-        Utils.drawLine(g2d, originX, originY, 320, 0, 1, 1, 14);
-        Utils.drawLine(g2d, originX, originY, 640, 40, 1, 1, 14);
+        Utils.drawLine(g2d, originX, originY, 320, 0, Color.BLUE);
+        Utils.drawLine(g2d, originX, originY, 640, 40, Color.BLUE);
         int[] c = new int[320];
 
         int h = hauteur;
@@ -54,11 +56,11 @@ public class FilFerViewComponent extends JComponent {
                 h = Math.max(c[x + o], t);
                 c[x + o] = h;
 
-                Utils.drawLine(g2d, originX, originY, (o + x) * 4 - 320, h, 1, 1, 14);
+                Utils.drawLine(g2d, originX, originY, (o + x) * 4 - 320, h, Color.BLUE);
                 saveX = x;
             }
 
-            Utils.drawLine(g2d, originX, originY, (o + saveX) * 4 - 322, fh, 1, 1, 14);
+            Utils.drawLine(g2d, originX, originY, (o + saveX) * 4 - 322, fh, Color.BLUE);
             fh = h;
         }
 
