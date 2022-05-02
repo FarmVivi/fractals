@@ -1,9 +1,7 @@
 package net.cnam.gui.window.view.strates;
 
-import java.awt.Graphics;
-
 import javax.swing.JPanel;
-import net.cnam.gui.component.CarteFractalComponent;
+
 import net.cnam.gui.component.StratesViewComponent;
 
 public class StratesViewPanel extends JPanel {
@@ -21,5 +19,4 @@ public class StratesViewPanel extends JPanel {
     public StratesViewComponent getStratesViewComponent() {
         return stratesViewComponent;
     }
-
 }

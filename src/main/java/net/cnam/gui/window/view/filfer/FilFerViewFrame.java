@@ -9,7 +9,7 @@ public class FilFerViewFrame extends JFrame {
     private final FilFerViewPanel panel;
 
     public FilFerViewFrame(App app) {
-        panel = new FilFerViewPanel();
+        panel = new FilFerViewPanel(app);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Vue en fil de fer");

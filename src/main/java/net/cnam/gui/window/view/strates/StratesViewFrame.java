@@ -21,9 +21,7 @@ public class StratesViewFrame extends JFrame {
         this.add(panel);
     }
 
-    public StratesViewPanel getPanel() {
+    public StratesViewPanel getStratesViewPanel() {
         return panel;
     }
-    
-    
 }

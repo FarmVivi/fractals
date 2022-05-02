@@ -2,8 +2,8 @@ package net.cnam.gui.component;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 import javax.swing.JComponent;
-import net.cnam.Utils;
 
 public class OmbresViewComponent extends JComponent {
 

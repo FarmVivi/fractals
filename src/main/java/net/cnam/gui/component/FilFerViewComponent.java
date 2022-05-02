@@ -3,14 +3,20 @@ package net.cnam.gui.component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JComponent;
+
+import net.cnam.App;
 import net.cnam.Utils;
 
 public class FilFerViewComponent extends JComponent {
 
+    private final App app;
+
     private int surface[][];
     private int hauteur;
 
-    public FilFerViewComponent(int surface[][], int hauteur) {
+    public FilFerViewComponent(App app, int surface[][], int hauteur) {
+        this.app = app;
+
         this.surface = surface;
         this.hauteur = hauteur;
     }
@@ -55,6 +61,10 @@ public class FilFerViewComponent extends JComponent {
             Utils.drawLine(g2d, originX, originY, (o + saveX) * 4 - 322, fh, 1, 1, 14);
             fh = h;
         }
+
+        StratesViewComponent stratesViewComponent = this.app.getStratesViewFrame().getStratesViewPanel()
+                .getStratesViewComponent();
+        stratesViewComponent.setValues(surface, hauteur, c);
     }
 
     public void setValues(int[][] surface, int hauteur) {
