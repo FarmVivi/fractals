@@ -3,11 +3,23 @@ package net.cnam.gui.window.view.strates;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
+import net.cnam.gui.component.CarteFractalComponent;
+import net.cnam.gui.component.StratesViewComponent;
 
 public class StratesViewPanel extends JPanel {
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    private final StratesViewComponent stratesViewComponent;
+
+    public StratesViewPanel() {
+        this.setLayout(null);
+
+        stratesViewComponent = new StratesViewComponent();
+        stratesViewComponent.setLocation(0, 0);
+        this.add(stratesViewComponent);
     }
+
+    public StratesViewComponent getStratesViewComponent() {
+        return stratesViewComponent;
+    }
+
 }

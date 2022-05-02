@@ -20,4 +20,10 @@ public class StratesViewFrame extends JFrame {
         // Ajout du panel
         this.add(panel);
     }
+
+    public StratesViewPanel getPanel() {
+        return panel;
+    }
+    
+    
 }
