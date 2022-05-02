@@ -34,6 +34,8 @@ public class StratesViewComponent extends JComponent {
             c[80 + i] = h - 2;
         }
 
+        int cursorX = 0;
+        int cursorY = 0;
         for (int y = 0; y <= 128; y++) {
             for (int x = 0; x <= 127; x++) {
                 int nmx = nm + x + y;
@@ -48,8 +50,6 @@ public class StratesViewComponent extends JComponent {
                     h = nmx;
                 if (h <= c[a])
                     Utils.plot(g2d, a * 4, c[a], 0, 0);
-                int cursorX = 0;
-                int cursorY = 0;
                 if (h > c[a]) {
                     cursorX = a * 7;
                     cursorY = c[a] + 2;
