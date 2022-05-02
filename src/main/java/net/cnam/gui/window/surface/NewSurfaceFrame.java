@@ -11,7 +11,7 @@ public class NewSurfaceFrame extends JFrame {
     private final NewSurfacePanel panel;
 
     public NewSurfaceFrame(App app) {
-        panel = new NewSurfacePanel(app, 1, 128, 2, 2048, new Random().nextLong());
+        panel = new NewSurfacePanel(app, 1, 32, 1, 512, new Random().nextLong());
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Nouvelle surface");

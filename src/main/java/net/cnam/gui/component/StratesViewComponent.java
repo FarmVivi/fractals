@@ -1,8 +1,11 @@
 package net.cnam.gui.component;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
 import javax.swing.JComponent;
+
 import net.cnam.Utils;
 
 public class StratesViewComponent extends JComponent {
@@ -49,14 +52,13 @@ public class StratesViewComponent extends JComponent {
                 if (h < nmx)
                     h = nmx;
                 if (h <= c[a])
-                    Utils.plot(g2d, a * 4, c[a], 0, 0);
+                    Utils.plot(g2d, a * 4, c[a], Color.BLUE);
                 if (h > c[a]) {
                     cursorX = a * 7;
                     cursorY = c[a] + 2;
                 }
-                Utils.drawLine(g2d, cursorX, cursorY, a * 4, h, 0, c2);
+                Utils.drawLine(g2d, cursorX, cursorY, a * 4, h, Utils.getStratesColor(c2));
                 c[a] = h;
-
             }
         }
 
