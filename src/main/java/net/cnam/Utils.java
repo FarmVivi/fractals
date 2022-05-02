@@ -146,6 +146,12 @@ public class Utils {
         g2d.drawRect(x, y, 1, 1);
     }
 
+    public static void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2, int color) {
+        Color c = getColor(1, color);
+        g2d.setColor(c);
+        g2d.drawLine(x1, y1, x2, y2);
+    }
+
     public static Color getColor(int mode, int color) {
         if (mode < 0 || mode > 2) {
             throw new IllegalArgumentException("mode doit être compris entre 0 et 2");
