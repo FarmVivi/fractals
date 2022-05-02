@@ -157,17 +157,17 @@ public class Utils {
 
         switch (c) {
             case 0:
-                // Noir
-                return new Color(0, 0, 0);
+                //Bleu foncé
+                return new Color(50, 57, 175);
             case 1:
-                // Bleu
-                return new Color(0, 0, 255);
+                //Bleu plus clair
+                return new Color(137, 143, 253);
             case 2:
-                // Bleu vif
-                return new Color(0, 0, 139);
+                //Bleu clair smr
+                return new Color(38, 249, 254);
             case 3:
-                // Rouge
-                return new Color(255, 0, 0);
+                //Jaune
+                return new Color(254, 254, 38);
             case 4:
                 // Magenta
                 return new Color(255, 0, 255);
@@ -199,11 +199,11 @@ public class Utils {
                 // Blanc
                 return new Color(255, 255, 255);
             case 14:
-                // TODO Bleu pastel
-                return Color.BLUE;
+                //Gris
+                return new Color(218,218,210);
             case 15:
-                // Orange
-                return new Color(255, 165, 0);
+                //Blanc
+                return new Color(255, 255, 255);
             default:
                 return Color.BLACK;
         }
