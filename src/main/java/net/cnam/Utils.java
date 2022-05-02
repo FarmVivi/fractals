@@ -140,126 +140,17 @@ public class Utils {
     }
 
     // GUI
-    public static void plot(Graphics2D g2d, int x, int y, int mode, int color) {
-        Color c = getColor(mode, color);
-        g2d.setColor(c);
+    public static void plot(Graphics2D g2d, int x, int y, int mode, Color color) {
+        g2d.setColor(color);
         g2d.drawLine(x, y, x, y);
     }
 
-    public static void plot(Graphics2D g2d, int x, int y, int mode, int color, int overwrittenColor) {
-        Color c = getColor(overwrittenColor);
-        g2d.setColor(c);
-        g2d.drawLine(x, y, x, y);
-    }
-
-    public static void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2, int mode, int color) {
-        Color c = getColor(mode, color);
-        g2d.setColor(c);
+    public static void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2, Color color) {
+        g2d.setColor(color);
         g2d.drawLine(x1, y1, x2, y2);
     }
 
-    public static void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2, int mode, int color,
-            int overwrittenColor) {
-        Color c = getColor(overwrittenColor);
-        g2d.setColor(c);
-        g2d.drawLine(x1, y1, x2, y2);
-    }
-
-    private static Color getColor(int mode, int color) {
-        if (mode < 0 || mode > 2) {
-            throw new IllegalArgumentException("mode doit être compris entre 0 et 2");
-        }
-        if (color < 0 || color > 15) {
-            throw new IllegalArgumentException("color doit être compris entre 0 et 15");
-        }
-
-        switch (mode) {
-            case 0:
-                switch (color) {
-                    case 0 -> {
-                        return getColor(1);
-                    }
-                    case 1 -> {
-                        return getColor(24);
-                    }
-                    case 2 -> {
-                        return getColor(20);
-                    }
-                    case 3 -> {
-                        return getColor(6);
-                    }
-                    case 4 -> {
-                        return getColor(26);
-                    }
-                    case 5 -> {
-                        return getColor(0);
-                    }
-                    case 6 -> {
-                        return getColor(2);
-                    }
-                    case 7 -> {
-                        return getColor(8);
-                    }
-                    case 8 -> {
-                        return getColor(10);
-                    }
-                    case 9 -> {
-                        return getColor(12);
-                    }
-                    case 10 -> {
-                        return getColor(14);
-                    }
-                    case 11 -> {
-                        return getColor(16);
-                    }
-                    case 12 -> {
-                        return getColor(18);
-                    }
-                    case 13 -> {
-                        return getColor(22);
-                    }
-                    case 14 -> {
-                        // return getColor(generateRandomInt(1, 24));
-                        return getColor(13);
-                    }
-                    case 15 -> {
-                        // return getColor(generateRandomInt(11, 16));
-                        return getColor(13);
-                    }
-                }
-
-            case 1:
-                switch (color) {
-                    case 0, 4, 8, 12 -> {
-                        return getColor(1);
-                    }
-                    case 1, 5, 9, 13 -> {
-                        return getColor(24);
-                    }
-                    case 2, 6, 10, 14 -> {
-                        return getColor(20);
-                    }
-                    case 3, 7, 11, 15 -> {
-                        return getColor(6);
-                    }
-                }
-
-            case 2:
-                switch (color) {
-                    case 0, 2, 4, 6, 8, 10, 12, 14 -> {
-                        return getColor(1);
-                    }
-                    case 1, 3, 5, 7, 9, 11, 13, 15 -> {
-                        return getColor(24);
-                    }
-                }
-
-            default:
-                return Color.BLACK;
-        }
-    }
-
-    private static Color getColor(int c) {
+    public static Color getSurfaceColor(int c) {
         if (c < 0 || c > 26) {
             throw new IllegalArgumentException("c doit être compris entre 0 et 26");
         }
