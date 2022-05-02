@@ -29,7 +29,7 @@ public class Utils {
                     c = 15;
                 }
 
-                Utils.plot(g, x, y, 0, c);
+                Utils.plot(g, x, y, getSurfaceColor(c));
             }
         }
 
@@ -62,7 +62,7 @@ public class Utils {
 
                     surface[x][y] = hauteur;
 
-                    Utils.plot(g, x, y, 0, c);
+                    Utils.plot(g, x, y, getSurfaceColor(c));
                 }
             }
 
@@ -82,7 +82,7 @@ public class Utils {
 
                     surface[x][y] = hauteur;
 
-                    Utils.plot(g, x, y, 0, c);
+                    Utils.plot(g, x, y, getSurfaceColor(c));
 
                     hauteur = (int) ((surface[y - q][x] + surface[y + q][x] + surface[y][x - q] + surface[y][x + q]) / 4
                             + deviation * random.nextFloat() - e);
@@ -97,7 +97,7 @@ public class Utils {
 
                     surface[y][x] = hauteur;
 
-                    Utils.plot(g, y, x, 0, c);
+                    Utils.plot(g, y, x, getSurfaceColor(c));
                 }
             }
 
@@ -140,7 +140,7 @@ public class Utils {
     }
 
     // GUI
-    public static void plot(Graphics2D g2d, int x, int y, int mode, Color color) {
+    public static void plot(Graphics2D g2d, int x, int y, Color color) {
         g2d.setColor(color);
         g2d.drawLine(x, y, x, y);
     }
