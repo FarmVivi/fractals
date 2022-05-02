@@ -28,10 +28,17 @@ public class App {
         this.gameFrame = new GameFrame(this);
     }
 
+    /**
+     * Rend visible la fenêtre principale
+     */
     public void launchMainWindow() {
         this.mainFrame.setVisible(true);
     }
 
+    /**
+     * Méthode pour 
+     * @return
+     */
     public MenuFrame getMainFrame() {
         return mainFrame;
     }

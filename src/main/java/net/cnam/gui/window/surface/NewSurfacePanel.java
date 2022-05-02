@@ -10,6 +10,7 @@ import net.cnam.App;
 import net.cnam.Utils;
 import net.cnam.gui.component.CarteFractalComponent;
 import net.cnam.gui.component.FilFerViewComponent;
+import net.cnam.gui.component.StratesViewComponent;
 
 // A partir de la ligne 180
 public class NewSurfacePanel extends JPanel {
@@ -51,5 +52,8 @@ public class NewSurfacePanel extends JPanel {
         FilFerViewComponent filFerViewComponent = this.app.getFilFerViewFrame().getFilFerViewPanel()
                 .getFilFerViewComponent();
         filFerViewComponent.setValues(surface, hauteur);
+        
+        StratesViewComponent stratesViewComponent = this.app.getStratesViewFrame().getPanel().getStratesViewComponent();
+        stratesViewComponent.setValues(surface, hauteur, new int[0]);
     }
 }
