@@ -143,13 +143,13 @@ public class Utils {
     public static void plot(Graphics2D g2d, int x, int y, int mode, int color) {
         Color c = getColor(mode, color);
         g2d.setColor(c);
-        g2d.drawRect(x, y, 1, 1);
+        g2d.drawLine(x, y, x, y);
     }
 
     public static void plot(Graphics2D g2d, int x, int y, int mode, int color, int overwrittenColor) {
         Color c = getColor(overwrittenColor);
         g2d.setColor(c);
-        g2d.drawRect(x, y, 1, 1);
+        g2d.drawLine(x, y, x, y);
     }
 
     public static void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2, int mode, int color) {
@@ -219,10 +219,12 @@ public class Utils {
                         return getColor(22);
                     }
                     case 14 -> {
-                        return getColor(generateRandomInt(1, 24));
+                        // return getColor(generateRandomInt(1, 24));
+                        return getColor(13);
                     }
                     case 15 -> {
-                        return getColor(generateRandomInt(11, 16));
+                        // return getColor(generateRandomInt(11, 16));
+                        return getColor(13);
                     }
                 }
 
