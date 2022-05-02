@@ -151,7 +151,7 @@ public class Utils {
     }
 
     public static Color getSurfaceColor(int c) {
-        if (c < 0 || c > 26) {
+        if (c < 0 || c > 15) {
             throw new IllegalArgumentException("c doit être compris entre 0 et 26");
         }
 
@@ -204,39 +204,6 @@ public class Utils {
             case 15:
                 // Orange
                 return new Color(255, 165, 0);
-            case 16:
-                // Rose
-                return new Color(255, 192, 203);
-            case 17:
-                // TODO Magenta pastel
-                return Color.MAGENTA;
-            case 18:
-                // Vert vif
-                return new Color(0, 100, 0);
-            case 19:
-                // Vert marin
-                return new Color(46, 139, 87);
-            case 20:
-                // Turquoise vif
-                return new Color(0, 206, 209);
-            case 21:
-                // Vert citron
-                return new Color(50, 205, 50);
-            case 22:
-                // TODO Vert pastel
-                return Color.GREEN;
-            case 23:
-                // TODO Turquoise pastel
-                return new Color(64, 224, 208);
-            case 24:
-                // Jaune vif
-                return new Color(255, 215, 0);
-            case 25:
-                // TODO Jaune pastel
-                return Color.YELLOW;
-            case 26:
-                // Blanc brillant
-                return new Color(255, 250, 240);
             default:
                 return Color.BLACK;
         }
