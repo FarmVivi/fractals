@@ -152,7 +152,184 @@ public class Utils {
 
     public static Color getSurfaceColor(int c) {
         if (c < 0 || c > 15) {
-            throw new IllegalArgumentException("c doit être compris entre 0 et 26");
+            throw new IllegalArgumentException("c doit être compris entre 0 et 15");
+        }
+
+        switch (c) {
+            case 0:
+                // Noir
+                return new Color(0, 0, 0);
+            case 1:
+                // Bleu
+                return new Color(0, 0, 255);
+            case 2:
+                // Bleu vif
+                return new Color(0, 0, 139);
+            case 3:
+                // Rouge
+                return new Color(255, 0, 0);
+            case 4:
+                // Magenta
+                return new Color(255, 0, 255);
+            case 5:
+                // TODO Mauve
+                return new Color(212, 115, 212);
+            case 6:
+                // Rouge vif
+                return new Color(139, 0, 0);
+            case 7:
+                // Violet
+                return new Color(128, 0, 128);
+            case 8:
+                // Magenta vif
+                return new Color(139, 0, 139);
+            case 9:
+                // Vert
+                return new Color(0, 128, 0);
+            case 10:
+                // Turquoise
+                return new Color(64, 224, 208);
+            case 11:
+                // Bleu ciel
+                return new Color(135, 206, 235);
+            case 12:
+                // Jaune
+                return new Color(255, 255, 0);
+            case 13:
+                // Blanc
+                return new Color(255, 255, 255);
+            case 14:
+                // TODO Bleu pastel
+                return Color.BLUE;
+            case 15:
+                // Orange
+                return new Color(255, 165, 0);
+            default:
+                return Color.BLACK;
+        }
+    }
+
+    public static Color getFilFerColor(int c) {
+        if (c < 0 || c > 15) {
+            throw new IllegalArgumentException("c doit être compris entre 0 et 15");
+        }
+
+        switch (c) {
+            case 0:
+                // Noir
+                return new Color(0, 0, 0);
+            case 1:
+                // Bleu
+                return new Color(0, 0, 255);
+            case 2:
+                // Bleu vif
+                return new Color(0, 0, 139);
+            case 3:
+                // Rouge
+                return new Color(255, 0, 0);
+            case 4:
+                // Magenta
+                return new Color(255, 0, 255);
+            case 5:
+                // TODO Mauve
+                return new Color(212, 115, 212);
+            case 6:
+                // Rouge vif
+                return new Color(139, 0, 0);
+            case 7:
+                // Violet
+                return new Color(128, 0, 128);
+            case 8:
+                // Magenta vif
+                return new Color(139, 0, 139);
+            case 9:
+                // Vert
+                return new Color(0, 128, 0);
+            case 10:
+                // Turquoise
+                return new Color(64, 224, 208);
+            case 11:
+                // Bleu ciel
+                return new Color(135, 206, 235);
+            case 12:
+                // Jaune
+                return new Color(255, 255, 0);
+            case 13:
+                // Blanc
+                return new Color(255, 255, 255);
+            case 14:
+                // TODO Bleu pastel
+                return Color.BLUE;
+            case 15:
+                // Orange
+                return new Color(255, 165, 0);
+            default:
+                return Color.BLACK;
+        }
+    }
+
+    public static Color getStratesColor(int c) {
+        if (c < 0 || c > 15) {
+            throw new IllegalArgumentException("c doit être compris entre 0 et 15");
+        }
+
+        switch (c) {
+            case 0:
+                // Noir
+                return new Color(0, 0, 0);
+            case 1:
+                // Bleu
+                return new Color(0, 0, 255);
+            case 2:
+                // Bleu vif
+                return new Color(0, 0, 139);
+            case 3:
+                // Rouge
+                return new Color(255, 0, 0);
+            case 4:
+                // Magenta
+                return new Color(255, 0, 255);
+            case 5:
+                // TODO Mauve
+                return new Color(212, 115, 212);
+            case 6:
+                // Rouge vif
+                return new Color(139, 0, 0);
+            case 7:
+                // Violet
+                return new Color(128, 0, 128);
+            case 8:
+                // Magenta vif
+                return new Color(139, 0, 139);
+            case 9:
+                // Vert
+                return new Color(0, 128, 0);
+            case 10:
+                // Turquoise
+                return new Color(64, 224, 208);
+            case 11:
+                // Bleu ciel
+                return new Color(135, 206, 235);
+            case 12:
+                // Jaune
+                return new Color(255, 255, 0);
+            case 13:
+                // Blanc
+                return new Color(255, 255, 255);
+            case 14:
+                // TODO Bleu pastel
+                return Color.BLUE;
+            case 15:
+                // Orange
+                return new Color(255, 165, 0);
+            default:
+                return Color.BLACK;
+        }
+    }
+
+    public static Color getOmbresColor(int c) {
+        if (c < 0 || c > 15) {
+            throw new IllegalArgumentException("c doit être compris entre 0 et 15");
         }
 
         switch (c) {
