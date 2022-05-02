@@ -35,7 +35,7 @@ public class CarteFractalComponent extends JComponent {
                     c = 15;
                 }
 
-                Utils.plot(g2d, x, y, c);
+                Utils.plot(g2d, x, y, 0, c);
             }
         }
     }

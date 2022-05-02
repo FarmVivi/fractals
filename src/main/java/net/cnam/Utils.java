@@ -29,7 +29,7 @@ public class Utils {
                     c = 15;
                 }
 
-                Utils.plot(g, x, y, c);
+                Utils.plot(g, x, y, 0, c);
             }
         }
 
@@ -62,7 +62,7 @@ public class Utils {
 
                     surface[x][y] = hauteur;
 
-                    Utils.plot(g, x, y, c);
+                    Utils.plot(g, x, y, 0, c);
                 }
             }
 
@@ -82,7 +82,7 @@ public class Utils {
 
                     surface[x][y] = hauteur;
 
-                    Utils.plot(g, x, y, c);
+                    Utils.plot(g, x, y, 0, c);
 
                     hauteur = (int) ((surface[y - q][x] + surface[y + q][x] + surface[y][x - q] + surface[y][x + q]) / 4
                             + deviation * random.nextFloat() - e);
@@ -97,7 +97,7 @@ public class Utils {
 
                     surface[y][x] = hauteur;
 
-                    Utils.plot(g, y, x, c);
+                    Utils.plot(g, y, x, 0, c);
                 }
             }
 
@@ -140,19 +140,32 @@ public class Utils {
     }
 
     // GUI
-    public static void plot(Graphics2D g2d, int x, int y, int color) {
-        Color c = getColor(1, color);
+    public static void plot(Graphics2D g2d, int x, int y, int mode, int color) {
+        Color c = getColor(mode, color);
         g2d.setColor(c);
         g2d.drawRect(x, y, 1, 1);
     }
 
-    public static void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2, int color) {
-        Color c = getColor(1, color);
+    public static void plot(Graphics2D g2d, int x, int y, int mode, int color, int overwrittenColor) {
+        Color c = getColor(overwrittenColor);
+        g2d.setColor(c);
+        g2d.drawRect(x, y, 1, 1);
+    }
+
+    public static void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2, int mode, int color) {
+        Color c = getColor(mode, color);
         g2d.setColor(c);
         g2d.drawLine(x1, y1, x2, y2);
     }
 
-    public static Color getColor(int mode, int color) {
+    public static void drawLine(Graphics2D g2d, int x1, int y1, int x2, int y2, int mode, int color,
+            int overwrittenColor) {
+        Color c = getColor(overwrittenColor);
+        g2d.setColor(c);
+        g2d.drawLine(x1, y1, x2, y2);
+    }
+
+    private static Color getColor(int mode, int color) {
         if (mode < 0 || mode > 2) {
             throw new IllegalArgumentException("mode doit être compris entre 0 et 2");
         }

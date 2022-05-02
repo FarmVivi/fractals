@@ -20,4 +20,8 @@ public class FilFerViewFrame extends JFrame {
         // Ajout du panel
         this.add(panel);
     }
+
+    public FilFerViewPanel getFilFerViewPanel() {
+        return panel;
+    }
 }
