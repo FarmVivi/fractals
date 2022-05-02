@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import net.cnam.App;
 
 public class GameFrame extends JFrame {
-    private GamePanel panel;
+
+    private final GamePanel panel;
 
     public GameFrame(App app) {
         panel = new GamePanel();

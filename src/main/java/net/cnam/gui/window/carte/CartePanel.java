@@ -5,7 +5,8 @@ import javax.swing.JPanel;
 import net.cnam.gui.component.CarteFractalComponent;
 
 public class CartePanel extends JPanel {
-    private CarteFractalComponent carteFractal;
+
+    private final CarteFractalComponent carteFractal;
 
     public CartePanel() {
         this.setLayout(null);

@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import net.cnam.App;
 
 public class FilFerViewFrame extends JFrame {
-    private FilFerViewPanel panel;
+
+    private final FilFerViewPanel panel;
 
     public FilFerViewFrame(App app) {
         panel = new FilFerViewPanel();

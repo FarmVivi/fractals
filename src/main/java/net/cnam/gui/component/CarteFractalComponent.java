@@ -8,6 +8,7 @@ import javax.swing.JComponent;
 import net.cnam.Utils;
 
 public class CarteFractalComponent extends JComponent {
+
     private int surface[][];
     private int hauteur;
 
@@ -24,7 +25,6 @@ public class CarteFractalComponent extends JComponent {
 
         // g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
         // RenderingHints.VALUE_ANTIALIAS_ON);
-
         int n = hauteur / 16;
 
         // Lignes 790 à 830

@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import net.cnam.App;
 
 public class OmbresViewFrame extends JFrame {
-    private OmbresViewPanel panel;
+
+    private final OmbresViewPanel panel;
 
     public OmbresViewFrame(App app) {
         panel = new OmbresViewPanel();

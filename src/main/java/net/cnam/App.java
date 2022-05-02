@@ -9,13 +9,14 @@ import net.cnam.gui.window.view.ombres.OmbresViewFrame;
 import net.cnam.gui.window.view.strates.StratesViewFrame;
 
 public class App {
-    private MenuFrame mainFrame;
-    private NewSurfaceFrame newSurfaceFrame;
-    private CarteFrame carteFrame;
-    private StratesViewFrame stratesViewFrame;
-    private OmbresViewFrame ombresViewFrame;
-    private FilFerViewFrame filFerViewFrame;
-    private GameFrame gameFrame;
+
+    private final MenuFrame mainFrame;
+    private final NewSurfaceFrame newSurfaceFrame;
+    private final CarteFrame carteFrame;
+    private final StratesViewFrame stratesViewFrame;
+    private final OmbresViewFrame ombresViewFrame;
+    private final FilFerViewFrame filFerViewFrame;
+    private final GameFrame gameFrame;
 
     public App() {
         this.mainFrame = new MenuFrame(this);

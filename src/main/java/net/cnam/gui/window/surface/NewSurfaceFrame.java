@@ -7,7 +7,8 @@ import javax.swing.JFrame;
 import net.cnam.App;
 
 public class NewSurfaceFrame extends JFrame {
-    private NewSurfacePanel panel;
+
+    private final NewSurfacePanel panel;
 
     public NewSurfaceFrame(App app) {
         panel = new NewSurfacePanel(app, 1, 100, 10, 512, new Random().nextLong());

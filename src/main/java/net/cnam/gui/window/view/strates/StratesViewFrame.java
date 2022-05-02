@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import net.cnam.App;
 
 public class StratesViewFrame extends JFrame {
-    private StratesViewPanel panel;
+
+    private final StratesViewPanel panel;
 
     public StratesViewFrame(App app) {
         panel = new StratesViewPanel();

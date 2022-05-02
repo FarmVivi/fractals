@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import net.cnam.App;
 
 public class MenuFrame extends JFrame {
-    private MenuPanel panel;
+
+    private final MenuPanel panel;
 
     public MenuFrame(App app) {
         panel = new MenuPanel(app);

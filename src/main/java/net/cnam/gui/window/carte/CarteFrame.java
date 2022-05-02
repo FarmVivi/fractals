@@ -5,7 +5,8 @@ import javax.swing.JFrame;
 import net.cnam.App;
 
 public class CarteFrame extends JFrame {
-    private CartePanel panel;
+
+    private final CartePanel panel;
 
     public CarteFrame(App app) {
         panel = new CartePanel();
