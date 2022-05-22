@@ -10,7 +10,7 @@ public class Utils {
             return;
         graphics.setColor(Utils.getSurfaceColor(c));
         // graphics.drawLine(x, y, x, y);
-        graphics.drawRect(x, y, 1, 1);
+        graphics.drawRect(x *2 , y * 2, 1, 1);
     }
 
     public static void drawLine(Graphics2D graphics, int x1, int y1, int x2, int y2, int c) {
