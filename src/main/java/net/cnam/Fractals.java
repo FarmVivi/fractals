@@ -171,19 +171,27 @@ public class Fractals {
     }
 
     public void newSurface(Graphics2D graphics) {
+        if (calculFractalDone) {
+            return;
+        }
+
         semaphore.acquireUninterruptibly();
+
         surfaceDeBase(graphics);
         calculFractal(graphics);
         calculFractalDone = true;
+
         semaphore.release();
     }
 
     public void map(Graphics2D graphics) {
         semaphore.acquireUninterruptibly();
+
         if (!calculFractalDone) {
             newSurface(null);
         }
         surface(graphics);
+
         semaphore.release();
     }
 }
