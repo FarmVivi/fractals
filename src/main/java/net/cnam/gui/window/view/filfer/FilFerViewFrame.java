@@ -3,13 +3,11 @@ package net.cnam.gui.window.view.filfer;
 import javax.swing.JFrame;
 
 import net.cnam.App;
+import net.cnam.Fractals;
 
 public class FilFerViewFrame extends JFrame {
-
-    private final FilFerViewPanel panel;
-
-    public FilFerViewFrame(App app) {
-        panel = new FilFerViewPanel(app);
+    public FilFerViewFrame(App app, Fractals fractals) {
+        FilFerViewPanel panel = new FilFerViewPanel(fractals);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Vue en fil de fer");
@@ -19,9 +17,5 @@ public class FilFerViewFrame extends JFrame {
 
         // Ajout du panel
         this.add(panel);
-    }
-
-    public FilFerViewPanel getFilFerViewPanel() {
-        return panel;
     }
 }

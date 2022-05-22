@@ -1,22 +1,24 @@
 package net.cnam.gui.window.view.strates;
 
+import java.awt.Graphics;
+
 import javax.swing.JPanel;
 
-import net.cnam.gui.component.StratesViewComponent;
+import net.cnam.Fractals;
 
 public class StratesViewPanel extends JPanel {
+    private final Fractals fractals;
 
-    private final StratesViewComponent stratesViewComponent;
-
-    public StratesViewPanel() {
+    public StratesViewPanel(Fractals fractals) {
         this.setLayout(null);
 
-        stratesViewComponent = new StratesViewComponent();
-        stratesViewComponent.setLocation(0, 0);
-        this.add(stratesViewComponent);
+        this.fractals = fractals;
     }
 
-    public StratesViewComponent getStratesViewComponent() {
-        return stratesViewComponent;
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // TODO
     }
 }

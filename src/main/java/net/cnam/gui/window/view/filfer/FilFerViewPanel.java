@@ -1,22 +1,24 @@
 package net.cnam.gui.window.view.filfer;
 
+import java.awt.Graphics;
+
 import javax.swing.JPanel;
 
-import net.cnam.App;
-import net.cnam.gui.component.FilFerViewComponent;
+import net.cnam.Fractals;
 
 public class FilFerViewPanel extends JPanel {
-    private final FilFerViewComponent filFerViewComponent;
+    private final Fractals fractals;
 
-    public FilFerViewPanel(App app) {
+    public FilFerViewPanel(Fractals fractals) {
         this.setLayout(null);
 
-        filFerViewComponent = new FilFerViewComponent(app, new int[0][0], 0);
-        filFerViewComponent.setLocation(0, 0);
-        this.add(filFerViewComponent);
+        this.fractals = fractals;
     }
 
-    public FilFerViewComponent getFilFerViewComponent() {
-        return filFerViewComponent;
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // TODO
     }
 }

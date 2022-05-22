@@ -1,17 +1,13 @@
 package net.cnam.gui.window.surface;
 
-import java.util.Random;
-
 import javax.swing.JFrame;
 
 import net.cnam.App;
+import net.cnam.Fractals;
 
 public class NewSurfaceFrame extends JFrame {
-
-    private final NewSurfacePanel panel;
-
-    public NewSurfaceFrame(App app) {
-        panel = new NewSurfacePanel(app, 1, 32, 1, 512, new Random().nextLong());
+    public NewSurfaceFrame(App app, Fractals fractals) {
+        NewSurfacePanel panel = new NewSurfacePanel(fractals);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Nouvelle surface");

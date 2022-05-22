@@ -3,13 +3,11 @@ package net.cnam.gui.window.view.strates;
 import javax.swing.JFrame;
 
 import net.cnam.App;
+import net.cnam.Fractals;
 
 public class StratesViewFrame extends JFrame {
-
-    private final StratesViewPanel panel;
-
-    public StratesViewFrame(App app) {
-        panel = new StratesViewPanel();
+    public StratesViewFrame(App app, Fractals fractals) {
+        StratesViewPanel panel = new StratesViewPanel(fractals);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Vue en strates");
@@ -19,9 +17,5 @@ public class StratesViewFrame extends JFrame {
 
         // Ajout du panel
         this.add(panel);
-    }
-
-    public StratesViewPanel getStratesViewPanel() {
-        return panel;
     }
 }

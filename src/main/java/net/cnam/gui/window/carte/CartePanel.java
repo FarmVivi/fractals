@@ -1,22 +1,25 @@
 package net.cnam.gui.window.carte;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JPanel;
 
-import net.cnam.gui.component.CarteFractalComponent;
+import net.cnam.Fractals;
 
 public class CartePanel extends JPanel {
+    private Fractals fractals;
 
-    private final CarteFractalComponent carteFractal;
-
-    public CartePanel() {
+    public CartePanel(Fractals fractals) {
         this.setLayout(null);
 
-        carteFractal = new CarteFractalComponent(new int[0][0], 0);
-        carteFractal.setLocation(0, 0);
-        this.add(carteFractal);
+        this.fractals = fractals;
     }
 
-    public CarteFractalComponent getCarteFractal() {
-        return carteFractal;
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        fractals.map((Graphics2D) g);
     }
 }

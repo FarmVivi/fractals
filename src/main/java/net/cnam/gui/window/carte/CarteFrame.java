@@ -3,13 +3,11 @@ package net.cnam.gui.window.carte;
 import javax.swing.JFrame;
 
 import net.cnam.App;
+import net.cnam.Fractals;
 
 public class CarteFrame extends JFrame {
-
-    private final CartePanel panel;
-
-    public CarteFrame(App app) {
-        panel = new CartePanel();
+    public CarteFrame(App app, Fractals fractals) {
+        CartePanel panel = new CartePanel(fractals);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Carte");
@@ -19,9 +17,5 @@ public class CarteFrame extends JFrame {
 
         // Ajout du panel
         this.add(panel);
-    }
-
-    public CartePanel getCartePanel() {
-        return panel;
     }
 }

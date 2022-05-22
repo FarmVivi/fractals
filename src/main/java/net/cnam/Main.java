@@ -1,8 +1,15 @@
 package net.cnam;
 
+import javax.swing.SwingUtilities;
+
 public class Main {
 
     public static void main(String[] args) {
-        new App().launchMainWindow();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                App app = new App();
+                app.launchMainWindow();
+            }
+        });
     }
 }

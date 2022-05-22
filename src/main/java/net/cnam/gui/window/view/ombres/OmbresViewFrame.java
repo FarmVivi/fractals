@@ -3,13 +3,11 @@ package net.cnam.gui.window.view.ombres;
 import javax.swing.JFrame;
 
 import net.cnam.App;
+import net.cnam.Fractals;
 
 public class OmbresViewFrame extends JFrame {
-
-    private final OmbresViewPanel panel;
-
-    public OmbresViewFrame(App app) {
-        panel = new OmbresViewPanel();
+    public OmbresViewFrame(App app, Fractals fractals) {
+        OmbresViewPanel panel = new OmbresViewPanel(fractals);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Vue en ombres");

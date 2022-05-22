@@ -1,5 +1,7 @@
 package net.cnam;
 
+import java.util.Random;
+
 import net.cnam.gui.window.carte.CarteFrame;
 import net.cnam.gui.window.game.GameFrame;
 import net.cnam.gui.window.menu.MenuFrame;
@@ -19,26 +21,21 @@ public class App {
     private final GameFrame gameFrame;
 
     public App() {
+        Fractals fractals = new Fractals(1, 32, 1, new Random().nextLong(), 128);
+
         this.mainFrame = new MenuFrame(this);
-        this.newSurfaceFrame = new NewSurfaceFrame(this);
-        this.carteFrame = new CarteFrame(this);
+        this.newSurfaceFrame = new NewSurfaceFrame(this, fractals);
+        this.carteFrame = new CarteFrame(this, fractals);
         this.stratesViewFrame = new StratesViewFrame(this);
         this.ombresViewFrame = new OmbresViewFrame(this);
         this.filFerViewFrame = new FilFerViewFrame(this);
         this.gameFrame = new GameFrame(this);
     }
 
-    /**
-     * Rend visible la fenêtre principale
-     */
     public void launchMainWindow() {
         this.mainFrame.setVisible(true);
     }
 
-    /**
-     * Méthode pour 
-     * @return
-     */
     public MenuFrame getMainFrame() {
         return mainFrame;
     }
