@@ -20,7 +20,7 @@ public class Fractals {
 
     // Variables "temporaires"
     private int[][] h1;
-    private int[] C;
+    private int[] c1;
     private int m;
     private int p;
     private int h2;
@@ -30,10 +30,13 @@ public class Fractals {
     private int n;
     private int x;
     private int y;
-    private int c;
+    private int c2;
     private int q;
     private int e;
     private int i;
+    private int nm;
+    private int nmx;
+    private int a;
 
     private Semaphore semaphore = new Semaphore(1);
     private boolean calculFractalDone = false;
@@ -48,7 +51,7 @@ public class Fractals {
 
     private void reset() {
         this.h1 = new int[129][129];
-        this.C = new int[321];
+        this.c1 = new int[321];
         this.m = initM;
         this.p = (int) Math.pow(2, 7 - m);
         this.h2 = initH;
@@ -58,10 +61,13 @@ public class Fractals {
         this.n = h2 / 16;
         this.x = 0;
         this.y = 0;
-        this.c = 0;
+        this.c2 = 0;
         this.q = 0;
         this.e = 0;
         this.i = 0;
+        this.nm = 0;
+        this.nmx = 0;
+        this.a = 0;
     }
 
     // lignes 290 à 350
@@ -72,11 +78,11 @@ public class Fractals {
                 if (h1[x][y] < n) {
                     h1[x][y] = n;
                 }
-                c = h1[x][y] / n;
-                if (c > 15) {
-                    c = 15;
+                c2 = h1[x][y] / n;
+                if (c2 > 15) {
+                    c2 = 15;
                 }
-                Utils.plot(graphics, x, y, c);
+                Utils.plot(graphics, x, y, c2);
             }
         }
     }
@@ -95,12 +101,12 @@ public class Fractals {
                     if (h2 < n) {
                         h2 = n;
                     }
-                    c = h2 / n;
-                    if (c > 15) {
-                        c = 15;
+                    c2 = h2 / n;
+                    if (c2 > 15) {
+                        c2 = 15;
                     }
                     h1[x][y] = h2;
-                    Utils.plot(graphics, x, y, c);
+                    Utils.plot(graphics, x, y, c2);
                 }
             }
 
@@ -112,24 +118,24 @@ public class Fractals {
                     if (h2 < n) {
                         h2 = n;
                     }
-                    c = h2 / n;
-                    if (c > 15) {
-                        c = 15;
+                    c2 = h2 / n;
+                    if (c2 > 15) {
+                        c2 = 15;
                     }
                     h1[x][y] = h2;
-                    Utils.plot(graphics, x, y, c);
+                    Utils.plot(graphics, x, y, c2);
 
                     h2 = (int) ((h1[y - q][x] + h1[y + q][x] + h1[y][x - q] + h1[y][x + q]) / 4 + d * random.nextFloat()
                             - e);
                     if (h2 < n) {
                         h2 = n;
                     }
-                    c = h2 / n;
-                    if (c > 15) {
-                        c = 15;
+                    c2 = h2 / n;
+                    if (c2 > 15) {
+                        c2 = 15;
                     }
                     h1[y][x] = h2;
-                    Utils.plot(graphics, y, x, c);
+                    Utils.plot(graphics, y, x, c2);
                 }
             }
 
@@ -165,14 +171,66 @@ public class Fractals {
         }
     }
 
+    // lignes 770 à 840
     private void surface(Graphics2D graphics) {
         for (y = 0; y <= 128; y++) {
             for (x = 0; x <= 128; x++) {
-                c = h1[x][y] / n;
-                if (c > 15) {
-                    c = 15;
+                c2 = h1[x][y] / n;
+                if (c2 > 15) {
+                    c2 = 15;
                 }
-                Utils.plot(graphics, x, y, c);
+                Utils.plot(graphics, x, y, c2);
+            }
+        }
+    }
+
+    // lignes 980 à 1140
+    private void strates(Graphics2D graphics) {
+        nm = n * 4;
+
+        // lignes 1000 à 1040
+        for (i = 0; i <= 80; i++) {
+            h2 = h1[0][i] + i;
+            if (h2 < nm + i) {
+                h2 = nm + i;
+            }
+            c1[80 - i] = h2 - 2;
+            h2 = h1[i][0] + i;
+            if (h2 < nm + i) {
+                h2 = nm + i;
+            }
+            c1[80 + i] = h2 - 2;
+        }
+
+        // lignes 1050 à 1130
+        for (y = 0; y <= 128; y++) {
+            for (x = 0; x <= 127; x++) {
+                nmx = nm + x + y;
+                a = 80 - y + x;
+                if (a < 0 || a > 319) {
+                    continue;
+                }
+                h2 = h1[x][y] + x + y;
+                c2 = h1[x][y] / n;
+                if (c2 > 15) {
+                    c2 = 15;
+                }
+                if (h2 < nmx) {
+                    h2 = nmx;
+                }
+                if (h2 <= c1[a]) {
+                    Utils.plot(graphics, a * 4, c1[a], 0);
+                    // Utils.plot(graphics, a * 4 + 1, c1[a], 0);
+                    // Utils.plot(graphics, a * 4 + 2, c1[a], 0);
+                    // Utils.plot(graphics, a * 4 + 3, c1[a], 0);
+                }
+                if (h2 > c1[a]) {
+                    Utils.drawLine(graphics, a * 4, c1[a] + 2, a * 4, h2 + 1, c2);
+                    // Utils.drawLine(graphics, a * 4 + 1, c1[a] + 2, a * 4 + 1, h2 + 1, c2);
+                    // Utils.drawLine(graphics, a * 4 + 2, c1[a] + 2, a * 4 + 2, h2 + 1, c2);
+                    // Utils.drawLine(graphics, a * 4 + 3, c1[a] + 2, a * 4 + 3, h2 + 1, c2);
+                    c1[a] = h2;
+                }
             }
         }
     }
@@ -189,13 +247,25 @@ public class Fractals {
     }
 
     public void map(Graphics2D graphics) {
-        semaphore.acquireUninterruptibly();
-
         if (!calculFractalDone) {
             newSurface(null);
         }
 
+        semaphore.acquireUninterruptibly();
+
         surface(graphics);
+
+        semaphore.release();
+    }
+
+    public void viewStrates(Graphics2D graphics) {
+        if (!calculFractalDone) {
+            newSurface(null);
+        }
+
+        semaphore.acquireUninterruptibly();
+
+        strates(graphics);
 
         semaphore.release();
     }

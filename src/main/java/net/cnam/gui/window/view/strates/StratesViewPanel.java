@@ -1,6 +1,7 @@
 package net.cnam.gui.window.view.strates;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -19,6 +20,6 @@ public class StratesViewPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // TODO
+        fractals.viewStrates((Graphics2D) g);
     }
 }
