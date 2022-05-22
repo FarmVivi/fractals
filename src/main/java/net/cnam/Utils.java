@@ -10,7 +10,7 @@ public class Utils {
             return;
         graphics.setColor(Utils.getSurfaceColor(c));
         // graphics.drawLine(x, y, x, y);
-        graphics.drawRect(x * 2, y * 2, 1, 1);
+        graphics.drawRect(x, y, 1, 1);
     }
 
     public static void drawLine(Graphics2D graphics, int x1, int y1, int x2, int y2, int c) {
@@ -36,9 +36,9 @@ public class Utils {
 
         switch (c) {
             case 0:
-                // Noir
-                // pas use
-                return new Color(0, 0, 0);
+                // Blanc
+                // sommet montagne
+                return new Color(255, 255, 255);
             case 1:
                 // Blanc
                 // haut de montagne (blanc)
@@ -77,28 +77,28 @@ public class Utils {
                 return new Color(218, 211, 4);
             case 10:
                 // Turquoise
-                // haut peu profonde (turquoise)
+                // haut bordure plage (turquoise)
                 return new Color(0, 224, 240);
             case 11:
+                // Bleu super clair
+                // eau peu profonde (bleu super clair)
+                return new Color(123, 192, 238);
+            case 12:
                 // Bleu clair
                 // eau semi profonde (bleu clair)
-                return new Color(15, 139, 222);
-            case 12:
-                // Bleu foncé
-                // eau profonde (bleu foncé)
-                return new Color(7, 89, 144);
+                return new Color(91, 173, 228);
             case 13:
-                // Blanc
-                //useless
-                return new Color(255, 255, 255);
+                // bleu foncé
+                // eau profonde
+                return new Color(40, 128, 187);
             case 14:
-                // TODO Bleu pastel
-                //useless
-                return Color.gray;
+                // TODO Bleu foncé x2
+                // eau très profonde
+                return new Color(21, 97, 147);
             case 15:
-                // Orange
-                //useless
-                return new Color(255, 165, 0);
+                // bleu foncé x3
+                // eau super profonde
+                return new Color(5, 64, 103);
             default:
                 return Color.BLACK;
         }
