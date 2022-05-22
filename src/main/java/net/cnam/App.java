@@ -26,9 +26,9 @@ public class App {
         this.mainFrame = new MenuFrame(this);
         this.newSurfaceFrame = new NewSurfaceFrame(this, fractals);
         this.carteFrame = new CarteFrame(this, fractals);
-        this.stratesViewFrame = new StratesViewFrame(this);
-        this.ombresViewFrame = new OmbresViewFrame(this);
-        this.filFerViewFrame = new FilFerViewFrame(this);
+        this.stratesViewFrame = new StratesViewFrame(this, fractals);
+        this.ombresViewFrame = new OmbresViewFrame(this, fractals);
+        this.filFerViewFrame = new FilFerViewFrame(this, fractals);
         this.gameFrame = new GameFrame(this);
     }
 
