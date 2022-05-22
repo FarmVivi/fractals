@@ -37,51 +37,67 @@ public class Utils {
         switch (c) {
             case 0:
                 // Noir
+                // pas use
                 return new Color(0, 0, 0);
             case 1:
-                // Bleu
-                return new Color(0, 0, 255);
+                // Blanc
+                // haut de montagne (blanc)
+                return new Color(255, 255, 255);
             case 2:
-                // Bleu vif
-                return new Color(0, 0, 139);
+                // gris très clair
+                // presque haut de montagne (gris très clair)
+                return new Color(243, 244, 244);
             case 3:
-                // Rouge
-                return new Color(255, 0, 0);
+                // gris moins clair
+                // flanc de montagne (gris moins clair)
+                return new Color(218, 221, 221);
             case 4:
-                // Magenta
-                return new Color(255, 0, 255);
+                // gris foncé
+                // flanc de montagne (gris foncé)
+                return new Color(149, 151, 151);
             case 5:
-                // TODO Mauve
-                return new Color(212, 115, 212);
+                // vert très foncé
+                // haut de pleine / début montagne (vert très foncé)
+                return new Color(56, 82, 64);
             case 6:
-                // Rouge vif
-                return new Color(139, 0, 0);
+                // vert foncé
+                // haut de pleine (vert foncé)
+                return new Color(64, 119, 81);
             case 7:
-                // Violet
-                return new Color(128, 0, 128);
-            case 8:
-                // Magenta vif
-                return new Color(139, 0, 139);
-            case 9:
                 // Vert
-                return new Color(0, 128, 0);
+                // pleine (vert)
+                return new Color(43, 153, 77);
+            case 8:
+                // vert clair
+                // pleine basse (vert clair)
+                return new Color(11, 194, 66);
+            case 9:
+                // jaune
+                // plage (jaune)
+                return new Color(218, 211, 4);
             case 10:
                 // Turquoise
-                return new Color(64, 224, 208);
+                // haut peu profonde (turquoise)
+                return new Color(0, 224, 240);
             case 11:
-                // Bleu ciel
-                return new Color(135, 206, 235);
+                // Bleu clair
+                // eau semi profonde (bleu clair)
+                return new Color(15, 139, 222);
             case 12:
-                // Jaune
-                return new Color(255, 255, 0);
+                // Bleu foncé
+                // eau profonde (bleu foncé)
+                return new Color(7, 89, 144);
             case 13:
                 // Blanc
+                //useless
                 return new Color(255, 255, 255);
             case 14:
                 // TODO Bleu pastel
-                return Color.BLUE;
+                //useless
+                return Color.gray;
             case 15:
                 // Orange
+                //useless
                 return new Color(255, 165, 0);
             default:
                 return Color.BLACK;
