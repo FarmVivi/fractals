@@ -7,22 +7,27 @@ import java.util.concurrent.Semaphore;
 public class Fractals {
 
     // Variables permanentes
-    private int[][] h1;
-    private int[] C;
     // maille (0-3)
-    private int m;
-    private int p;
+    private final int initM;
     // hauteur de base
-    private int h2;
+    private final int initH;
     // déviation
-    private int d;
-    // random
-    private Random random;
+    private final int initD;
+    // graine
+    private final long initZ;
     // taille (128, 64, 32)
-    private int l;
-    private int n;
+    private final int initL;
 
     // Variables "temporaires"
+    private int[][] h1;
+    private int[] C;
+    private int m;
+    private int p;
+    private int h2;
+    private int d;
+    private Random random;
+    private int l;
+    private int n;
     private int x;
     private int y;
     private int c;
@@ -30,27 +35,33 @@ public class Fractals {
     private int e;
     private int i;
 
-    // Variables en plus pour le bon déroulement du programme
     private Semaphore semaphore = new Semaphore(1);
     private boolean calculFractalDone = false;
 
     public Fractals(int m, int h, int d, long z, int l) {
-        this.h1 = new int[129][129];
-        this.C = new int[321];
-        this.m = m;
-        this.p = (int) Math.pow(2, 7 - m);
-        this.h2 = h;
-        this.d = d;
-        this.random = new Random(z);
-        this.l = l;
-        this.n = h2 / 16;
+        this.initM = m;
+        this.initH = h;
+        this.initD = d;
+        this.initZ = z;
+        this.initL = l;
     }
 
-    private static void plot(Graphics2D graphics, int x, int y, int c) {
-        if (graphics == null)
-            return;
-        graphics.setColor(Utils.getSurfaceColor(c));
-        graphics.drawRect(x, y, 1, 1);
+    private void reset() {
+        this.h1 = new int[129][129];
+        this.C = new int[321];
+        this.m = initM;
+        this.p = (int) Math.pow(2, 7 - m);
+        this.h2 = initH;
+        this.d = initD;
+        this.random = new Random(initZ);
+        this.l = initL;
+        this.n = h2 / 16;
+        this.x = 0;
+        this.y = 0;
+        this.c = 0;
+        this.q = 0;
+        this.e = 0;
+        this.i = 0;
     }
 
     // lignes 290 à 350
@@ -65,7 +76,7 @@ public class Fractals {
                 if (c > 15) {
                     c = 15;
                 }
-                plot(graphics, x, y, c);
+                Utils.plot(graphics, x, y, c);
             }
         }
     }
@@ -89,7 +100,7 @@ public class Fractals {
                         c = 15;
                     }
                     h1[x][y] = h2;
-                    plot(graphics, x, y, c);
+                    Utils.plot(graphics, x, y, c);
                 }
             }
 
@@ -106,7 +117,7 @@ public class Fractals {
                         c = 15;
                     }
                     h1[x][y] = h2;
-                    plot(graphics, x, y, c);
+                    Utils.plot(graphics, x, y, c);
 
                     h2 = (int) ((h1[y - q][x] + h1[y + q][x] + h1[y][x - q] + h1[y][x + q]) / 4 + d * random.nextFloat()
                             - e);
@@ -118,7 +129,7 @@ public class Fractals {
                         c = 15;
                     }
                     h1[y][x] = h2;
-                    plot(graphics, x, y, c);
+                    Utils.plot(graphics, y, x, c);
                 }
             }
 
@@ -127,10 +138,6 @@ public class Fractals {
                 h2 = (int) ((h1[0][i - q] + h1[0][i + q] + h1[q][i]) / 3 + d * random.nextFloat() - e);
                 if (h2 < n) {
                     h2 = n;
-                }
-                c = h2 / n;
-                if (c > 15) {
-                    c = 15;
                 }
                 h1[0][i] = h2;
 
@@ -165,18 +172,15 @@ public class Fractals {
                 if (c > 15) {
                     c = 15;
                 }
-                plot(graphics, x, y, c);
+                Utils.plot(graphics, x, y, c);
             }
         }
     }
 
     public void newSurface(Graphics2D graphics) {
-        if (calculFractalDone) {
-            return;
-        }
-
         semaphore.acquireUninterruptibly();
 
+        reset();
         surfaceDeBase(graphics);
         calculFractal(graphics);
         calculFractalDone = true;
@@ -190,6 +194,7 @@ public class Fractals {
         if (!calculFractalDone) {
             newSurface(null);
         }
+
         surface(graphics);
 
         semaphore.release();

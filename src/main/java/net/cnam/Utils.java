@@ -1,8 +1,17 @@
 package net.cnam;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 
 public class Utils {
+
+    public static void plot(Graphics2D graphics, int x, int y, int c) {
+        if (graphics == null)
+            return;
+        graphics.setColor(Utils.getSurfaceColor(c));
+        //graphics.drawLine(x, y, x, y);
+        graphics.drawRect(x * 2, y * 2, 1, 1);
+    }
 
     public static Color getSurfaceColor(int c) {
         if (c < 0 || c > 15) {
