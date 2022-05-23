@@ -42,6 +42,9 @@ public class Fractals {
     private int t;
     private int h;
     private int fh;
+    private int c;
+    private int o1;
+    private int o2;
 
     private Semaphore semaphore = new Semaphore(1);
     private boolean calculFractalDone = false;
@@ -78,6 +81,9 @@ public class Fractals {
         this.t = 0;
         this.h = 0;
         this.fh = 0;
+        this.c = 0;
+        this.o1 = 0;
+        this.o2 = 0;
     }
 
     // lignes 290 à 350
@@ -245,6 +251,7 @@ public class Fractals {
         }
     }
 
+    // lignes 850 à 970
     private void filDeFer(Graphics2D graphics) {
         o = 160;
         k = 0;
@@ -252,18 +259,64 @@ public class Fractals {
         Utils.drawLine(graphics, 0, 40, 640, 40, 1);
         c1 = new int[321];
         for (y = 0; y <= 128; y += 2) {
-            //Utils.drawLine(graphics, 0*4-320, c1[o+k], 640, 40, 1);
-            k=0;
-            o=160-y;
-            if (o < 0) k = -o;
-            for (x=k; x<=128 ;x+=2){
-                t=h1[x][y] + y + x;
-                h = Math.max(c1[x+o],t);
-                c1[x+o]=h;
+            k = 0;
+            o = 160 - y;
+            if (o < 0) {
+                k = -o;
             }
-            Utils.drawLine(graphics, 0*4-320, c1[o+k], (0+x)*4-322, fh, 1);
-            fh=h;
+            for (x = k; x <= 128; x += 2) {
+                t = h1[x][y] + y + x;
+                h = Math.max(c1[x + o], t);
+                c1[x + o] = h;
+            }
+            Utils.drawLine(graphics, 0 * 4 - 320, c1[o + k], (0 + x) * 4 - 322, fh, 1);
+            fh = h;
         }
+    }
+
+    // lignes 1150 à 1370
+    private void ombres(Graphics2D graphics) {
+        //ligne 1160 à voir
+        //ligne 1170 un go sub à pacer
+        for (i = 0; i <= 80; i++) { // à vérifier
+            c1[80 - i] = h1[0][i] + i - 2;
+            c1[80 + i] = h1[i][0] + i - 2;
+        }
+
+        for (y = 0; y <= l; y++) { // à vérifier
+            for (x = 1; x >= 0; x -= 1) {
+                a = 80 - y + x;
+                if (a < 0 || a > 319) {
+                    ombresARenommer();
+                }
+                h2 = (h1[x][y] + x + y);
+                // REM Note 9 AND &FFFE
+                c2 = 3;
+                if (h1[x][y] > 01) {
+                    o1 = h1[x][y] + 1;
+                } else {
+                    c2 = 2;
+                }
+                if (h1[x][y] >= o2) {
+                    o2 = h1[x][y] + 2;
+                } else {
+                    c2 = 1;
+                }
+                if (h < c1[a]) {
+                    Utils.plot(graphics, a * 4, c1[a] - 2, c + 1);
+                }
+                ombresARenommer(); // a vérifier si bonne ligne ou dans le if
+                Utils.drawLine(graphics, a * 4, c1[a], c2, a * 4, h);
+                c1[a] = h2 + 2;
+                ombresARenommer();
+            }
+
+        }
+    }
+
+    private void ombresARenommer() {
+        o1 = o1 - 1;
+        o2 = o2 - 2;
     }
 
     public void newSurface(Graphics2D graphics) {
