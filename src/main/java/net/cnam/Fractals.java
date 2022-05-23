@@ -40,7 +40,6 @@ public class Fractals {
     private int o;
     private int k;
     private int t;
-    private int h;
     private int fh;
 
     private Semaphore semaphore = new Semaphore(1);
@@ -76,7 +75,6 @@ public class Fractals {
         this.o = 0;
         this.k = 0;
         this.t = 0;
-        this.h = 0;
         this.fh = 0;
     }
 
@@ -248,21 +246,25 @@ public class Fractals {
     private void filDeFer(Graphics2D graphics) {
         o = 160;
         k = 0;
-        Utils.drawLine(graphics, 0, 40, 320, 0, 1);
-        Utils.drawLine(graphics, 0, 40, 640, 40, 1);
+        int moveX = 0;
+        int moveY = 40;
+        Utils.drawLine(graphics, moveX, moveY, 320, 0, 1);
+        Utils.drawLine(graphics, moveX, moveY, 640, 40, 1);
         c1 = new int[321];
         for (y = 0; y <= 128; y += 2) {
-            //Utils.drawLine(graphics, 0*4-320, c1[o+k], 640, 40, 1);
-            k=0;
-            o=160-y;
-            if (o < 0) k = -o;
-            for (x=k; x<=128 ;x+=2){
-                t=h1[x][y] + y + x;
-                h = Math.max(c1[x+o],t);
-                c1[x+o]=h;
+            moveX = o * 4 - 320;
+            moveY = c1[o + k];
+            k = 0;
+            o = 160 - y;
+            if (o < 0)
+                k = -o;
+            for (x = k; x <= 128; x += 2) {
+                t = h1[x][y] + y + x;
+                h2 = Math.max(c1[x + o], t);
+                c1[x + o] = h2;
             }
-            Utils.drawLine(graphics, 0*4-320, c1[o+k], (0+x)*4-322, fh, 1);
-            fh=h;
+            Utils.drawLine(graphics, moveX, moveY, (o + x) * 4 - 322, fh, 1);
+            fh = h2;
         }
     }
 
@@ -297,6 +299,18 @@ public class Fractals {
         semaphore.acquireUninterruptibly();
 
         strates(graphics);
+
+        semaphore.release();
+    }
+
+    public void viewFilDeFer(Graphics2D graphics) {
+        if (!calculFractalDone) {
+            newSurface(null);
+        }
+
+        semaphore.acquireUninterruptibly();
+
+        filDeFer(graphics);
 
         semaphore.release();
     }

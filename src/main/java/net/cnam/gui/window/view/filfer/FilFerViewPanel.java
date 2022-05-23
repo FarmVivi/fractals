@@ -1,6 +1,8 @@
 package net.cnam.gui.window.view.filfer;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -11,6 +13,7 @@ public class FilFerViewPanel extends JPanel {
 
     public FilFerViewPanel(Fractals fractals) {
         this.setLayout(null);
+        this.setBackground(Color.BLACK);
 
         this.fractals = fractals;
     }
@@ -19,6 +22,6 @@ public class FilFerViewPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // TODO
+        fractals.viewFilDeFer((Graphics2D) g);
     }
 }
