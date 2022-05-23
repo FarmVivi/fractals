@@ -253,8 +253,8 @@ public class Fractals {
         k = 0;
         int moveX = 0;
         int moveY = 40;
-        Utils.drawLine(graphics, moveX, moveY, 320, 0, 1);
-        Utils.drawLine(graphics, moveX, moveY, 640, 40, 1);
+        // Utils.drawLine(graphics, moveX, moveY, 320, 0, 1);
+        // Utils.drawLine(graphics, moveX, moveY, 640, 40, 1);
         c1 = new int[321];
         for (y = 0; y <= 128; y += 2) {
             moveX = o * 4 - 320;
@@ -268,7 +268,8 @@ public class Fractals {
                 h2 = Math.max(c1[x + o], t);
                 c1[x + o] = h2;
             }
-            Utils.drawLine(graphics, moveX, moveY, (o + x) * 4 - 322, fh, 1);
+            if (y != 0)
+                Utils.drawLine(graphics, moveX, moveY, (o + x) * 4 - 322, fh, 1);
             fh = h2;
         }
     }
