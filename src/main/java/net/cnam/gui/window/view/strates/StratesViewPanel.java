@@ -1,5 +1,6 @@
 package net.cnam.gui.window.view.strates;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -12,6 +13,7 @@ public class StratesViewPanel extends JPanel {
 
     public StratesViewPanel(Fractals fractals) {
         this.setLayout(null);
+        this.setBackground(Color.BLACK);
 
         this.fractals = fractals;
     }
