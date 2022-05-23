@@ -43,6 +43,13 @@ public class Fractals {
     private int fh;
     private int o1;
     private int o2;
+    private int pv;
+    private int xm;
+    private int ym;
+    private int xj;
+    private int yj;
+    private int tr;
+    private int ds;
 
     private Semaphore semaphore = new Semaphore(1);
     private boolean calculFractalDone = false;
@@ -80,6 +87,13 @@ public class Fractals {
         this.fh = 0;
         this.o1 = 0;
         this.o2 = 0;
+        this.pv = 0;
+        this.xm = 0;
+        this.ym = 0;
+        this.xj = 0;
+        this.yj = 0;
+        this.tr = 0;
+        this.ds = 0;
     }
 
     // lignes 290 à 350
@@ -318,6 +332,44 @@ public class Fractals {
     private void ombresPrivate() {
         o1 = o1 - 1;
         o2 = o2 - 2;
+    }
+    
+    private void Jeu(Graphics2D graphics){
+        pv = 100;
+        xm = (int)(Math.random()*20)+5;
+        ym = (int)(Math.random()*10)+5;
+        
+        // AFFICHAGE CABANE
+        Utils.plot(graphics, xm*4, ym*4, 13);
+        Utils.drawLine(graphics, xm*4, ym*4, (xm+2)*4, ym*2, 13);
+        Utils.drawLine(graphics, xm*4, ym*4, (xm+2)*4, (ym+2)*2, 13);
+        Utils.drawLine(graphics, xm*4, ym*4, xm*4, (ym+2)*2, 13);
+        Utils.drawLine(graphics, xm*4, ym*4, xm*4, ym*2, 13);
+        
+        // PLACE JOUEUR
+        xj = (int)(Math.random()*30)+10;
+        yj = (int)(Math.random()*10)+10;
+        Utils.plot(graphics, xj*4, yj*2, 1);
+        // faire de 1500 à 1610
+        
+        // RESULTATS
+        pv = pv -1;
+        tr = (int)(Math.random()*100);
+        if (h1[xj][yj] < 5 && tr < 15){
+            pv = 100;
+        }
+        // encore un locate en 1550
+        if (pv <= 0){
+            // ecrire "VOUS ETES MORT !"
+            System.exit(0);
+        }
+        Utils.plot(graphics, xj*4, yj*2, 3);
+        ds = (int)((Math.pow(xj-xm, 2))+(Math.pow(yj-ym, 2)));
+        if (ds < 3){
+            // ecrire "SAUVE !"
+            System.exit(0);
+        }
+        // GOTO 1500
     }
 
     public void newSurface(Graphics2D graphics) {
