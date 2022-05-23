@@ -307,44 +307,6 @@ public class Fractals {
         o1 = o1 - 1;
         o2 = o2 - 2;
     }
-    
-    private void Jeu(Graphics2D graphics){
-        pv = 100;
-        xm = (int)(Math.random()*20)+5;
-        ym = (int)(Math.random()*10)+5;
-        
-        // AFFICHAGE CABANE
-        Utils.plot(graphics, xm*4, ym*4, 13);
-        Utils.drawLine(graphics, xm*4, ym*4, (xm+2)*4, ym*2, 13);
-        Utils.drawLine(graphics, xm*4, ym*4, (xm+2)*4, (ym+2)*2, 13);
-        Utils.drawLine(graphics, xm*4, ym*4, xm*4, (ym+2)*2, 13);
-        Utils.drawLine(graphics, xm*4, ym*4, xm*4, ym*2, 13);
-        
-        // PLACE JOUEUR
-        xj = (int)(Math.random()*30)+10;
-        yj = (int)(Math.random()*10)+10;
-        Utils.plot(graphics, xj*4, yj*2, 1);
-        // faire de 1500 à 1610
-        
-        // RESULTATS
-        pv = pv -1;
-        tr = (int)(Math.random()*100);
-        if (h1[xj][yj] < 5 && tr < 15){
-            pv = 100;
-        }
-        // encore un locate en 1550
-        if (pv <= 0){
-            // ecrire "VOUS ETES MORT !"
-            System.exit(0);
-        }
-        Utils.plot(graphics, xj*4, yj*2, 3);
-        ds = (int)((Math.pow(xj-xm, 2))+(Math.pow(yj-ym, 2)));
-        if (ds < 3){
-            // ecrire "SAUVE !"
-            System.exit(0);
-        }
-        // GOTO 1500
-    }
 
     // lignes 850 à 970
     private void filDeFer(Graphics2D graphics) {
@@ -371,6 +333,44 @@ public class Fractals {
                 Utils.drawLine(graphics, moveX, moveY, (o + x) * 4 - 322, fh, 1);
             fh = h2;
         }
+    }
+
+    private void jeu(Graphics2D graphics) {
+        pv = 100;
+        xm = (int) (Math.random() * 20) + 5;
+        ym = (int) (Math.random() * 10) + 5;
+
+        // AFFICHAGE CABANE
+        Utils.plot(graphics, xm * 4, ym * 2, 13);
+        Utils.drawLine(graphics, xm * 4, ym * 2, (xm + 2) * 4, ym * 2, 13);
+        Utils.drawLine(graphics, xm * 4, ym * 2, (xm + 2) * 4, (ym + 2) * 2, 13);
+        Utils.drawLine(graphics, xm * 4, ym * 2, xm * 4, (ym + 2) * 2, 13);
+        Utils.drawLine(graphics, xm * 4, ym * 2, xm * 4, ym * 2, 13);
+
+        // PLACE JOUEUR
+        xj = (int) (Math.random() * 30) + 10;
+        yj = (int) (Math.random() * 10) + 10;
+        Utils.plot(graphics, xj * 4, yj * 2, 1);
+        // faire de 1500 à 1610
+
+        // RESULTATS
+        pv = pv - 1;
+        tr = (int) (Math.random() * 100);
+        if (h1[xj][yj] < 5 && tr < 15) {
+            pv = 100;
+        }
+        // encore un locate en 1550
+        if (pv <= 0) {
+            // ecrire "VOUS ETES MORT !"
+            System.exit(0);
+        }
+        Utils.plot(graphics, xj * 4, yj * 2, 3);
+        ds = (int) ((Math.pow(xj - xm, 2)) + (Math.pow(yj - ym, 2)));
+        if (ds < 3) {
+            // ecrire "SAUVE !"
+            System.exit(0);
+        }
+        // GOTO 1500
     }
 
     public void newSurface(Graphics2D graphics) {
@@ -428,6 +428,18 @@ public class Fractals {
         semaphore.acquireUninterruptibly();
 
         filDeFer(graphics);
+
+        semaphore.release();
+    }
+
+    public void game(Graphics2D graphics) {
+        if (!calculFractalDone) {
+            newSurface(null);
+        }
+
+        semaphore.acquireUninterruptibly();
+
+        jeu(graphics);
 
         semaphore.release();
     }

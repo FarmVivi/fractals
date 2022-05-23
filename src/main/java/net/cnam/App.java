@@ -29,7 +29,7 @@ public class App {
         this.stratesViewFrame = new StratesViewFrame(this, fractals);
         this.ombresViewFrame = new OmbresViewFrame(this, fractals);
         this.filFerViewFrame = new FilFerViewFrame(this, fractals);
-        this.gameFrame = new GameFrame(this);
+        this.gameFrame = new GameFrame(this, fractals);
     }
 
     public void launchMainWindow() {
