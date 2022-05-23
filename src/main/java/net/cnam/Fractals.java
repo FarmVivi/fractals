@@ -201,24 +201,24 @@ public class Fractals {
         nm = n * 4;
 
         // lignes 1000 à 1040
-        for (i = 0; i <= 80; i++) {
+        for (i = 0; i <= 128; i++) {
             h2 = h1[0][i] + i;
             if (h2 < nm + i) {
                 h2 = nm + i;
             }
-            c1[80 - i] = h2 - 2;
+            c1[128 - i] = h2 - 2;
             h2 = h1[i][0] + i;
             if (h2 < nm + i) {
                 h2 = nm + i;
             }
-            c1[80 + i] = h2 - 2;
+            c1[128 + i] = h2 - 2;
         }
 
         // lignes 1050 à 1130
         for (y = 0; y <= 128; y++) {
             for (x = 0; x <= 127; x++) {
                 nmx = nm + x + y;
-                a = 80 - y + x;
+                a = 128 - y + x;
                 if (a < 0 || a > 319) {
                     continue;
                 }
@@ -250,16 +250,16 @@ public class Fractals {
     // lignes 1150 à 1370
     private void ombres(Graphics2D graphics) {
         // ligne 1160 à voir
-        for (i = 0; i <= 80; i++) {
-            c1[80 - i] = h1[0][i] + i - 2;
-            c1[80 + i] = h1[i][0] + i - 2;
+        for (i = 0; i <= 128; i++) {
+            c1[128 - i] = h1[0][i] + i - 2;
+            c1[128 + i] = h1[i][0] + i - 2;
         }
 
         for (y = 0; y <= l; y++) {
             o1 = 0;
             o2 = 0;
             for (x = l; x >= o; x--) {
-                a = 80 - y + x;
+                a = 128 - y + x;
                 if (a < 0 || a > 319) {
                     ombresPrivate();
                     continue;
