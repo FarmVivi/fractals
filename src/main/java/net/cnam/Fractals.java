@@ -41,7 +41,6 @@ public class Fractals {
     private int k;
     private int t;
     private int fh;
-    private int c;
     private int o1;
     private int o2;
 
@@ -79,7 +78,6 @@ public class Fractals {
         this.k = 0;
         this.t = 0;
         this.fh = 0;
-        this.c = 0;
         this.o1 = 0;
         this.o2 = 0;
     }
@@ -277,23 +275,24 @@ public class Fractals {
 
     // lignes 1150 à 1370
     private void ombres(Graphics2D graphics) {
-        //ligne 1160 à voir
-        //ligne 1170 un go sub à pacer
-        for (i = 0; i <= 80; i++) { // à vérifier
+        // ligne 1160 à voir
+        for (i = 0; i <= 80; i++) {
             c1[80 - i] = h1[0][i] + i - 2;
             c1[80 + i] = h1[i][0] + i - 2;
         }
 
-        for (y = 0; y <= l; y++) { // à vérifier
-            for (x = 1; x >= 0; x -= 1) {
+        for (y = 0; y <= l; y++) {
+            o1 = 0;
+            o2 = 0;
+            for (x = l; x >= o; x--) {
                 a = 80 - y + x;
                 if (a < 0 || a > 319) {
-                    ombresARenommer();
+                    ombresPrivate();
+                    continue;
                 }
-                h2 = (h1[x][y] + x + y);
-                // REM Note 9 AND &FFFE
+                h2 = h1[x][y] + x + y;
                 c2 = 3;
-                if (h1[x][y] > 01) {
+                if (h1[x][y] >= o1) {
                     o1 = h1[x][y] + 1;
                 } else {
                     c2 = 2;
@@ -304,18 +303,19 @@ public class Fractals {
                     c2 = 1;
                 }
                 if (h2 < c1[a]) {
-                    Utils.plot(graphics, a * 4, c1[a] - 2, c + 1);
+                    Utils.plot(graphics, a * 4, c1[a] - 2, c2 + 1);
+                    ombresPrivate();
+                    continue;
                 }
-                ombresARenommer(); // a vérifier si bonne ligne ou dans le if
-                Utils.drawLine(graphics, a * 4, c1[a], c2, a * 4, h2);
+                Utils.drawLine(graphics, a * 4, c1[a], a * 4, h2, c2);
                 c1[a] = h2 + 2;
-                ombresARenommer();
+                ombresPrivate();
             }
 
         }
     }
 
-    private void ombresARenommer() {
+    private void ombresPrivate() {
         o1 = o1 - 1;
         o2 = o2 - 2;
     }
@@ -351,6 +351,18 @@ public class Fractals {
         semaphore.acquireUninterruptibly();
 
         strates(graphics);
+
+        semaphore.release();
+    }
+
+    public void viewOmbres(Graphics2D graphics) {
+        if (!calculFractalDone) {
+            newSurface(null);
+        }
+
+        semaphore.acquireUninterruptibly();
+
+        ombres(graphics);
 
         semaphore.release();
     }

@@ -1,6 +1,8 @@
 package net.cnam.gui.window.view.ombres;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -11,6 +13,7 @@ public class OmbresViewPanel extends JPanel {
 
     public OmbresViewPanel(Fractals fractals) {
         this.setLayout(null);
+        this.setBackground(Color.BLACK);
 
         this.fractals = fractals;
     }
@@ -19,6 +22,6 @@ public class OmbresViewPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // TODO
+        fractals.viewOmbres((Graphics2D) g);
     }
 }

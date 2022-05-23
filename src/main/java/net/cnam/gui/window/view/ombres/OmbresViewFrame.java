@@ -1,5 +1,7 @@
 package net.cnam.gui.window.view.ombres;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 import net.cnam.App;
