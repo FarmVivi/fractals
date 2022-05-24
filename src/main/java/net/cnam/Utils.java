@@ -1,89 +1,45 @@
 package net.cnam;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
 public class Utils {
 
-    public static void plot(Graphics2D graphics, int x, int y, int c) {
-        if (graphics == null) {
-            return;
-        }
-        graphics.setColor(Utils.getSurfaceColor(c));
-        // graphics.drawLine(x, y, x, y);
-        graphics.drawRect(x, y, 1, 1);
-    }
-
-    public static void drawLine(Graphics2D graphics, int x1, int y1, int x2, int y2, int c) {
-        if (graphics == null) {
-            return;
-        }
-        graphics.setColor(Utils.getSurfaceColor(c));
-        // graphics.drawLine(x1, y1, x2, y2);
-        if (x1 == x2) {
-            if (y2 > y1) {
-                for (int i = y1; i <= y2; i++) {
-                    graphics.drawRect(x1, i, 1, 1);
-                }
-            } else {
-                for (int i = y2; i <= y1; i++) {
-                    graphics.drawRect(x1, i, 1, 1);
-                }
-            }
-        } else if (y1 == y2) {
-            if (x2 > x1) {
-                for (int i = x1; i <= x2; i++) {
-                    graphics.drawRect(i, y1, 1, 1);
-                }
-            } else {
-                for (int i = x2; i <= x1; i++) {
-                    graphics.drawRect(i, y1, 1, 1);
-                }
-            }
-        } else {
-            graphics.drawLine(x1, y1, x2, y2);
-        }
-    }
-
     public static Color[] tryDegradeSaMere(Color colorUne, Color colorDeux, int nbDegra) {
         int rMax, rMin, gMax, gMin, bMax, bMin;
-        if (colorUne.getRed() > colorDeux.getRed()){
+        if (colorUne.getRed() > colorDeux.getRed()) {
             rMax = colorUne.getRed();
             rMin = colorDeux.getRed();
-        }
-        else {
+        } else {
             rMin = colorUne.getRed();
             rMax = colorDeux.getRed();
         }
-        
-        if (colorUne.getGreen() > colorDeux.getGreen()){
+
+        if (colorUne.getGreen() > colorDeux.getGreen()) {
             gMax = colorUne.getGreen();
             gMin = colorDeux.getGreen();
-        }
-        else {
+        } else {
             gMin = colorUne.getGreen();
             gMax = colorDeux.getGreen();
         }
-        
-        if (colorUne.getBlue() > colorDeux.getBlue()){
+
+        if (colorUne.getBlue() > colorDeux.getBlue()) {
             bMax = colorUne.getBlue();
             bMin = colorDeux.getBlue();
-        }
-        else {
+        } else {
             bMin = colorUne.getBlue();
             bMax = colorDeux.getBlue();
         }
-        
+
         float pasRed, pasGreen, pasBlue;
-        pasRed = ((rMax - rMin)/nbDegra);
-        pasGreen = ((gMax - gMin)/nbDegra);
-        pasBlue = ((bMax - bMin)/nbDegra);
-        
+        pasRed = ((rMax - rMin) / nbDegra);
+        pasGreen = ((gMax - gMin) / nbDegra);
+        pasBlue = ((bMax - bMin) / nbDegra);
+
         Color[] result = new Color[nbDegra];
-        for (int i = 0 ; i < nbDegra ; i++){
-            result[i] = new Color((int)rMax-pasRed*i, (int)gMax-pasGreen*i, (int)bMax-pasBlue*i);
+        for (int i = 0; i < nbDegra; i++) {
+            result[i] = new Color((int) rMax - pasRed * i, (int) gMax - pasGreen * i, (int) bMax - pasBlue * i);
         }
-        
+
         return result;
     }
 
