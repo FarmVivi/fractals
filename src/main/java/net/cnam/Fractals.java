@@ -107,8 +107,9 @@ public class Fractals {
             return;
         }
         graphics.setColor(Utils.getSurfaceColor(c));
-        // graphics.drawLine(x, y, x, y);
-        graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
+        graphics.drawLine(x, (int) (graphics.getClipBounds().getHeight() - y), x,
+                (int) (graphics.getClipBounds().getHeight() - y));
+        // graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
 
         move(x, y);
     }
@@ -123,31 +124,30 @@ public class Fractals {
             return;
         }
         graphics.setColor(Utils.getSurfaceColor(c));
-        // graphics.drawLine(x1, y1, x2, y2);
-        if (x == moveX) {
-            if (y > moveY) {
-                for (int i = moveY; i <= y; i++) {
-                    graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - i), 1, 1);
-                }
-            } else {
-                for (int i = y; i <= moveY; i++) {
-                    graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - i), 1, 1);
-                }
-            }
-        } else if (y == moveY) {
-            if (x > moveX) {
-                for (int i = moveX; i <= x; i++) {
-                    graphics.drawRect(i, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
-                }
-            } else {
-                for (int i = x; i <= moveX; i++) {
-                    graphics.drawRect(i, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
-                }
-            }
-        } else {
-            graphics.drawLine(moveX, (int) (graphics.getClipBounds().getHeight() - moveY), x,
-                    (int) (graphics.getClipBounds().getHeight() - y));
-        }
+        // if (x == moveX) {
+        // if (y > moveY) {
+        // for (int i = moveY; i <= y; i++) {
+        // graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - i), 1, 1);
+        // }
+        // } else {
+        // for (int i = y; i <= moveY; i++) {
+        // graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - i), 1, 1);
+        // }
+        // }
+        // } else if (y == moveY) {
+        // if (x > moveX) {
+        // for (int i = moveX; i <= x; i++) {
+        // graphics.drawRect(i, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
+        // }
+        // } else {
+        // for (int i = x; i <= moveX; i++) {
+        // graphics.drawRect(i, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
+        // }
+        // }
+        // } else {
+        graphics.drawLine(moveX, (int) (graphics.getClipBounds().getHeight() - moveY), x,
+                (int) (graphics.getClipBounds().getHeight() - y));
+        // }
 
         move(x, y);
     }
@@ -385,7 +385,8 @@ public class Fractals {
                 h2 = Math.max(c1[x + o], t);
                 c1[x + o] = h2;
             }
-            drawLine(graphics, (o + x) * 4 - 322, fh, 1);
+            if (y != 0)
+                drawLine(graphics, (o + x) * 4 - 322, fh, 1);
             fh = h2;
         }
     }

@@ -21,7 +21,7 @@ public class App {
     private final GameFrame gameFrame;
 
     public App() {
-        Fractals fractals = new Fractals(1, 32, 1, new Random().nextLong(), 128);
+        Fractals fractals = new Fractals(2, 64, 3, new Random().nextLong(), 128);
 
         this.mainFrame = new MenuFrame(this);
         this.newSurfaceFrame = new NewSurfaceFrame(this, fractals);

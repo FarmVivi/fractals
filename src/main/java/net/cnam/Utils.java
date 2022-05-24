@@ -49,67 +49,67 @@ public class Utils {
         }
 
         switch (c) {
-            case 0:
+            case 15:
                 // Blanc
                 // sommet montagne
                 return new Color(255, 255, 255);
-            case 1:
+            case 14:
                 // Blanc
                 // haut de montagne (blanc)
                 return new Color(255, 255, 255);
-            case 2:
+            case 13:
                 // gris très clair
                 // presque haut de montagne (gris très clair)
                 return new Color(243, 244, 244);
-            case 3:
+            case 12:
                 // gris moins clair
                 // flanc de montagne (gris moins clair)
                 return new Color(218, 221, 221);
-            case 4:
+            case 11:
                 // gris foncé
                 // flanc de montagne (gris foncé)
                 return new Color(149, 151, 151);
-            case 5:
+            case 10:
                 // vert très foncé
                 // haut de pleine / début montagne (vert très foncé)
                 return new Color(56, 82, 64);
-            case 6:
+            case 9:
                 // vert foncé
                 // haut de pleine (vert foncé)
                 return new Color(64, 119, 81);
-            case 7:
+            case 8:
                 // Vert
                 // pleine (vert)
                 return new Color(43, 153, 77);
-            case 8:
+            case 7:
                 // vert clair
                 // pleine basse (vert clair)
                 return new Color(11, 194, 66);
-            case 9:
+            case 6:
                 // jaune
                 // plage (jaune)
                 return new Color(218, 211, 4);
-            case 10:
+            case 5:
                 // Turquoise
                 // haut bordure plage (turquoise)
                 return new Color(0, 224, 240);
-            case 11:
+            case 4:
                 // Bleu super clair
                 // eau peu profonde (bleu super clair)
                 return new Color(123, 192, 238);
-            case 12:
+            case 3:
                 // Bleu clair
                 // eau semi profonde (bleu clair)
                 return new Color(91, 173, 228);
-            case 13:
+            case 2:
                 // bleu foncé
                 // eau profonde
                 return new Color(40, 128, 187);
-            case 14:
+            case 1:
                 // TODO Bleu foncé x2
                 // eau très profonde
                 return new Color(21, 97, 147);
-            case 15:
+            case 0:
                 // bleu foncé x3
                 // eau super profonde
                 return new Color(5, 64, 103);
