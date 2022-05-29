@@ -5,11 +5,8 @@ import javax.swing.JFrame;
 import net.cnam.App;
 
 public class MenuFrame extends JFrame {
-
-    private final MenuPanel panel;
-
     public MenuFrame(App app) {
-        panel = new MenuPanel(app);
+        MenuPanel panel = new MenuPanel(app);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Menu");

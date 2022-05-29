@@ -6,11 +6,8 @@ import net.cnam.App;
 import net.cnam.Fractals;
 
 public class GameFrame extends JFrame {
-
-    private final GamePanel panel;
-
     public GameFrame(App app, Fractals fractals) {
-        panel = new GamePanel(fractals);
+        GamePanel panel = new GamePanel(fractals);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Le jeu");

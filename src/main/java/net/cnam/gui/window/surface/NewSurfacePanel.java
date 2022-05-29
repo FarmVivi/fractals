@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import net.cnam.Fractals;
 
 public class NewSurfacePanel extends JPanel {
-    private Fractals fractals;
+    private final Fractals fractals;
 
     public NewSurfacePanel(Fractals fractals) {
         this.setLayout(null);

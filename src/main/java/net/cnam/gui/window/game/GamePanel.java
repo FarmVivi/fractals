@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import net.cnam.Fractals;
 
 public class GamePanel extends JPanel {
-
     private final Fractals fractals;
 
     public GamePanel(Fractals fractals) {

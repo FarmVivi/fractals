@@ -11,7 +11,6 @@ import net.cnam.gui.window.view.ombres.OmbresViewFrame;
 import net.cnam.gui.window.view.strates.StratesViewFrame;
 
 public class App {
-
     private final MenuFrame mainFrame;
     private final NewSurfaceFrame newSurfaceFrame;
     private final CarteFrame carteFrame;

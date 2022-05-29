@@ -1,13 +1,10 @@
 package net.cnam;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
-import javax.swing.JComponent;
-
 public class Fractals {
-
     // Variables permanentes
     // maille (0-3)
     private final int initM;
@@ -55,7 +52,7 @@ public class Fractals {
     private int tr;
     private int ds;
 
-    private Semaphore semaphore = new Semaphore(1);
+    private final Semaphore semaphore = new Semaphore(1);
     private boolean calculFractalDone = false;
 
     public Fractals(int m, int h, int d, long z, int l) {
@@ -302,16 +299,10 @@ public class Fractals {
                 }
                 if (h2 <= c1[a]) {
                     plot(graphics, a * 4, c1[a], 0);
-                    // Utils.plot(graphics, a * 4 + 1, c1[a], 0);
-                    // Utils.plot(graphics, a * 4 + 2, c1[a], 0);
-                    // Utils.plot(graphics, a * 4 + 3, c1[a], 0);
                 }
                 if (h2 > c1[a]) {
                     move(a * 4, c1[a] + 2);
                     drawLine(graphics, a * 4, h2 + 1, c2);
-                    // Utils.drawLine(graphics, a * 4 + 1, c1[a] + 2, a * 4 + 1, h2 + 1, c2);
-                    // Utils.drawLine(graphics, a * 4 + 2, c1[a] + 2, a * 4 + 2, h2 + 1, c2);
-                    // Utils.drawLine(graphics, a * 4 + 3, c1[a] + 2, a * 4 + 3, h2 + 1, c2);
                     c1[a] = h2;
                 }
             }
@@ -384,6 +375,7 @@ public class Fractals {
                 t = h1[x][y] + y + x;
                 h2 = Math.max(c1[x + o], t);
                 c1[x + o] = h2;
+                drawLine(graphics, (o + x) * 4 - 320, h2, 1);
             }
             if (y != 0)
                 drawLine(graphics, (o + x) * 4 - 322, fh, 1);
