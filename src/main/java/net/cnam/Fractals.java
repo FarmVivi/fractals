@@ -66,8 +66,8 @@ public class Fractals {
     private void reset() {
         this.moveX = 0;
         this.moveY = 0;
-        this.h1 = new int[129][129];
-        this.c1 = new int[321];
+        this.h1 = new int[initL + 1][initL + 1];
+        this.c1 = new int[320 + 1];
         this.m = initM;
         this.p = (int) Math.pow(2, 7 - m);
         this.h2 = initH;
@@ -99,52 +99,29 @@ public class Fractals {
         this.ds = 0;
     }
 
-    public void plot(Graphics2D graphics, int x, int y, int c) {
+    private void plot(Graphics2D graphics, int x, int y, int c) {
         if (graphics == null) {
             return;
         }
         graphics.setColor(Utils.getSurfaceColor(c));
         graphics.drawLine(x, (int) (graphics.getClipBounds().getHeight() - y), x,
                 (int) (graphics.getClipBounds().getHeight() - y));
-        // graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
 
         move(x, y);
     }
 
-    public void move(int x, int y) {
+    private void move(int x, int y) {
         this.moveX = x;
         this.moveY = y;
     }
 
-    public void drawLine(Graphics2D graphics, int x, int y, int c) {
+    private void drawLine(Graphics2D graphics, int x, int y, int c) {
         if (graphics == null) {
             return;
         }
         graphics.setColor(Utils.getSurfaceColor(c));
-        // if (x == moveX) {
-        // if (y > moveY) {
-        // for (int i = moveY; i <= y; i++) {
-        // graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - i), 1, 1);
-        // }
-        // } else {
-        // for (int i = y; i <= moveY; i++) {
-        // graphics.drawRect(x, (int) (graphics.getClipBounds().getHeight() - i), 1, 1);
-        // }
-        // }
-        // } else if (y == moveY) {
-        // if (x > moveX) {
-        // for (int i = moveX; i <= x; i++) {
-        // graphics.drawRect(i, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
-        // }
-        // } else {
-        // for (int i = x; i <= moveX; i++) {
-        // graphics.drawRect(i, (int) (graphics.getClipBounds().getHeight() - y), 1, 1);
-        // }
-        // }
-        // } else {
         graphics.drawLine(moveX, (int) (graphics.getClipBounds().getHeight() - moveY), x,
                 (int) (graphics.getClipBounds().getHeight() - y));
-        // }
 
         move(x, y);
     }
@@ -268,24 +245,24 @@ public class Fractals {
         nm = n * 4;
 
         // lignes 1000 à 1040
-        for (i = 0; i <= 128; i++) {
+        for (i = 0; i <= l; i++) {
             h2 = h1[0][i] + i;
             if (h2 < nm + i) {
                 h2 = nm + i;
             }
-            c1[128 - i] = h2 - 2;
+            c1[l - i] = h2 - 2;
             h2 = h1[i][0] + i;
             if (h2 < nm + i) {
                 h2 = nm + i;
             }
-            c1[128 + i] = h2 - 2;
+            c1[l + i] = h2 - 2;
         }
 
         // lignes 1050 à 1130
-        for (y = 0; y <= 128; y++) {
-            for (x = 0; x <= 127; x++) {
+        for (y = 0; y <= l; y++) {
+            for (x = 0; x <= l - 1; x++) {
                 nmx = nm + x + y;
-                a = 128 - y + x;
+                a = l - y + x;
                 if (a < 0 || a > 319) {
                     continue;
                 }
@@ -311,17 +288,18 @@ public class Fractals {
 
     // lignes 1150 à 1370
     private void ombres(Graphics2D graphics) {
-        // ligne 1160 à voir
-        for (i = 0; i <= 128; i++) {
-            c1[128 - i] = h1[0][i] + i - 2;
-            c1[128 + i] = h1[i][0] + i - 2;
+        // ligne 1180
+        for (i = 0; i <= l; i++) {
+            c1[l - i] = h1[0][i] + i - 2;
+            c1[l + i] = h1[i][0] + i - 2;
         }
 
+        // lignes 1190 à 1300
         for (y = 0; y <= l; y++) {
             o1 = 0;
             o2 = 0;
             for (x = l; x >= o; x--) {
-                a = 128 - y + x;
+                a = l - y + x;
                 if (a < 0 || a > 319) {
                     ombresPrivate();
                     continue;
@@ -348,7 +326,6 @@ public class Fractals {
                 c1[a] = h2 + 2;
                 ombresPrivate();
             }
-
         }
     }
 
@@ -359,25 +336,37 @@ public class Fractals {
 
     // lignes 850 à 970
     private void filDeFer(Graphics2D graphics) {
+        // 0, 40
         move(0, 40);
+        // 160
         o = 160;
+        // 0
         k = 0;
+        // 320, 0
         drawLine(graphics, 320, 0, 1);
+        // 640, 40
         drawLine(graphics, 640, 40, 1);
-        c1 = new int[321];
-        for (y = 0; y <= 128; y += 2) {
+        c1 = new int[320 + 1];
+        // 0, 128
+        for (y = 0; y <= l; y += 2) {
+            // - 320
             move(o * 4 - 320, c1[o + k]);
+            // 0
             k = 0;
+            // 160
             o = 160 - y;
             if (o < 0)
                 k = -o;
-            for (x = k; x <= 128; x += 2) {
+            // k, 128
+            for (x = k; x <= l; x += 2) {
                 t = h1[x][y] + y + x;
                 h2 = Math.max(c1[x + o], t);
                 c1[x + o] = h2;
+                // - 320
                 drawLine(graphics, (o + x) * 4 - 320, h2, 1);
             }
             if (y != 0)
+                // - 322
                 drawLine(graphics, (o + x) * 4 - 322, fh, 1);
             fh = h2;
         }
