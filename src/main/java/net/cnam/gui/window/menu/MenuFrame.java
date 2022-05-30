@@ -12,7 +12,7 @@ public class MenuFrame extends JFrame {
         this.setTitle("Fractals - Menu");
         this.setSize(480, 360);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Ajout du panel
         this.add(panel);

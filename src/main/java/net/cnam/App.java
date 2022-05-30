@@ -39,48 +39,24 @@ public class App {
         return mainFrame;
     }
 
-    public NewSurfaceFrame getNewSurfaceFrame() {
-        return newSurfaceFrame;
-    }
-
     public void launchNewSurfaceWindow() {
         this.newSurfaceFrame.setVisible(true);
-    }
-
-    public CarteFrame getCarteFrame() {
-        return carteFrame;
     }
 
     public void launchCarteWindow() {
         this.carteFrame.setVisible(true);
     }
 
-    public StratesViewFrame getStratesViewFrame() {
-        return stratesViewFrame;
-    }
-
     public void launchStratesViewWindow() {
         this.stratesViewFrame.setVisible(true);
-    }
-
-    public OmbresViewFrame getOmbresViewFrame() {
-        return ombresViewFrame;
     }
 
     public void launchOmbresViewWindow() {
         this.ombresViewFrame.setVisible(true);
     }
 
-    public FilFerViewFrame getFilFerViewFrame() {
-        return filFerViewFrame;
-    }
-
     public void launchFilFerViewWindow() {
         this.filFerViewFrame.setVisible(true);
-    }
-
-    public GameFrame getGameFrame() {
-        return gameFrame;
     }
 
     public void launchGameWindow() {

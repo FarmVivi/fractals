@@ -1,11 +1,16 @@
 package net.cnam;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class Fractals {
     // Variables permanentes
+    // Couleurs
+    private final List<Color> colors = new ArrayList<>();
     // maille (0-3)
     private final int initM;
     // hauteur de base
@@ -61,6 +66,16 @@ public class Fractals {
         this.initD = d;
         this.initZ = z;
         this.initL = l;
+        Color[] waterColors = Utils.createGradient(new Color(0, 35, 104), new Color(88, 159, 206), 8);
+        Color[] sandColors = Utils.createGradient(new Color(239, 253, 103), new Color(255, 198, 55), 4);
+        Color[] grassColors = Utils.createGradient(new Color(115, 255, 0), new Color(27, 148, 18), 12);
+        Color[] stoneColors = Utils.createGradient(new Color(54, 107, 33), new Color(133, 133, 133), 4);
+        Color[] snowColors = Utils.createGradient(new Color(133, 133, 133), new Color(255, 255, 255), 2);
+        colors.addAll(Arrays.asList(waterColors));
+        colors.addAll(Arrays.asList(sandColors));
+        colors.addAll(Arrays.asList(grassColors));
+        colors.addAll(Arrays.asList(stoneColors));
+        colors.addAll(Arrays.asList(snowColors));
     }
 
     private void reset() {
@@ -74,7 +89,7 @@ public class Fractals {
         this.d = initD;
         this.random = new Random(initZ);
         this.l = initL;
-        this.n = h2 / 16;
+        this.n = h2 / colors.size();
         this.x = 0;
         this.y = 0;
         this.c2 = 0;
@@ -103,7 +118,7 @@ public class Fractals {
         if (graphics == null) {
             return;
         }
-        graphics.setColor(Utils.getSurfaceColor(c));
+        graphics.setColor(colors.get(c));
         graphics.drawLine(x, (int) (graphics.getClipBounds().getHeight() - y), x,
                 (int) (graphics.getClipBounds().getHeight() - y));
 
@@ -119,7 +134,7 @@ public class Fractals {
         if (graphics == null) {
             return;
         }
-        graphics.setColor(Utils.getSurfaceColor(c));
+        graphics.setColor(colors.get(c));
         graphics.drawLine(moveX, (int) (graphics.getClipBounds().getHeight() - moveY), x,
                 (int) (graphics.getClipBounds().getHeight() - y));
 
@@ -135,8 +150,8 @@ public class Fractals {
                     h1[x][y] = n;
                 }
                 c2 = h1[x][y] / n;
-                if (c2 > 15) {
-                    c2 = 15;
+                if (c2 > colors.size() - 1) {
+                    c2 = colors.size() - 1;
                 }
                 plot(graphics, x, y, c2);
             }
@@ -158,8 +173,8 @@ public class Fractals {
                         h2 = n;
                     }
                     c2 = h2 / n;
-                    if (c2 > 15) {
-                        c2 = 15;
+                    if (c2 > colors.size() - 1) {
+                        c2 = colors.size() - 1;
                     }
                     h1[x][y] = h2;
                     plot(graphics, x, y, c2);
@@ -175,8 +190,8 @@ public class Fractals {
                         h2 = n;
                     }
                     c2 = h2 / n;
-                    if (c2 > 15) {
-                        c2 = 15;
+                    if (c2 > colors.size() - 1) {
+                        c2 = colors.size() - 1;
                     }
                     h1[x][y] = h2;
                     plot(graphics, x, y, c2);
@@ -187,8 +202,8 @@ public class Fractals {
                         h2 = n;
                     }
                     c2 = h2 / n;
-                    if (c2 > 15) {
-                        c2 = 15;
+                    if (c2 > colors.size() - 1) {
+                        c2 = colors.size() - 1;
                     }
                     h1[y][x] = h2;
                     plot(graphics, y, x, c2);
@@ -229,11 +244,11 @@ public class Fractals {
 
     // lignes 770 à 840
     private void surface(Graphics2D graphics) {
-        for (y = 0; y <= 128; y++) {
-            for (x = 0; x <= 128; x++) {
+        for (y = 0; y <= l; y++) {
+            for (x = 0; x <= l; x++) {
                 c2 = h1[x][y] / n;
-                if (c2 > 15) {
-                    c2 = 15;
+                if (c2 > colors.size() - 1) {
+                    c2 = colors.size() - 1;
                 }
                 plot(graphics, x, y, c2);
             }
@@ -268,8 +283,8 @@ public class Fractals {
                 }
                 h2 = h1[x][y] + x + y;
                 c2 = h1[x][y] / n;
-                if (c2 > 15) {
-                    c2 = 15;
+                if (c2 > colors.size() - 1) {
+                    c2 = colors.size() - 1;
                 }
                 if (h2 < nmx) {
                     h2 = nmx;
