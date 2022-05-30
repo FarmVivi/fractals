@@ -57,6 +57,9 @@ public class Fractals {
     private int tr;
     private int ds;
 
+    // Variables "temporaires" custom
+    private int magicC;
+
     private final Semaphore semaphore = new Semaphore(1);
     private boolean calculFractalDone = false;
 
@@ -82,7 +85,8 @@ public class Fractals {
         this.moveX = 0;
         this.moveY = 0;
         this.h1 = new int[initL + 1][initL + 1];
-        this.c1 = new int[320 + 1];
+        this.magicC = initL * 2 + initL / 2;
+        this.c1 = new int[magicC + 1];
         this.m = initM;
         this.p = (int) Math.pow(2, 7 - m);
         this.h2 = initH;
@@ -278,7 +282,7 @@ public class Fractals {
             for (x = 0; x <= l - 1; x++) {
                 nmx = nm + x + y;
                 a = l - y + x;
-                if (a < 0 || a > 319) {
+                if (a < 0 || a > magicC - 1) {
                     continue;
                 }
                 h2 = h1[x][y] + x + y;
@@ -315,7 +319,7 @@ public class Fractals {
             o2 = 0;
             for (x = l; x >= o; x--) {
                 a = l - y + x;
-                if (a < 0 || a > 319) {
+                if (a < 0 || a > magicC - 1) {
                     ombresPrivate();
                     continue;
                 }
@@ -352,24 +356,24 @@ public class Fractals {
     // lignes 850 à 970
     private void filDeFer(Graphics2D graphics) {
         // 0, 40
-        move(0, 40);
+        move(0, magicC / 8);
         // 160
-        o = 160;
+        o = magicC / 2;
         // 0
         k = 0;
         // 320, 0
-        drawLine(graphics, 320, 0, 1);
+        drawLine(graphics, magicC, 0, 1);
         // 640, 40
-        drawLine(graphics, 640, 40, 1);
-        c1 = new int[320 + 1];
+        drawLine(graphics, magicC * 2, magicC / 8, 1);
+        c1 = new int[magicC + 1];
         // 0, 128
         for (y = 0; y <= l; y += 2) {
             // - 320
-            move(o * 4 - 320, c1[o + k]);
+            move(o * 4 - magicC, c1[o + k]);
             // 0
             k = 0;
             // 160
-            o = 160 - y;
+            o = magicC / 2 - y;
             if (o < 0)
                 k = -o;
             // k, 128
@@ -378,11 +382,11 @@ public class Fractals {
                 h2 = Math.max(c1[x + o], t);
                 c1[x + o] = h2;
                 // - 320
-                drawLine(graphics, (o + x) * 4 - 320, h2, 1);
+                drawLine(graphics, (o + x) * 4 - magicC, h2, 1);
             }
             if (y != 0)
                 // - 322
-                drawLine(graphics, (o + x) * 4 - 322, fh, 1);
+                drawLine(graphics, (o + x) * 4 - magicC - 2, fh, 1);
             fh = h2;
         }
     }

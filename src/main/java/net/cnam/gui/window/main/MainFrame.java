@@ -1,16 +1,14 @@
 package net.cnam.gui.window.main;
 
 import net.cnam.App;
+import net.cnam.Fractals;
+import net.cnam.gui.window.surface.NewSurfacePanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    private JMenuBar menuBar;
-    private JMenu fileMenu;
-    private JMenuItem newItem;
-    private JMenuItem oldItem;
-    private JMenuItem exitItem;
+    private Fractals fractals;
 
     public MainFrame() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -24,22 +22,40 @@ public class MainFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Menu
-        menuBar = new JMenuBar();
-        fileMenu = new JMenu("Fichier");
-        newItem = new JMenuItem("Nouveau...");
+        // Onglet Fichier
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("Fichier");
+        JMenuItem newItem = new JMenuItem("Nouveau...");
+        newItem.addActionListener(e -> {
+            fractals = new Fractals(2, 64, 3, 0L, 512);
+            Container contentPane = this.getContentPane();
+            contentPane.removeAll();
+            contentPane.add(new NewSurfacePanel(fractals));
+            contentPane.repaint();
+        });
         fileMenu.add(newItem);
         fileMenu.addSeparator();
-        oldItem = new JMenuItem("Ouvrir vieux menu");
+        JMenuItem oldItem = new JMenuItem("Ouvrir vieux menu");
         oldItem.addActionListener(e -> {
             App app = new App();
             app.launchMainWindow();
         });
         fileMenu.add(oldItem);
         fileMenu.addSeparator();
-        exitItem = new JMenuItem("Quitter");
+        JMenuItem exitItem = new JMenuItem("Quitter");
         exitItem.addActionListener(e -> System.exit(0));
         fileMenu.add(exitItem);
         menuBar.add(fileMenu);
+
+        // Onglet Affichage
+        JMenu viewMenu = new JMenu("Affichage");
+        JMenuItem mapItem = new JMenuItem("Carte");
+        mapItem.addActionListener(e -> {
+
+        });
+        viewMenu.add(mapItem);
+        menuBar.add(viewMenu);
+
         this.setJMenuBar(menuBar);
 
         MainPanel panel = new MainPanel();

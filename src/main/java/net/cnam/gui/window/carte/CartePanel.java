@@ -1,13 +1,11 @@
 package net.cnam.gui.window.carte;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.swing.JPanel;
-
 import net.cnam.Fractals;
 
-public class CartePanel extends JPanel {
+import javax.swing.*;
+import java.awt.*;
+
+public class CartePanel extends JScrollPane {
     private final Fractals fractals;
 
     public CartePanel(Fractals fractals) {

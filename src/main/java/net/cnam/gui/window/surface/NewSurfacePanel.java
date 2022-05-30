@@ -1,13 +1,11 @@
 package net.cnam.gui.window.surface;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.swing.JPanel;
-
 import net.cnam.Fractals;
 
-public class NewSurfacePanel extends JPanel {
+import javax.swing.*;
+import java.awt.*;
+
+public class NewSurfacePanel extends JScrollPane {
     private final Fractals fractals;
 
     public NewSurfacePanel(Fractals fractals) {
