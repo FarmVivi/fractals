@@ -150,8 +150,8 @@ public class Fractals {
         for (x = 0; x <= l; x += p) {
             for (y = 0; y <= l; y += p) {
                 h1[x][y] = (int) (random.nextFloat() * h2);
-                if (h1[x][y] < colors.size() - 1) {
-                    h1[x][y] = colors.size() - 1;
+                if (h1[x][y] < n) {
+                    h1[x][y] = n;
                 }
                 c2 = h1[x][y] / n;
                 if (c2 > colors.size() - 1) {
