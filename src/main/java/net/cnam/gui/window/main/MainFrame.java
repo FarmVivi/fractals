@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
         JMenu fileMenu = new JMenu("Fichier");
         JMenuItem newItem = new JMenuItem("Nouveau...");
         newItem.addActionListener(e -> {
-            fractals = new Fractals(2, 64, 3, 0L, 512);
+            fractals = new Fractals(1, 128, 3, 0L, 1024);
             Container contentPane = this.getContentPane();
             contentPane.removeAll();
             contentPane.add(new NewSurfacePanel(fractals));

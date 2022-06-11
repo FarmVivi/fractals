@@ -69,16 +69,14 @@ public class Fractals {
         this.initD = d;
         this.initZ = z;
         this.initL = l;
-        Color[] waterColors = Utils.createGradient(new Color(0, 35, 104), new Color(88, 159, 206), 8);
-        Color[] sandColors = Utils.createGradient(new Color(239, 253, 103), new Color(255, 198, 55), 4);
-        Color[] grassColors = Utils.createGradient(new Color(115, 255, 0), new Color(27, 148, 18), 12);
-        Color[] stoneColors = Utils.createGradient(new Color(54, 107, 33), new Color(133, 133, 133), 4);
-        Color[] snowColors = Utils.createGradient(new Color(133, 133, 133), new Color(255, 255, 255), 2);
-        colors.addAll(Arrays.asList(waterColors));
-        colors.addAll(Arrays.asList(sandColors));
-        colors.addAll(Arrays.asList(grassColors));
-        colors.addAll(Arrays.asList(stoneColors));
-        colors.addAll(Arrays.asList(snowColors));
+        Color[] seaGradient = Utils.createGradient(new Color(0, 0, 128), new Color(0, 255, 255), 15);
+        Color[] sandGradient = Utils.createGradient(new Color(202, 205, 0), new Color(255, 237, 0), 5);
+        Color[] grassGradient = Utils.createGradient(new Color(106, 234, 0), new Color(58, 129, 0), 15);
+        Color[] mountainGradient = Utils.createGradient(new Color(153, 153, 153), new Color(255, 255, 255), 10);
+        colors.addAll(Arrays.asList(seaGradient));
+        colors.addAll(Arrays.asList(sandGradient));
+        colors.addAll(Arrays.asList(grassGradient));
+        colors.addAll(Arrays.asList(mountainGradient));
     }
 
     private void reset() {

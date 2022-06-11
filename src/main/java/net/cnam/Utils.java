@@ -1,6 +1,6 @@
 package net.cnam;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class Utils {
     // Méthode pour créer un dégradé de couleurs entre 2 couleurs

@@ -20,7 +20,7 @@ public class App {
     private final GameFrame gameFrame;
 
     public App() {
-        Fractals fractals = new Fractals(2, 64, 3, 0L, 1024);
+        Fractals fractals = new Fractals(2, 64, 3, 0L, 128);
 
         this.mainFrame = new MenuFrame(this);
         this.newSurfaceFrame = new NewSurfaceFrame(this, fractals);

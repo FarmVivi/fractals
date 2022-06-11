@@ -1,16 +1,14 @@
-package net.cnam.gui.window.carte;
+package net.cnam.gui.component;
 
 import net.cnam.Fractals;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CartePanel extends JScrollPane {
+public class Carte extends JComponent {
     private final Fractals fractals;
 
-    public CartePanel(Fractals fractals) {
-        this.setLayout(null);
-
+    public Carte(Fractals fractals) {
         this.fractals = fractals;
     }
 
