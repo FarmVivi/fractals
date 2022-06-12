@@ -425,6 +425,14 @@ public class Fractals {
         // GOTO 1500
     }
 
+    private Dimension getDimensionMap(){
+        return new Dimension(l + 1,l + 1);
+    }
+
+    private Dimension getDimensionStrat(){
+        return new Dimension((magicC - 1) * 4, l + h2);
+    }
+
     public void newSurface(Graphics2D graphics) {
         semaphore.acquireUninterruptibly();
 
