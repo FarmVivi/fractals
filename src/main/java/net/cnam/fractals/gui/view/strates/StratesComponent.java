@@ -1,24 +1,25 @@
-package net.cnam.fractals.gui.view.filfer;
+package net.cnam.fractals.gui.view.strates;
 
 import net.cnam.fractals.Fractals;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class FilFerViewPanel extends JPanel {
+public class StratesComponent extends JComponent {
     private final Fractals fractals;
 
-    public FilFerViewPanel(Fractals fractals) {
+    public StratesComponent(Fractals fractals) {
         this.setLayout(null);
-        this.setBackground(Color.BLACK);
 
         this.fractals = fractals;
+
+        this.setSize(fractals.getDimension3D());
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        fractals.viewFilDeFer((Graphics2D) g);
+        fractals.viewStrates((Graphics2D) g);
     }
 }

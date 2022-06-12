@@ -1,19 +1,19 @@
-package net.cnam.fractals.old.gui.view.filfer;
+package net.cnam.fractals.old.gui.view.strates;
 
 import net.cnam.fractals.Fractals;
-import net.cnam.fractals.gui.view.filfer.FilFerViewPanel;
+import net.cnam.fractals.gui.view.strates.StratesPanel;
 import net.cnam.fractals.old.App;
 
 import javax.swing.*;
 
 @Deprecated
-public class FilFerViewFrame extends JFrame {
+public class StratesFrame extends JFrame {
     @Deprecated
-    public FilFerViewFrame(App app, Fractals fractals) {
-        FilFerViewPanel panel = new FilFerViewPanel(fractals);
+    public StratesFrame(App app, Fractals fractals) {
+        StratesPanel panel = new StratesPanel(fractals);
 
         // Caractéristiques de la fenêtre
-        this.setTitle("Fractals - Vue en fil de fer");
+        this.setTitle("Fractals - Vue en strates");
         this.setSize(1280, 720);
         this.setLocationRelativeTo(app.getMenuFrame());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

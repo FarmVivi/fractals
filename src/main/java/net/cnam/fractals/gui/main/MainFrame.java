@@ -1,6 +1,7 @@
 package net.cnam.fractals.gui.main;
 
 import net.cnam.fractals.Fractals;
+import net.cnam.fractals.gui.carte.CartePanel;
 import net.cnam.fractals.gui.surface.NewSurfacePanel;
 import net.cnam.fractals.old.App;
 
@@ -33,7 +34,7 @@ public class MainFrame extends JFrame {
             fractals = new Fractals(1, 128, 3, 0L, 1024);
             panel.removeAll();
             panel.add(new NewSurfacePanel(fractals));
-            panel.repaint();
+            panel.revalidate();
         });
         fileMenu.add(newItem);
         fileMenu.addSeparator();
@@ -53,7 +54,9 @@ public class MainFrame extends JFrame {
         JMenu viewMenu = new JMenu("Affichage");
         JMenuItem mapItem = new JMenuItem("Carte");
         mapItem.addActionListener(e -> {
-
+            panel.removeAll();
+            panel.add(new CartePanel(fractals));
+            panel.revalidate();
         });
         viewMenu.add(mapItem);
         menuBar.add(viewMenu);

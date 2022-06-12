@@ -425,12 +425,12 @@ public class Fractals {
         // GOTO 1500
     }
 
-    private Dimension getDimensionMap(){
-        return new Dimension(l + 1,l + 1);
+    public Dimension getDimension2D() {
+        return new Dimension(initL + 1, initL + 1);
     }
 
-    private Dimension getDimensionStrat(){
-        return new Dimension((magicC - 1) * 4, l + h2);
+    public Dimension getDimension3D() {
+        return new Dimension((initL * 2 + initL / 2 - 1) * 4, initL + 1 + initH);
     }
 
     public void newSurface(Graphics2D graphics) {
