@@ -60,6 +60,14 @@ public class Fractals {
     private int magicC;
     private boolean calculFractalDone = false;
 
+    public Fractals() {
+        this(Utils.randomInt(1, 3),
+                Utils.randomInt(64, 128),
+                Utils.randomInt(1, 3),
+                new Random().nextLong(),
+                Utils.randomInt(128, 1024));
+    }
+
     public Fractals(int m, int h, int d, long z, int l) {
         this.initM = m;
         this.initH = h;

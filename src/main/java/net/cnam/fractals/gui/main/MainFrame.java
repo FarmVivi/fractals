@@ -11,9 +11,12 @@ import net.cnam.fractals.gui.view.strates.StratesPanel;
 import net.cnam.fractals.old.App;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
+    private static final String TITLE = "Fractals";
+
     private final ScrollPanel scrollPanel;
     private final MainPanel panel;
     private Fractals fractals;
@@ -27,7 +30,7 @@ public class MainFrame extends JFrame {
         int width = (int) (screenSize.getWidth() - bounds.left - bounds.right);
         int height = (int) (screenSize.getHeight() - bounds.top - bounds.bottom);
         // Caractéristiques de la fenêtre
-        this.setTitle("Fractals");
+        this.setTitle(TITLE);
         this.setSize(width, height);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,15 +40,60 @@ public class MainFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("Fichier");
 
-        JMenuItem newItem = new JMenuItem("Nouveau...");
+        JMenuItem newItem = new JMenuItem("Nouveau...", UIManager.getIcon("FileView.fileIcon"));
         newItem.addActionListener(e -> {
-            fractals = new Fractals(1, 128, 3, 0L, 128);
+            fractals = new Fractals();
             panel.removeAll();
             panel.add(new NewSurfacePanel(fractals));
             panel.revalidate();
             scrollPanel.setLocation(0, 0);
         });
         fileMenu.add(newItem);
+
+        JMenuItem openItem = new JMenuItem("Ouvrir...", UIManager.getIcon("FileView.directoryIcon"));
+        openItem.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Ouvrir");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Fractals", "fractals"));
+            int returnValue = fileChooser.showOpenDialog(this);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                JOptionPane.showMessageDialog(this, "Fonctionnalité bientôt disponible", "En développement...", JOptionPane.INFORMATION_MESSAGE);
+                /* fractals = new Fractals(1, 128, 3, 0L, 1024);
+                fractals.load(fileChooser.getSelectedFile());
+                panel.removeAll();
+                panel.add(new NewSurfacePanel(fractals));
+                panel.revalidate();
+                scrollPanel.setLocation(0, 0); */
+            }
+        });
+        fileMenu.add(openItem);
+
+        JMenuItem saveItem = new JMenuItem("Enregistrer", UIManager.getIcon("FileView.floppyDriveIcon"));
+        saveItem.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Enregistrer");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Fractals", "fractals"));
+            int returnValue = fileChooser.showSaveDialog(this);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                JOptionPane.showMessageDialog(this, "Fonctionnalité bientôt disponible", "En développement...", JOptionPane.INFORMATION_MESSAGE);
+                // fractals.save(fileChooser.getSelectedFile());
+            }
+        });
+        fileMenu.add(saveItem);
+
+        JMenuItem closeItem = new JMenuItem("Fermer");
+        closeItem.addActionListener(e -> {
+            this.fractals = null;
+            this.setTitle(TITLE);
+            panel.removeAll();
+            panel.revalidate();
+            scrollPanel.setLocation(0, 0);
+        });
+        fileMenu.add(closeItem);
 
         fileMenu.addSeparator();
 
