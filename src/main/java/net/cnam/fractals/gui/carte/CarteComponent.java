@@ -17,9 +17,9 @@ public class CarteComponent extends JComponent {
     }
 
     @Override
-    public void paint(Graphics g) {
-        fractals.map((Graphics2D) g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-        super.paint(g);
+        fractals.map((Graphics2D) g);
     }
 }

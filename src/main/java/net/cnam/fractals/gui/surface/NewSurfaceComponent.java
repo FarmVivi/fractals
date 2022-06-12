@@ -17,9 +17,9 @@ public class NewSurfaceComponent extends JComponent {
     }
 
     @Override
-    public void paint(Graphics g) {
-        fractals.newSurface((Graphics2D) g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-        super.paint(g);
+        fractals.newSurface((Graphics2D) g);
     }
 }

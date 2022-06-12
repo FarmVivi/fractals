@@ -17,9 +17,9 @@ public class FilFerComponent extends JComponent {
     }
 
     @Override
-    public void paint(Graphics g) {
-        fractals.viewFilDeFer((Graphics2D) g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-        super.paint(g);
+        fractals.viewFilDeFer((Graphics2D) g);
     }
 }

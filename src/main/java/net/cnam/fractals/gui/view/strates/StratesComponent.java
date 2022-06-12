@@ -17,9 +17,9 @@ public class StratesComponent extends JComponent {
     }
 
     @Override
-    public void paint(Graphics g) {
-        fractals.viewStrates((Graphics2D) g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-        super.paint(g);
+        fractals.viewStrates((Graphics2D) g);
     }
 }

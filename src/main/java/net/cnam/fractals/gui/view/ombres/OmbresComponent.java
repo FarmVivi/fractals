@@ -17,9 +17,9 @@ public class OmbresComponent extends JComponent {
     }
 
     @Override
-    public void paint(Graphics g) {
-        fractals.viewOmbres((Graphics2D) g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-        super.paint(g);
+        fractals.viewOmbres((Graphics2D) g);
     }
 }
