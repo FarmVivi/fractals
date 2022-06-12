@@ -1,7 +1,5 @@
 package net.cnam;
 
-import java.util.Random;
-
 import net.cnam.gui.window.carte.CarteFrame;
 import net.cnam.gui.window.game.GameFrame;
 import net.cnam.gui.window.menu.MenuFrame;
@@ -10,8 +8,9 @@ import net.cnam.gui.window.view.filfer.FilFerViewFrame;
 import net.cnam.gui.window.view.ombres.OmbresViewFrame;
 import net.cnam.gui.window.view.strates.StratesViewFrame;
 
+@Deprecated
 public class App {
-    private final MenuFrame mainFrame;
+    private final MenuFrame menuFrame;
     private final NewSurfaceFrame newSurfaceFrame;
     private final CarteFrame carteFrame;
     private final StratesViewFrame stratesViewFrame;
@@ -19,47 +18,51 @@ public class App {
     private final FilFerViewFrame filFerViewFrame;
     private final GameFrame gameFrame;
 
+    @Deprecated
     public App() {
-        Fractals fractals = new Fractals(2, 64, 3, 0L, 128);
+        Fractals defaultFractals = new Fractals(2, 64, 3, 0L, 128);
 
-        this.mainFrame = new MenuFrame(this);
-        this.newSurfaceFrame = new NewSurfaceFrame(this, fractals);
-        this.carteFrame = new CarteFrame(this, fractals);
-        this.stratesViewFrame = new StratesViewFrame(this, fractals);
-        this.ombresViewFrame = new OmbresViewFrame(this, fractals);
-        this.filFerViewFrame = new FilFerViewFrame(this, fractals);
-        this.gameFrame = new GameFrame(this, fractals);
+        this.menuFrame = new MenuFrame(this);
+        this.newSurfaceFrame = new NewSurfaceFrame(this, defaultFractals);
+        this.carteFrame = new CarteFrame(this, defaultFractals);
+        this.stratesViewFrame = new StratesViewFrame(this, defaultFractals);
+        this.ombresViewFrame = new OmbresViewFrame(this, defaultFractals);
+        this.filFerViewFrame = new FilFerViewFrame(this, defaultFractals);
+        this.gameFrame = new GameFrame(this, defaultFractals);
     }
 
-    public void launchMainWindow() {
-        this.mainFrame.setVisible(true);
+    @Deprecated
+    public MenuFrame getMenuFrame() {
+        return menuFrame;
     }
 
-    public MenuFrame getMainFrame() {
-        return mainFrame;
+    @Deprecated
+    public NewSurfaceFrame getNewSurfaceFrame() {
+        return newSurfaceFrame;
     }
 
-    public void launchNewSurfaceWindow() {
-        this.newSurfaceFrame.setVisible(true);
+    @Deprecated
+    public CarteFrame getCarteFrame() {
+        return carteFrame;
     }
 
-    public void launchCarteWindow() {
-        this.carteFrame.setVisible(true);
+    @Deprecated
+    public StratesViewFrame getStratesViewFrame() {
+        return stratesViewFrame;
     }
 
-    public void launchStratesViewWindow() {
-        this.stratesViewFrame.setVisible(true);
+    @Deprecated
+    public OmbresViewFrame getOmbresViewFrame() {
+        return ombresViewFrame;
     }
 
-    public void launchOmbresViewWindow() {
-        this.ombresViewFrame.setVisible(true);
+    @Deprecated
+    public FilFerViewFrame getFilFerViewFrame() {
+        return filFerViewFrame;
     }
 
-    public void launchFilFerViewWindow() {
-        this.filFerViewFrame.setVisible(true);
-    }
-
-    public void launchGameWindow() {
-        this.gameFrame.setVisible(true);
+    @Deprecated
+    public GameFrame getGameFrame() {
+        return gameFrame;
     }
 }

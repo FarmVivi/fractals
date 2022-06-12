@@ -5,7 +5,7 @@ import net.cnam.Fractals;
 import javax.swing.*;
 import java.awt.*;
 
-public class NewSurfacePanel extends JScrollPane {
+public class NewSurfacePanel extends JPanel {
     private final Fractals fractals;
 
     public NewSurfacePanel(Fractals fractals) {

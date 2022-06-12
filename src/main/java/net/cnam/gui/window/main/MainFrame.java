@@ -8,9 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
+    private final MainPanel panel;
     private Fractals fractals;
 
     public MainFrame() {
+        this.panel = new MainPanel();
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Insets bounds = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
         int width = (int) (screenSize.getWidth() - bounds.left - bounds.right);
@@ -28,17 +31,16 @@ public class MainFrame extends JFrame {
         JMenuItem newItem = new JMenuItem("Nouveau...");
         newItem.addActionListener(e -> {
             fractals = new Fractals(1, 128, 3, 0L, 1024);
-            Container contentPane = this.getContentPane();
-            contentPane.removeAll();
-            contentPane.add(new NewSurfacePanel(fractals));
-            contentPane.repaint();
+            panel.removeAll();
+            panel.add(new NewSurfacePanel(fractals));
+            panel.repaint();
         });
         fileMenu.add(newItem);
         fileMenu.addSeparator();
         JMenuItem oldItem = new JMenuItem("Ouvrir vieux menu");
         oldItem.addActionListener(e -> {
             App app = new App();
-            app.launchMainWindow();
+            app.getMenuFrame().setVisible(true);
         });
         fileMenu.add(oldItem);
         fileMenu.addSeparator();
@@ -58,9 +60,7 @@ public class MainFrame extends JFrame {
 
         this.setJMenuBar(menuBar);
 
-        MainPanel panel = new MainPanel();
-
         // Ajout du panel
-        this.add(panel);
+        this.add(new JScrollPane(panel));
     }
 }

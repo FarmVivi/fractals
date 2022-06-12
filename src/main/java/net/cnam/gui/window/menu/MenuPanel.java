@@ -1,62 +1,42 @@
 package net.cnam.gui.window.menu;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
 import net.cnam.App;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+@Deprecated
 public class MenuPanel extends JPanel {
-
-    private final JButton newSurfaceButton;
-    private final JButton carteButton;
-    private final JButton stratesViewButton;
-    private final JButton ombresViewButton;
-    private final JButton filFerViewButton;
-    private final JButton gameButton;
-
+    @Deprecated
     public MenuPanel(App app) {
         // Bouton "Nouvelle surface"
-        this.newSurfaceButton = new JButton("Nouvelle surface");
-        this.newSurfaceButton.addActionListener((ActionEvent e) -> {
-            app.launchNewSurfaceWindow();
-        });
+        JButton newSurfaceButton = new JButton("Nouvelle surface");
+        newSurfaceButton.addActionListener((ActionEvent e) -> app.getNewSurfaceFrame().setVisible(true));
         this.add(newSurfaceButton);
 
         // Bouton "Carte"
-        this.carteButton = new JButton("Carte");
-        this.carteButton.addActionListener((ActionEvent e) -> {
-            app.launchCarteWindow();
-        });
+        JButton carteButton = new JButton("Carte");
+        carteButton.addActionListener((ActionEvent e) -> app.getCarteFrame().setVisible(true));
         this.add(carteButton);
 
         // Bouton "Vue en strates"
-        this.stratesViewButton = new JButton("Vue en strates");
-        this.stratesViewButton.addActionListener((ActionEvent e) -> {
-            app.launchStratesViewWindow();
-        });
+        JButton stratesViewButton = new JButton("Vue en strates");
+        stratesViewButton.addActionListener((ActionEvent e) -> app.getStratesViewFrame().setVisible(true));
         this.add(stratesViewButton);
 
         // Bouton "Vue en ombres"
-        this.ombresViewButton = new JButton("Vue en ombres");
-        this.ombresViewButton.addActionListener((ActionEvent e) -> {
-            app.launchOmbresViewWindow();
-        });
+        JButton ombresViewButton = new JButton("Vue en ombres");
+        ombresViewButton.addActionListener((ActionEvent e) -> app.getOmbresViewFrame().setVisible(true));
         this.add(ombresViewButton);
 
         // Bouton "Vue en fils de fer"
-        this.filFerViewButton = new JButton("Vue en fil de fer");
-        this.filFerViewButton.addActionListener((ActionEvent e) -> {
-            app.launchFilFerViewWindow();
-        });
+        JButton filFerViewButton = new JButton("Vue en fil de fer");
+        filFerViewButton.addActionListener((ActionEvent e) -> app.getFilFerViewFrame().setVisible(true));
         this.add(filFerViewButton);
 
         // Bouton "Le jeu"
-        this.gameButton = new JButton("Le jeu");
-        this.gameButton.addActionListener((ActionEvent e) -> {
-            app.launchGameWindow();
-        });
+        JButton gameButton = new JButton("Le jeu");
+        gameButton.addActionListener((ActionEvent e) -> app.getGameFrame().setVisible(true));
         this.add(gameButton);
     }
 }

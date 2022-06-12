@@ -1,12 +1,9 @@
 package net.cnam.gui.window.view.filfer;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.swing.JPanel;
-
 import net.cnam.Fractals;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class FilFerViewPanel extends JPanel {
     private final Fractals fractals;

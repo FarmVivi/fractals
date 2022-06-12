@@ -1,10 +1,12 @@
 package net.cnam.gui.window.menu;
 
-import javax.swing.JFrame;
-
 import net.cnam.App;
 
+import javax.swing.*;
+
+@Deprecated
 public class MenuFrame extends JFrame {
+    @Deprecated
     public MenuFrame(App app) {
         MenuPanel panel = new MenuPanel(app);
 
@@ -15,6 +17,8 @@ public class MenuFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Ajout du panel
-        this.add(panel);
+        this.add(new JScrollPane(panel));
+
+        this.pack();
     }
 }
