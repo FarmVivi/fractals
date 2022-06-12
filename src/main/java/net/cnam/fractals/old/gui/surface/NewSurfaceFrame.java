@@ -1,6 +1,7 @@
 package net.cnam.fractals.old.gui.surface;
 
 import net.cnam.fractals.Fractals;
+import net.cnam.fractals.gui.ScrollPanel;
 import net.cnam.fractals.gui.surface.NewSurfacePanel;
 import net.cnam.fractals.old.App;
 
@@ -19,6 +20,6 @@ public class NewSurfaceFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Ajout du panel
-        this.add(new JScrollPane(panel));
+        this.add(new ScrollPanel(panel));
     }
 }

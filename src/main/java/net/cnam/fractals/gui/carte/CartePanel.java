@@ -3,7 +3,6 @@ package net.cnam.fractals.gui.carte;
 import net.cnam.fractals.Fractals;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class CartePanel extends JPanel {
     public CartePanel(Fractals fractals) {

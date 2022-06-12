@@ -1,5 +1,6 @@
 package net.cnam.fractals.old.gui.menu;
 
+import net.cnam.fractals.gui.ScrollPanel;
 import net.cnam.fractals.old.App;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ public class MenuFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Ajout du panel
-        this.add(new JScrollPane(panel));
+        this.add(new ScrollPanel(panel));
 
         this.pack();
     }

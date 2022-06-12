@@ -113,13 +113,18 @@ public class Fractals {
         this.ds = 0;
     }
 
-    private void plot(Graphics2D graphics, int x, int y, int c) {
+    private void plot(Graphics2D graphics, int componentHeight, int x, int y, int c) {
+        plot(graphics, componentHeight, x, y, colors.get(c));
+    }
+
+    private void plot(Graphics2D graphics, int componentHeight, int x, int y, Color color) {
         if (graphics == null) {
             return;
         }
-        graphics.setColor(colors.get(c));
-        graphics.drawLine(x, (int) (graphics.getClipBounds().getHeight() - y), x,
-                (int) (graphics.getClipBounds().getHeight() - y));
+
+        graphics.setColor(color);
+        graphics.drawLine(x, componentHeight - y,
+                x, componentHeight - y);
 
         move(x, y);
     }
@@ -129,19 +134,24 @@ public class Fractals {
         this.moveY = y;
     }
 
-    private void drawLine(Graphics2D graphics, int x, int y, int c) {
+    private void drawLine(Graphics2D graphics, int componentHeight, int x, int y, int c) {
+        drawLine(graphics, componentHeight, x, y, colors.get(c));
+    }
+
+    private void drawLine(Graphics2D graphics, int componentHeight, int x, int y, Color color) {
         if (graphics == null) {
             return;
         }
-        graphics.setColor(colors.get(c));
-        graphics.drawLine(moveX, (int) (graphics.getClipBounds().getHeight() - moveY), x,
-                (int) (graphics.getClipBounds().getHeight() - y));
+
+        graphics.setColor(color);
+        graphics.drawLine(moveX, componentHeight - moveY,
+                x, componentHeight - y);
 
         move(x, y);
     }
 
     // lignes 290 à 350
-    private void surfaceDeBase(Graphics2D graphics) {
+    private void surfaceDeBase(Graphics2D graphics, int componentHeight) {
         for (x = 0; x <= l; x += p) {
             for (y = 0; y <= l; y += p) {
                 h1[x][y] = (int) (random.nextFloat() * h2);
@@ -152,13 +162,13 @@ public class Fractals {
                 if (c2 > colors.size() - 1) {
                     c2 = colors.size() - 1;
                 }
-                plot(graphics, x, y, c2);
+                plot(graphics, componentHeight, x, y, c2);
             }
         }
     }
 
     // lignes 360 à 690
-    private void calculFractal(Graphics2D graphics) {
+    private void calculFractal(Graphics2D graphics, int componentHeight) {
         while (p > 1) {
             q = p / 2;
             e = d / 2;
@@ -176,7 +186,7 @@ public class Fractals {
                         c2 = colors.size() - 1;
                     }
                     h1[x][y] = h2;
-                    plot(graphics, x, y, c2);
+                    plot(graphics, componentHeight, x, y, c2);
                 }
             }
 
@@ -193,7 +203,7 @@ public class Fractals {
                         c2 = colors.size() - 1;
                     }
                     h1[x][y] = h2;
-                    plot(graphics, x, y, c2);
+                    plot(graphics, componentHeight, x, y, c2);
 
                     h2 = (int) ((h1[y - q][x] + h1[y + q][x] + h1[y][x - q] + h1[y][x + q]) / 4 + d * random.nextFloat()
                             - e);
@@ -205,7 +215,7 @@ public class Fractals {
                         c2 = colors.size() - 1;
                     }
                     h1[y][x] = h2;
-                    plot(graphics, y, x, c2);
+                    plot(graphics, componentHeight, y, x, c2);
                 }
             }
 
@@ -242,20 +252,20 @@ public class Fractals {
     }
 
     // lignes 770 à 840
-    private void surface(Graphics2D graphics) {
+    private void surface(Graphics2D graphics, int componentHeight) {
         for (y = 0; y <= l; y++) {
             for (x = 0; x <= l; x++) {
                 c2 = h1[x][y] / n;
                 if (c2 > colors.size() - 1) {
                     c2 = colors.size() - 1;
                 }
-                plot(graphics, x, y, c2);
+                plot(graphics, componentHeight, x, y, c2);
             }
         }
     }
 
     // lignes 980 à 1140
-    private void strates(Graphics2D graphics) {
+    private void strates(Graphics2D graphics, int componentHeight) {
         nm = n * 4;
 
         // lignes 1000 à 1040
@@ -289,11 +299,11 @@ public class Fractals {
                     h2 = nmx;
                 }
                 if (h2 <= c1[a]) {
-                    plot(graphics, a * 4, c1[a], 0);
+                    plot(graphics, componentHeight, a * 4, c1[a], 0);
                 }
                 if (h2 > c1[a]) {
                     move(a * 4, c1[a] + 2);
-                    drawLine(graphics, a * 4, h2 + 1, c2);
+                    drawLine(graphics, componentHeight, a * 4, h2 + 1, c2);
                     c1[a] = h2;
                 }
             }
@@ -301,7 +311,7 @@ public class Fractals {
     }
 
     // lignes 1150 à 1370
-    private void ombres(Graphics2D graphics) {
+    private void ombres(Graphics2D graphics, int componentHeight) {
         // ligne 1180
         for (i = 0; i <= l; i++) {
             c1[l - i] = h1[0][i] + i - 2;
@@ -331,12 +341,12 @@ public class Fractals {
                     c2 = 1;
                 }
                 if (h2 < c1[a]) {
-                    plot(graphics, a * 4, c1[a] - 2, c2 + 1);
+                    plot(graphics, componentHeight, a * 4, c1[a] - 2, c2 + 1);
                     ombresPrivate();
                     continue;
                 }
                 move(a * 4, c1[a]);
-                drawLine(graphics, a * 4, h2, c2);
+                drawLine(graphics, componentHeight, a * 4, h2, c2);
                 c1[a] = h2 + 2;
                 ombresPrivate();
             }
@@ -349,7 +359,7 @@ public class Fractals {
     }
 
     // lignes 850 à 970
-    private void filDeFer(Graphics2D graphics) {
+    private void filDeFer(Graphics2D graphics, int componentHeight) {
         // 0, 40
         move(0, magicC / 8);
         // 160
@@ -357,9 +367,9 @@ public class Fractals {
         // 0
         k = 0;
         // 320, 0
-        drawLine(graphics, magicC, 0, 1);
+        drawLine(graphics, componentHeight, magicC, 0, 1);
         // 640, 40
-        drawLine(graphics, magicC * 2, magicC / 8, 1);
+        drawLine(graphics, componentHeight, magicC * 2, magicC / 8, 1);
         c1 = new int[magicC + 1];
         // 0, 128
         for (y = 0; y <= l; y += 2) {
@@ -377,32 +387,32 @@ public class Fractals {
                 h2 = Math.max(c1[x + o], t);
                 c1[x + o] = h2;
                 // - 320
-                drawLine(graphics, (o + x) * 4 - magicC, h2, 1);
+                drawLine(graphics, componentHeight, (o + x) * 4 - magicC, h2, 1);
             }
             if (y != 0)
                 // - 322
-                drawLine(graphics, (o + x) * 4 - magicC - 2, fh, 1);
+                drawLine(graphics, componentHeight, (o + x) * 4 - magicC - 2, fh, 1);
             fh = h2;
         }
     }
 
-    private void jeu(Graphics2D graphics) {
+    private void jeu(Graphics2D graphics, int componentHeight) {
         pv = 100;
         xm = (int) (Math.random() * 20) + 5;
         ym = (int) (Math.random() * 10) + 5;
 
         // AFFICHAGE CABANE
-        plot(graphics, xm * 4, ym * 2, 13);
+        plot(graphics, componentHeight, xm * 4, ym * 2, 13);
         move(xm * 4, ym * 2);
-        drawLine(graphics, (xm + 2) * 4, ym * 2, 13);
-        drawLine(graphics, (xm + 2) * 4, (ym + 2) * 2, 13);
-        drawLine(graphics, xm * 4, (ym + 2) * 2, 13);
-        drawLine(graphics, xm * 4, ym * 2, 13);
+        drawLine(graphics, componentHeight, (xm + 2) * 4, ym * 2, 13);
+        drawLine(graphics, componentHeight, (xm + 2) * 4, (ym + 2) * 2, 13);
+        drawLine(graphics, componentHeight, xm * 4, (ym + 2) * 2, 13);
+        drawLine(graphics, componentHeight, xm * 4, ym * 2, 13);
 
         // PLACE JOUEUR
         xj = (int) (Math.random() * 30) + 10;
         yj = (int) (Math.random() * 10) + 10;
-        plot(graphics, xj * 4, yj * 2, 1);
+        plot(graphics, componentHeight, xj * 4, yj * 2, 1);
         // faire de 1500 à 1610
 
         // RESULTATS
@@ -416,7 +426,7 @@ public class Fractals {
             // ecrire "VOUS ETES MORT !"
             System.exit(0);
         }
-        plot(graphics, xj * 4, yj * 2, 3);
+        plot(graphics, componentHeight, xj * 4, yj * 2, 3);
         ds = (int) ((Math.pow(xj - xm, 2)) + (Math.pow(yj - ym, 2)));
         if (ds < 3) {
             // ecrire "SAUVE !"
@@ -436,9 +446,11 @@ public class Fractals {
     public void newSurface(Graphics2D graphics) {
         semaphore.acquireUninterruptibly();
 
+        int componentHeight = (int) getDimension2D().getHeight();
+
         reset();
-        surfaceDeBase(graphics);
-        calculFractal(graphics);
+        surfaceDeBase(graphics, componentHeight);
+        calculFractal(graphics, componentHeight);
         calculFractalDone = true;
 
         semaphore.release();
@@ -451,7 +463,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        surface(graphics);
+        surface(graphics, (int) getDimension2D().getHeight());
 
         semaphore.release();
     }
@@ -463,7 +475,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        strates(graphics);
+        strates(graphics, (int) getDimension2D().getHeight());
 
         semaphore.release();
     }
@@ -475,7 +487,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        ombres(graphics);
+        ombres(graphics, (int) getDimension2D().getHeight());
 
         semaphore.release();
     }
@@ -487,7 +499,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        filDeFer(graphics);
+        filDeFer(graphics, (int) getDimension2D().getHeight());
 
         semaphore.release();
     }
@@ -499,7 +511,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        jeu(graphics);
+        jeu(graphics, (int) getDimension2D().getHeight());
 
         semaphore.release();
     }
