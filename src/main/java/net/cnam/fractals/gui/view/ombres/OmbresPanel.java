@@ -8,7 +8,6 @@ import java.awt.*;
 public class OmbresPanel extends JPanel {
     public OmbresPanel(Fractals fractals) {
         this.setLayout(null);
-        this.setBackground(Color.BLACK);
 
         OmbresComponent ombresComponent = new OmbresComponent(fractals);
         this.add(ombresComponent);

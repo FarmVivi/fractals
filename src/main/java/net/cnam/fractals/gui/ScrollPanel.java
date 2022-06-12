@@ -9,5 +9,6 @@ public class ScrollPanel extends JScrollPane {
 
         this.getViewport().setScrollMode(JViewport.BACKINGSTORE_SCROLL_MODE);
         this.setBorder(BorderFactory.createEmptyBorder());
+        this.setLayout(new ScrollPaneLayout());
     }
 }

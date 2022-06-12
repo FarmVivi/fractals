@@ -440,7 +440,7 @@ public class Fractals {
     }
 
     public Dimension getDimension3D() {
-        return new Dimension((initL * 2 + initL / 2 - 1) * 4, initL + 1 + initH);
+        return new Dimension(initL * 8, initL * 2 + initH);
     }
 
     public void newSurface(Graphics2D graphics) {
@@ -475,7 +475,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        strates(graphics, (int) getDimension2D().getHeight());
+        strates(graphics, (int) getDimension3D().getHeight());
 
         semaphore.release();
     }
@@ -487,7 +487,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        ombres(graphics, (int) getDimension2D().getHeight());
+        ombres(graphics, (int) getDimension3D().getHeight());
 
         semaphore.release();
     }
@@ -499,7 +499,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        filDeFer(graphics, (int) getDimension2D().getHeight());
+        filDeFer(graphics, (int) getDimension3D().getHeight());
 
         semaphore.release();
     }
@@ -511,7 +511,7 @@ public class Fractals {
 
         semaphore.acquireUninterruptibly();
 
-        jeu(graphics, (int) getDimension2D().getHeight());
+        jeu(graphics, (int) getDimension3D().getHeight());
 
         semaphore.release();
     }

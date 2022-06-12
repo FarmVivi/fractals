@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
 
         JMenuItem newItem = new JMenuItem("Nouveau...");
         newItem.addActionListener(e -> {
-            fractals = new Fractals(1, 128, 3, 0L, 1024);
+            fractals = new Fractals(1, 128, 3, 0L, 128);
             panel.removeAll();
             panel.add(new NewSurfacePanel(fractals));
             panel.revalidate();
