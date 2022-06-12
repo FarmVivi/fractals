@@ -13,7 +13,6 @@ public class GamePanel extends JPanel {
         this.fractals = fractals;
 
         this.setLayout(null);
-        this.setBackground(Color.BLACK);
 
         StratesComponent stratesComponent = new StratesComponent(fractals);
         this.add(stratesComponent);
