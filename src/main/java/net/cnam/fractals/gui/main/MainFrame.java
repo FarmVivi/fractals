@@ -42,6 +42,7 @@ public class MainFrame extends JFrame {
 
         JMenuItem newItem = new JMenuItem("Nouveau...", UIManager.getIcon("FileView.fileIcon"));
         newItem.addActionListener(e -> {
+            //new NouveauJDialog(this);
             fractals = new Fractals();
             panel.removeAll();
             panel.add(new NewSurfacePanel(fractals));
