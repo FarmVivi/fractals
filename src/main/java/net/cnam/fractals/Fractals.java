@@ -126,13 +126,22 @@ public class Fractals {
     }
 
     private void plot(Graphics2D graphics, int componentHeight, int x, int y, Color color) {
+        plot(graphics, componentHeight, x, y, 1, 1, color);
+    }
+
+    private void plot(Graphics2D graphics, int componentHeight, int x, int y, int width, int height, int c) {
+        plot(graphics, componentHeight, x, y, width, height, colors.get(c));
+    }
+
+    private void plot(Graphics2D graphics, int componentHeight, int x, int y, int width, int height, Color color) {
         if (graphics == null) {
             return;
         }
 
-        graphics.setColor(color);
-        graphics.drawLine(x, componentHeight - y,
-                x, componentHeight - y);
+        if (graphics.getColor() != color) {
+            graphics.setColor(color);
+        }
+        graphics.fillRect(x, componentHeight - y, width, height);
 
         move(x, y);
     }
@@ -151,9 +160,10 @@ public class Fractals {
             return;
         }
 
-        graphics.setColor(color);
-        graphics.drawLine(moveX, componentHeight - moveY,
-                x, componentHeight - y);
+        if (graphics.getColor() != color) {
+            graphics.setColor(color);
+        }
+        graphics.drawLine(moveX, componentHeight - moveY, x, componentHeight - y);
 
         move(x, y);
     }
@@ -307,11 +317,17 @@ public class Fractals {
                     h2 = nmx;
                 }
                 if (h2 <= c1[a]) {
-                    plot(graphics, componentHeight, a * 4, c1[a], 0);
+                    plot(graphics, componentHeight, a * 4, c1[a], 4, 1, c2);
                 }
                 if (h2 > c1[a]) {
-                    move(a * 4, c1[a] + 2);
-                    drawLine(graphics, componentHeight, a * 4, h2 + 1, c2);
+                    move(a * 4, c1[a] + 1);
+                    drawLine(graphics, componentHeight, a * 4, h2, c2);
+                    move(a * 4 + 1, c1[a] + 1);
+                    drawLine(graphics, componentHeight, a * 4 + 1, h2, c2);
+                    move(a * 4 + 2, c1[a] + 1);
+                    drawLine(graphics, componentHeight, a * 4 + 2, h2, c2);
+                    move(a * 4 + 3, c1[a] + 1);
+                    drawLine(graphics, componentHeight, a * 4 + 3, h2, c2);
                     c1[a] = h2;
                 }
             }
@@ -348,13 +364,36 @@ public class Fractals {
                 } else {
                     c2 = 1;
                 }
+
+
                 if (h2 < c1[a]) {
-                    plot(graphics, componentHeight, a * 4, c1[a] - 2, c2 + 1);
+                    c2 += 1;
+                }
+                Color color;
+                if (c2 == 1) {
+                    color = new Color(0, 0, 128);
+                } else if (c2 == 2) {
+                    color = new Color(0, 0, 255);
+                } else if (c2 == 3) {
+                    color = new Color(0, 128, 255);
+                } else {
+                    color = new Color(0, 255, 255);
+                }
+
+
+                if (h2 < c1[a]) {
+                    plot(graphics, componentHeight, a * 4, c1[a] - 2, 4, 1, color);
                     ombresPrivate();
                     continue;
                 }
-                move(a * 4, c1[a]);
-                drawLine(graphics, componentHeight, a * 4, h2, c2);
+                move(a * 4, c1[a] - 1);
+                drawLine(graphics, componentHeight, a * 4, h2, color);
+                move(a * 4 + 1, c1[a] - 1);
+                drawLine(graphics, componentHeight, a * 4 + 1, h2, color);
+                move(a * 4 + 2, c1[a] - 1);
+                drawLine(graphics, componentHeight, a * 4 + 2, h2, color);
+                move(a * 4 + 3, c1[a] - 1);
+                drawLine(graphics, componentHeight, a * 4 + 3, h2, color);
                 c1[a] = h2 + 2;
                 ombresPrivate();
             }
