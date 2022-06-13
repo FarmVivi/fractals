@@ -36,6 +36,7 @@ public class MainFrame extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
         // Menu
         // Onglet Fichier
         JMenuBar menuBar = new JMenuBar();
