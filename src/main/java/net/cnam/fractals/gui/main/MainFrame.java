@@ -17,13 +17,12 @@ import java.awt.*;
 public class MainFrame extends JFrame {
     private static final String TITLE = "Fractals";
 
-    private final ScrollPanel scrollPanel;
     private final MainPanel panel;
     private Fractals fractals;
 
     public MainFrame() {
         this.panel = new MainPanel();
-        this.scrollPanel = new ScrollPanel(panel);
+        ScrollPanel scrollPanel = new ScrollPanel(panel);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Insets bounds = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
@@ -46,7 +45,6 @@ public class MainFrame extends JFrame {
             panel.removeAll();
             panel.add(new NewSurfacePanel(fractals));
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
         fileMenu.add(newItem);
 
@@ -64,8 +62,7 @@ public class MainFrame extends JFrame {
                 fractals.load(fileChooser.getSelectedFile());
                 panel.removeAll();
                 panel.add(new NewSurfacePanel(fractals));
-                panel.revalidate();
-                scrollPanel.setLocation(0, 0); */
+                panel.revalidate(); */
             }
         });
         fileMenu.add(openItem);
@@ -91,7 +88,6 @@ public class MainFrame extends JFrame {
             this.setTitle(TITLE);
             panel.removeAll();
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
         fileMenu.add(closeItem);
 
@@ -120,7 +116,6 @@ public class MainFrame extends JFrame {
             panel.removeAll();
             panel.add(new NewSurfacePanel(fractals));
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
         viewMenu.add(newSurfaceItem);
 
@@ -131,7 +126,6 @@ public class MainFrame extends JFrame {
             panel.removeAll();
             panel.add(new CartePanel(fractals));
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
         viewMenu.add(mapItem);
 
@@ -142,7 +136,6 @@ public class MainFrame extends JFrame {
             panel.removeAll();
             panel.add(new StratesPanel(fractals));
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
         viewMenu.add(stratesViewItem);
 
@@ -151,7 +144,6 @@ public class MainFrame extends JFrame {
             panel.removeAll();
             panel.add(new OmbresPanel(fractals));
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
         viewMenu.add(ombresViewItem);
 
@@ -160,7 +152,6 @@ public class MainFrame extends JFrame {
             panel.removeAll();
             panel.add(new FilFerPanel(fractals));
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
         viewMenu.add(filFerViewItem);
 
@@ -171,7 +162,6 @@ public class MainFrame extends JFrame {
             panel.removeAll();
             panel.add(new GamePanel(fractals));
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
         viewMenu.add(gameItem);
 

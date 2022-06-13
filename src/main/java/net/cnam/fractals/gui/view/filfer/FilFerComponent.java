@@ -20,6 +20,8 @@ public class FilFerComponent extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        fractals.viewFilDeFer((Graphics2D) g);
+        Graphics2D g2d = (Graphics2D) g;
+        fractals.viewFilDeFer(g2d);
+        g2d.dispose();
     }
 }

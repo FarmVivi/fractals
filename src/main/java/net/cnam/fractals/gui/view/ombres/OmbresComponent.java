@@ -20,6 +20,8 @@ public class OmbresComponent extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        fractals.viewOmbres((Graphics2D) g);
+        Graphics2D g2d = (Graphics2D) g;
+        fractals.viewOmbres(g2d);
+        g2d.dispose();
     }
 }
