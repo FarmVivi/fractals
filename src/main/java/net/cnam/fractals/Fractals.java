@@ -1,6 +1,7 @@
 package net.cnam.fractals;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -481,6 +482,50 @@ public class Fractals {
         }
         // GOTO 1500
     }
+
+    /*
+    //TODO retirer le static pour que ca fonctionne
+    public void loadFractal() {
+
+        try {
+            FileInputStream fluxEntree = new FileInputStream("src/save-fractals.dat");
+            BufferedInputStream tamponEntree = new BufferedInputStream(fluxEntree);
+            DataInputStream entree = new DataInputStream(tamponEntree);
+
+            initM = entree.readInt();
+            initH = entree.readInt();
+            initD = entree.readInt();
+            initZ = entree.readLong();
+            initL = entree.readInt();
+
+            entree.close();
+
+        } catch (IOException ignored) {
+        }
+
+    }
+
+
+    public void saveFractal() {
+
+        try {
+            FileOutputStream fluxSortie = new FileOutputStream("src/save-fractals.dat");
+            BufferedOutputStream tamponSortie = new BufferedOutputStream(fluxSortie);
+            DataOutputStream sortie = new DataOutputStream(tamponSortie);
+
+            sortie.writeInt(initM);
+            sortie.writeInt(initH);
+            sortie.writeInt(initD);
+            sortie.writeLong(initZ);
+            sortie.writeInt(initL);
+
+            sortie.close();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+    }
+    */
 
     public Dimension getDimension2D() {
         return new Dimension(initL + 1, initL + 1);
