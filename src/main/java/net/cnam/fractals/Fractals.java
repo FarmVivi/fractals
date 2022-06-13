@@ -1,7 +1,6 @@
 package net.cnam.fractals;
 
 import java.awt.*;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,21 +8,13 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class Fractals {
-    // Variables permanentes
-    // Couleurs
     private final List<Color> colors = new ArrayList<>();
-    // maille (0-3)
-    private final int initM;
-    // hauteur de base
-    private final int initH;
-    // déviation
-    private final int initD;
-    // graine
-    private final long initZ;
-    // taille (128, 64, 32)
-    private final int initL;
     private final Semaphore semaphore = new Semaphore(1);
-    // Variables "temporaires"
+
+    private FractalsSettings settings;
+    private int magicC;
+    private boolean calculFractalDone;
+
     private int moveX;
     private int moveY;
     private int[][] h1;
@@ -57,24 +48,8 @@ public class Fractals {
     private int yj;
     private int tr;
     private int ds;
-    // Variables "temporaires" custom
-    private int magicC;
-    private boolean calculFractalDone = false;
 
-    public Fractals() {
-        this(Utils.randomInt(1, 3),
-                Utils.randomInt(64, 128),
-                Utils.randomInt(1, 3),
-                new Random().nextLong(),
-                Utils.randomInt(128, 1024));
-    }
-
-    public Fractals(int m, int h, int d, long z, int l) {
-        this.initM = m;
-        this.initH = h;
-        this.initD = d;
-        this.initZ = z;
-        this.initL = l;
+    public Fractals(FractalsSettings settings) {
         Color[] seaGradient = Utils.createGradient(new Color(0, 0, 128), new Color(0, 255, 255), 15);
         Color[] sandGradient = Utils.createGradient(new Color(202, 205, 0), new Color(255, 237, 0), 5);
         Color[] grassGradient = Utils.createGradient(new Color(106, 234, 0), new Color(58, 129, 0), 15);
@@ -83,20 +58,32 @@ public class Fractals {
         colors.addAll(Arrays.asList(sandGradient));
         colors.addAll(Arrays.asList(grassGradient));
         colors.addAll(Arrays.asList(mountainGradient));
+
+        setSettings(settings);
+    }
+
+    public void setSettings(FractalsSettings settings) {
+        semaphore.acquireUninterruptibly();
+
+        this.settings = settings;
+        reset();
+
+        semaphore.release();
     }
 
     private void reset() {
+        this.calculFractalDone = false;
         this.moveX = 0;
         this.moveY = 0;
-        this.h1 = new int[initL + 1][initL + 1];
-        this.magicC = initL * 2 + initL / 2;
+        this.h1 = new int[settings.getTaille() + 1][settings.getTaille() + 1];
+        this.magicC = settings.getTaille() * 2 + settings.getTaille() / 2;
         this.c1 = new int[magicC + 1];
-        this.m = initM;
+        this.m = settings.getMaille();
         this.p = (int) Math.pow(2, 7 - m);
-        this.h2 = initH;
-        this.d = initD;
-        this.random = new Random(initZ);
-        this.l = initL;
+        this.h2 = settings.getHauteur();
+        this.d = settings.getDeviation();
+        this.random = new Random(settings.getGraine());
+        this.l = settings.getTaille();
         this.n = h2 / colors.size();
         this.x = 0;
         this.y = 0;
@@ -122,18 +109,39 @@ public class Fractals {
         this.ds = 0;
     }
 
+    public FractalsSettings getSettings() {
+        return settings;
+    }
+
+    public Dimension getDimension2D() {
+        return new Dimension(settings.getTaille() + 1, settings.getTaille() + 1);
+    }
+
+    public Dimension getDimension3D() {
+        return new Dimension(settings.getTaille() * 8, settings.getTaille() * 2 + settings.getHauteur());
+    }
+
     private void plot(Graphics2D graphics, int componentHeight, int x, int y, int c) {
         plot(graphics, componentHeight, x, y, colors.get(c));
     }
 
     private void plot(Graphics2D graphics, int componentHeight, int x, int y, Color color) {
+        plot(graphics, componentHeight, x, y, 1, 1, color);
+    }
+
+    private void plot(Graphics2D graphics, int componentHeight, int x, int y, int width, int height, int c) {
+        plot(graphics, componentHeight, x, y, width, height, colors.get(c));
+    }
+
+    private void plot(Graphics2D graphics, int componentHeight, int x, int y, int width, int height, Color color) {
         if (graphics == null) {
             return;
         }
 
-        graphics.setColor(color);
-        graphics.drawLine(x, componentHeight - y,
-                x, componentHeight - y);
+        if (graphics.getColor() != color) {
+            graphics.setColor(color);
+        }
+        graphics.fillRect(x, componentHeight - y, width, height);
 
         move(x, y);
     }
@@ -152,9 +160,10 @@ public class Fractals {
             return;
         }
 
-        graphics.setColor(color);
-        graphics.drawLine(moveX, componentHeight - moveY,
-                x, componentHeight - y);
+        if (graphics.getColor() != color) {
+            graphics.setColor(color);
+        }
+        graphics.drawLine(moveX, componentHeight - moveY, x, componentHeight - y);
 
         move(x, y);
     }
@@ -308,11 +317,17 @@ public class Fractals {
                     h2 = nmx;
                 }
                 if (h2 <= c1[a]) {
-                    plot(graphics, componentHeight, a * 4, c1[a], 0);
+                    plot(graphics, componentHeight, a * 4, c1[a], 4, 1, c2);
                 }
                 if (h2 > c1[a]) {
-                    move(a * 4, c1[a] + 2);
-                    drawLine(graphics, componentHeight, a * 4, h2 + 1, c2);
+                    move(a * 4, c1[a] + 1);
+                    drawLine(graphics, componentHeight, a * 4, h2, c2);
+                    move(a * 4 + 1, c1[a] + 1);
+                    drawLine(graphics, componentHeight, a * 4 + 1, h2, c2);
+                    move(a * 4 + 2, c1[a] + 1);
+                    drawLine(graphics, componentHeight, a * 4 + 2, h2, c2);
+                    move(a * 4 + 3, c1[a] + 1);
+                    drawLine(graphics, componentHeight, a * 4 + 3, h2, c2);
                     c1[a] = h2;
                 }
             }
@@ -349,13 +364,36 @@ public class Fractals {
                 } else {
                     c2 = 1;
                 }
+
+
                 if (h2 < c1[a]) {
-                    plot(graphics, componentHeight, a * 4, c1[a] - 2, c2 + 1);
+                    c2 += 1;
+                }
+                Color color;
+                if (c2 == 1) {
+                    color = new Color(0, 0, 128);
+                } else if (c2 == 2) {
+                    color = new Color(0, 0, 255);
+                } else if (c2 == 3) {
+                    color = new Color(0, 128, 255);
+                } else {
+                    color = new Color(0, 255, 255);
+                }
+
+
+                if (h2 < c1[a]) {
+                    plot(graphics, componentHeight, a * 4, c1[a] - 2, 4, 1, color);
                     ombresPrivate();
                     continue;
                 }
-                move(a * 4, c1[a]);
-                drawLine(graphics, componentHeight, a * 4, h2, c2);
+                move(a * 4, c1[a] - 1);
+                drawLine(graphics, componentHeight, a * 4, h2, color);
+                move(a * 4 + 1, c1[a] - 1);
+                drawLine(graphics, componentHeight, a * 4 + 1, h2, color);
+                move(a * 4 + 2, c1[a] - 1);
+                drawLine(graphics, componentHeight, a * 4 + 2, h2, color);
+                move(a * 4 + 3, c1[a] - 1);
+                drawLine(graphics, componentHeight, a * 4 + 3, h2, color);
                 c1[a] = h2 + 2;
                 ombresPrivate();
             }
@@ -442,58 +480,6 @@ public class Fractals {
             System.exit(0);
         }
         // GOTO 1500
-    }
-
-    /*
-    //TODO retirer le static pour que ca fonctionne
-    public void loadFractal() {
-
-        try {
-            FileInputStream fluxEntree = new FileInputStream("src/save-fractals.dat");
-            BufferedInputStream tamponEntree = new BufferedInputStream(fluxEntree);
-            DataInputStream entree = new DataInputStream(tamponEntree);
-
-            initM = entree.readInt();
-            initH = entree.readInt();
-            initD = entree.readInt();
-            initZ = entree.readLong();
-            initL = entree.readInt();
-
-            entree.close();
-
-        } catch (IOException ignored) {
-        }
-
-    }
-
-
-    public void saveFractal() {
-
-        try {
-            FileOutputStream fluxSortie = new FileOutputStream("src/save-fractals.dat");
-            BufferedOutputStream tamponSortie = new BufferedOutputStream(fluxSortie);
-            DataOutputStream sortie = new DataOutputStream(tamponSortie);
-
-            sortie.writeInt(initM);
-            sortie.writeInt(initH);
-            sortie.writeInt(initD);
-            sortie.writeLong(initZ);
-            sortie.writeInt(initL);
-
-            sortie.close();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-
-    }
-    */
-
-    public Dimension getDimension2D() {
-        return new Dimension(initL + 1, initL + 1);
-    }
-
-    public Dimension getDimension3D() {
-        return new Dimension(initL * 8, initL * 2 + initH);
     }
 
     public void newSurface(Graphics2D graphics) {

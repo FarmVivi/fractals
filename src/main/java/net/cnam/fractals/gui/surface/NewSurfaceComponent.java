@@ -20,6 +20,8 @@ public class NewSurfaceComponent extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        fractals.newSurface((Graphics2D) g);
+        Graphics2D g2d = (Graphics2D) g;
+        fractals.newSurface(g2d);
+        g2d.dispose();
     }
 }

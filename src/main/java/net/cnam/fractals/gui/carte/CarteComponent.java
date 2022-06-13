@@ -20,6 +20,8 @@ public class CarteComponent extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        fractals.map((Graphics2D) g);
+        Graphics2D g2d = (Graphics2D) g;
+        fractals.map(g2d);
+        g2d.dispose();
     }
 }

@@ -1,6 +1,7 @@
 package net.cnam.fractals.gui.main;
 
 import net.cnam.fractals.Fractals;
+import net.cnam.fractals.FractalsSettings;
 import net.cnam.fractals.gui.ScrollPanel;
 import net.cnam.fractals.gui.carte.CartePanel;
 import net.cnam.fractals.gui.game.GamePanel;
@@ -13,17 +14,17 @@ import net.cnam.fractals.old.App;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
     private static final String TITLE = "Fractals";
 
-    private final ScrollPanel scrollPanel;
     private final MainPanel panel;
     private Fractals fractals;
 
     public MainFrame() {
         this.panel = new MainPanel();
-        this.scrollPanel = new ScrollPanel(panel);
+        ScrollPanel scrollPanel = new ScrollPanel(panel);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Insets bounds = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
@@ -41,59 +42,15 @@ public class MainFrame extends JFrame {
         JMenu fileMenu = new JMenu("Fichier");
 
         JMenuItem newItem = new JMenuItem("Nouveau...", UIManager.getIcon("FileView.fileIcon"));
-        newItem.addActionListener(e -> {
-            //new NouveauJDialog(this);
-            fractals = new Fractals();
-            panel.removeAll();
-            panel.add(new NewSurfacePanel(fractals));
-            panel.revalidate();
-            scrollPanel.setLocation(0, 0);
-        });
         fileMenu.add(newItem);
 
         JMenuItem openItem = new JMenuItem("Ouvrir...", UIManager.getIcon("FileView.directoryIcon"));
-        openItem.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Ouvrir");
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setAcceptAllFileFilterUsed(false);
-            fileChooser.setFileFilter(new FileNameExtensionFilter("Fractals", "fractals"));
-            int returnValue = fileChooser.showOpenDialog(this);
-            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                JOptionPane.showMessageDialog(this, "Fonctionnalité bientôt disponible", "En développement...", JOptionPane.INFORMATION_MESSAGE);
-                /* fractals = new Fractals(1, 128, 3, 0L, 1024);
-                fractals.load(fileChooser.getSelectedFile());
-                panel.removeAll();
-                panel.add(new NewSurfacePanel(fractals));
-                panel.revalidate();
-                scrollPanel.setLocation(0, 0); */
-            }
-        });
         fileMenu.add(openItem);
 
         JMenuItem saveItem = new JMenuItem("Enregistrer", UIManager.getIcon("FileView.floppyDriveIcon"));
-        saveItem.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Enregistrer");
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setAcceptAllFileFilterUsed(false);
-            fileChooser.setFileFilter(new FileNameExtensionFilter("Fractals", "fractals"));
-            int returnValue = fileChooser.showSaveDialog(this);
-            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                JOptionPane.showMessageDialog(this, "Fonctionnalité bientôt disponible", "En développement...", JOptionPane.INFORMATION_MESSAGE);
-                // fractals.save(fileChooser.getSelectedFile());
-            }
-        });
         fileMenu.add(saveItem);
 
         JMenuItem closeItem = new JMenuItem("Fermer");
-        closeItem.addActionListener(e -> {
-            this.fractals = null;
-            this.setTitle(TITLE);
-            panel.removeAll();
-            panel.revalidate();
-            scrollPanel.setLocation(0, 0);
-        });
         fileMenu.add(closeItem);
 
         fileMenu.addSeparator();
@@ -117,66 +74,129 @@ public class MainFrame extends JFrame {
         JMenu viewMenu = new JMenu("Affichage");
 
         JMenuItem newSurfaceItem = new JMenuItem("Nouvelle surface");
-        newSurfaceItem.addActionListener(e -> {
-            panel.removeAll();
-            panel.add(new NewSurfacePanel(fractals));
-            panel.revalidate();
-            scrollPanel.setLocation(0, 0);
-        });
         viewMenu.add(newSurfaceItem);
 
         viewMenu.addSeparator();
 
         JMenuItem mapItem = new JMenuItem("Carte");
-        mapItem.addActionListener(e -> {
-            panel.removeAll();
-            panel.add(new CartePanel(fractals));
-            panel.revalidate();
-            scrollPanel.setLocation(0, 0);
-        });
         viewMenu.add(mapItem);
 
         viewMenu.addSeparator();
 
         JMenuItem stratesViewItem = new JMenuItem("Vue en strates");
-        stratesViewItem.addActionListener(e -> {
-            panel.removeAll();
-            panel.add(new StratesPanel(fractals));
-            panel.revalidate();
-            scrollPanel.setLocation(0, 0);
-        });
         viewMenu.add(stratesViewItem);
 
         JMenuItem ombresViewItem = new JMenuItem("Vue en ombres");
-        ombresViewItem.addActionListener(e -> {
-            panel.removeAll();
-            panel.add(new OmbresPanel(fractals));
-            panel.revalidate();
-            scrollPanel.setLocation(0, 0);
-        });
         viewMenu.add(ombresViewItem);
 
         JMenuItem filFerViewItem = new JMenuItem("Vue en fil de fer");
-        filFerViewItem.addActionListener(e -> {
-            panel.removeAll();
-            panel.add(new FilFerPanel(fractals));
-            panel.revalidate();
-            scrollPanel.setLocation(0, 0);
-        });
         viewMenu.add(filFerViewItem);
 
         viewMenu.addSeparator();
 
         JMenuItem gameItem = new JMenuItem("Jeu");
+        viewMenu.add(gameItem);
+
+        menuBar.add(viewMenu);
+
+        // Actions
+        // Onglet Fichier
+        // Nouveau
+        newItem.addActionListener(e -> {
+            fractals = new Fractals(new FractalsSettings());
+            panel.removeAll();
+            panel.add(new NewSurfacePanel(fractals));
+            panel.revalidate();
+        });
+
+        // Ouvrir
+        openItem.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Ouvrir");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Fractals", "fractals"));
+            int returnValue = fileChooser.showOpenDialog(this);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                try {
+                    fractals = new Fractals(new FractalsSettings(fileChooser.getSelectedFile()));
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erreur lors de l'ouverture du fichier\nErreur:\n"+ex, "Erreur lors de l'ouverture du fichier", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                panel.removeAll();
+                panel.add(new NewSurfacePanel(fractals));
+                panel.revalidate();
+            }
+        });
+
+        // Enregistrer
+        saveItem.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Enregistrer");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Fractals", "fractals"));
+            int returnValue = fileChooser.showSaveDialog(this);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                try {
+                    fractals.getSettings().save(fileChooser.getSelectedFile());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement du fichier\nErreur:\n"+ex, "Erreur lors de l'enregistrement du fichier", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        // Fermer
+        closeItem.addActionListener(e -> {
+            this.fractals = null;
+            this.setTitle(TITLE);
+            panel.removeAll();
+            panel.revalidate();
+        });
+
+        // Onglet Affichage
+        // Nouvelle surface
+        newSurfaceItem.addActionListener(e -> {
+            panel.removeAll();
+            panel.add(new NewSurfacePanel(fractals));
+            panel.revalidate();
+        });
+
+        // Carte
+        mapItem.addActionListener(e -> {
+            panel.removeAll();
+            panel.add(new CartePanel(fractals));
+            panel.revalidate();
+        });
+
+        // Vue en strates
+        stratesViewItem.addActionListener(e -> {
+            panel.removeAll();
+            panel.add(new StratesPanel(fractals));
+            panel.revalidate();
+        });
+
+        // Vue en ombres
+        ombresViewItem.addActionListener(e -> {
+            panel.removeAll();
+            panel.add(new OmbresPanel(fractals));
+            panel.revalidate();
+        });
+
+        // Vue en fil de fer
+        filFerViewItem.addActionListener(e -> {
+            panel.removeAll();
+            panel.add(new FilFerPanel(fractals));
+            panel.revalidate();
+        });
+
+        // Jeu
         gameItem.addActionListener(e -> {
             panel.removeAll();
             panel.add(new GamePanel(fractals));
             panel.revalidate();
-            scrollPanel.setLocation(0, 0);
         });
-        viewMenu.add(gameItem);
-
-        menuBar.add(viewMenu);
 
         this.setJMenuBar(menuBar);
 

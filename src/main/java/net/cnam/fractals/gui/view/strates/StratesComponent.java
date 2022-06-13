@@ -20,6 +20,8 @@ public class StratesComponent extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        fractals.viewStrates((Graphics2D) g);
+        Graphics2D g2d = (Graphics2D) g;
+        fractals.viewStrates(g2d);
+        g2d.dispose();
     }
 }

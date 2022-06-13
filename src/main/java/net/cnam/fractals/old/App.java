@@ -1,6 +1,7 @@
 package net.cnam.fractals.old;
 
 import net.cnam.fractals.Fractals;
+import net.cnam.fractals.FractalsSettings;
 import net.cnam.fractals.old.gui.carte.CarteFrame;
 import net.cnam.fractals.old.gui.game.GameFrame;
 import net.cnam.fractals.old.gui.menu.MenuFrame;
@@ -21,7 +22,7 @@ public class App {
 
     @Deprecated
     public App() {
-        Fractals defaultFractals = new Fractals(2, 64, 3, 0L, 128);
+        Fractals defaultFractals = new Fractals(new FractalsSettings());
 
         this.menuFrame = new MenuFrame(this);
         this.newSurfaceFrame = new NewSurfaceFrame(this, defaultFractals);
