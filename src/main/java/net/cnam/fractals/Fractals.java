@@ -184,9 +184,9 @@ public class Fractals {
         if (graphics.getColor() != color) {
             graphics.setColor(color);
         }
-        int height = y - moveY;
+        int height = y - moveY + 1;
         if (height < 0) {
-            height = moveY - y;
+            height = moveY - y + 1;
         }
         graphics.fillRect(moveX, componentHeight - moveY - y + moveY, size, height);
 
@@ -342,7 +342,7 @@ public class Fractals {
                     plot(graphics, componentHeight, a * 4, c1[a], 4, 1, c2);
                 }
                 if (h2 > c1[a]) {
-                    move(a * 4, c1[a]);
+                    move(a * 4, c1[a] + 1);
                     drawLine(graphics, componentHeight, a * 4, h2, 4, c2);
                     c1[a] = h2;
                 }
@@ -396,7 +396,7 @@ public class Fractals {
                     ombresPrivate();
                     continue;
                 }
-                move(a * 4, c1[a] - 2);
+                move(a * 4, c1[a] - 1);
                 drawLine(graphics, componentHeight, a * 4, h2, 4, color);
                 c1[a] = h2 + 2;
                 ombresPrivate();
