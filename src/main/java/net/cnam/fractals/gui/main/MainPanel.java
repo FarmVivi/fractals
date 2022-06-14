@@ -1,11 +1,24 @@
 package net.cnam.fractals.gui.main;
 
+import org.apache.batik.swing.JSVGCanvas;
+
 import javax.swing.*;
 import java.awt.*;
+import java.net.URISyntaxException;
 
 public class MainPanel extends JPanel {
+    private final JSVGCanvas svgCanvas;
+
     public MainPanel() {
         this.setLayout(new GridBagLayout());
+
+        this.svgCanvas = new JSVGCanvas();
+        try {
+            svgCanvas.setURI(MainPanel.class.getResource("/assets/svg/logo.svg").toURI().toString());
+            svgCanvas.setBackground(null);
+            super.add(svgCanvas);
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     @Override
@@ -13,6 +26,7 @@ public class MainPanel extends JPanel {
         if (comp.getBackground() != null) {
             this.setBackground(comp.getBackground());
         }
+        super.remove(svgCanvas);
         return super.add(comp);
     }
 
@@ -20,5 +34,6 @@ public class MainPanel extends JPanel {
     public void removeAll() {
         this.setBackground(null);
         super.removeAll();
+        super.add(svgCanvas);
     }
 }

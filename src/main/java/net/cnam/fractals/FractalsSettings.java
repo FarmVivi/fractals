@@ -17,6 +17,8 @@ public class FractalsSettings {
     // taille (128, 64, 32)
     private final int taille;
 
+    private File file;
+
     public FractalsSettings() {
         this(Utils.randomInt(1, 3),
                 Utils.randomInt(64, 128),
@@ -54,6 +56,8 @@ public class FractalsSettings {
         entree.close();
 
         verifyParameters();
+
+        this.file = saveFile;
     }
 
     private void verifyParameters() {
@@ -83,6 +87,8 @@ public class FractalsSettings {
         sortie.writeInt(taille);
 
         sortie.close();
+
+        this.file = saveFile;
     }
 
     public int getMaille() {
@@ -103,5 +109,13 @@ public class FractalsSettings {
 
     public int getTaille() {
         return taille;
+    }
+
+    public boolean isSaved() {
+        return file != null;
+    }
+
+    public File getFile() {
+        return file;
     }
 }

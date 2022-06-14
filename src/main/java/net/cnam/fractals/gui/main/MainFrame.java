@@ -5,7 +5,6 @@ import net.cnam.fractals.FractalsSettings;
 import net.cnam.fractals.gui.ScrollPanel;
 import net.cnam.fractals.gui.carte.CartePanel;
 import net.cnam.fractals.gui.game.GamePanel;
-import net.cnam.fractals.gui.surface.NewSurfacePanel;
 import net.cnam.fractals.gui.view.filfer.FilFerPanel;
 import net.cnam.fractals.gui.view.ombres.OmbresPanel;
 import net.cnam.fractals.gui.view.strates.StratesPanel;
@@ -26,6 +25,14 @@ public class MainFrame extends JFrame {
     private static final String TITLE = "Fractals";
 
     private final MainPanel panel;
+    private final JMenuItem saveItem;
+    private final JMenuItem closeItem;
+    private final JMenuItem mapItem;
+    private final JMenuItem stratesViewItem;
+    private final JMenuItem ombresViewItem;
+    private final JMenuItem filFerViewItem;
+    private final JMenuItem gameItem;
+
     private Fractals fractals;
 
     public MainFrame() {
@@ -64,10 +71,11 @@ public class MainFrame extends JFrame {
         JMenuItem openItem = new JMenuItem("Ouvrir...", UIManager.getIcon("FileView.directoryIcon"));
         fileMenu.add(openItem);
 
-        JMenuItem saveItem = new JMenuItem("Enregistrer", UIManager.getIcon("FileView.floppyDriveIcon"));
+        this.saveItem = new JMenuItem("Enregistrer", UIManager.getIcon("FileView.floppyDriveIcon"));
         fileMenu.add(saveItem);
 
-        JMenuItem closeItem = new JMenuItem("Fermer");
+        this.closeItem = new JMenuItem("Fermer");
+        closeItem.addActionListener(e -> MainFrame.this.close());
         fileMenu.add(closeItem);
 
         fileMenu.addSeparator();
@@ -90,23 +98,23 @@ public class MainFrame extends JFrame {
         // Onglet Affichage
         JMenu viewMenu = new JMenu("Affichage");
 
-        JMenuItem mapItem = new JMenuItem("Carte");
+        this.mapItem = new JMenuItem("Carte");
         viewMenu.add(mapItem);
 
         viewMenu.addSeparator();
 
-        JMenuItem stratesViewItem = new JMenuItem("Vue en strates");
+        this.stratesViewItem = new JMenuItem("Vue en strates");
         viewMenu.add(stratesViewItem);
 
-        JMenuItem ombresViewItem = new JMenuItem("Vue en ombres");
+        this.ombresViewItem = new JMenuItem("Vue en ombres");
         viewMenu.add(ombresViewItem);
 
-        JMenuItem filFerViewItem = new JMenuItem("Vue en fil de fer");
+        this.filFerViewItem = new JMenuItem("Vue en fil de fer");
         viewMenu.add(filFerViewItem);
 
         viewMenu.addSeparator();
 
-        JMenuItem gameItem = new JMenuItem("Jeu");
+        this.gameItem = new JMenuItem("Jeu");
         viewMenu.add(gameItem);
 
         menuBar.add(viewMenu);
@@ -157,16 +165,14 @@ public class MainFrame extends JFrame {
                     JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION) {
                 try {
-                    fractals = new Fractals(new FractalsSettings(
+                    Fractals newFractals = new Fractals(new FractalsSettings(
                             Integer.parseInt(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.MAILLE).getValuable()),
                             Integer.parseInt(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.HAUTEUR).getValuable()),
                             Integer.parseInt(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.DEVIATION).getValuable()),
                             Long.parseLong(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.GRAINE).getValuable()),
                             Integer.parseInt(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.TAILLE).getValuable())
                     ));
-                    panel.removeAll();
-                    panel.add(new CartePanel(fractals));
-                    panel.revalidate();
+                    MainFrame.this.open(newFractals);
                 } catch (IllegalArgumentException ex) {
                     JOptionPane.showMessageDialog(MainFrame.this, ex.getMessage(),
                             "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -197,10 +203,7 @@ public class MainFrame extends JFrame {
                 }
 
                 try {
-                    fractals = new Fractals(new FractalsSettings(file));
-                    panel.removeAll();
-                    panel.add(new NewSurfacePanel(fractals));
-                    panel.revalidate();
+                    MainFrame.this.open(new Fractals(new FractalsSettings(file)));
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Erreur lors de l'ouverture du fichier\nErreur:\n" + ex, "Erreur lors de l'ouverture du fichier", JOptionPane.ERROR_MESSAGE);
                 }
@@ -231,18 +234,15 @@ public class MainFrame extends JFrame {
 
                 try {
                     fractals.getSettings().save(file);
+                    if (fractals.getSettings().isSaved()) {
+                        this.setTitle(TITLE + " - " + fractals.getSettings().getFile().getAbsolutePath());
+                    } else {
+                        this.setTitle(TITLE);
+                    }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement du fichier\nErreur:\n" + ex, "Erreur lors de l'enregistrement du fichier", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        });
-
-        // Fermer
-        closeItem.addActionListener(e -> {
-            this.fractals = null;
-            this.setTitle(TITLE);
-            panel.removeAll();
-            panel.revalidate();
         });
 
         // Onglet Affichage
@@ -292,9 +292,48 @@ public class MainFrame extends JFrame {
 
         // Ajout du panel
         this.add(scrollPanel);
+
+        close();
     }
 
-    public void setFractals(Fractals fractals) {
+    public void open(Fractals fractals) {
+        if (this.fractals != null) {
+            close();
+        }
+
         this.fractals = fractals;
+
+        if (fractals.getSettings().isSaved()) {
+            this.setTitle(TITLE + " - " + fractals.getSettings().getFile().getAbsolutePath());
+        } else {
+            this.setTitle(TITLE);
+        }
+
+        saveItem.setEnabled(true);
+        closeItem.setEnabled(true);
+        mapItem.setEnabled(true);
+        stratesViewItem.setEnabled(true);
+        ombresViewItem.setEnabled(true);
+        filFerViewItem.setEnabled(true);
+        gameItem.setEnabled(true);
+
+        panel.removeAll();
+        panel.add(new CartePanel(fractals));
+        mapItem.setSelected(true);
+        panel.revalidate();
+    }
+
+    public void close() {
+        this.fractals = null;
+        this.setTitle(TITLE);
+        saveItem.setEnabled(false);
+        closeItem.setEnabled(false);
+        mapItem.setEnabled(false);
+        stratesViewItem.setEnabled(false);
+        ombresViewItem.setEnabled(false);
+        filFerViewItem.setEnabled(false);
+        gameItem.setEnabled(false);
+        panel.removeAll();
+        panel.revalidate();
     }
 }
