@@ -38,16 +38,16 @@ public class FractalsSettings {
         BufferedInputStream tamponEntree = new BufferedInputStream(fluxEntree);
         DataInputStream entree = new DataInputStream(tamponEntree);
 
-        if (entree.available() != 5) {
+        try {
+            this.maille = entree.readInt();
+            this.hauteur = entree.readInt();
+            this.deviation = entree.readInt();
+            this.graine = entree.readLong();
+            this.taille = entree.readInt();
+        } catch (EOFException e) {
             entree.close();
             throw new IllegalArgumentException("Fractals settings file (" + saveFile.getAbsolutePath() + ") is corrupted");
         }
-
-        this.maille = entree.readInt();
-        this.hauteur = entree.readInt();
-        this.deviation = entree.readInt();
-        this.graine = entree.readLong();
-        this.taille = entree.readInt();
 
         entree.close();
 

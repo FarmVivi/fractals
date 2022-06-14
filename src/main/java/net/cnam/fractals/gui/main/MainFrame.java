@@ -12,9 +12,10 @@ import net.cnam.fractals.gui.view.strates.StratesPanel;
 import net.cnam.fractals.old.App;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.io.IOException;
+import java.io.File;
 
 public class MainFrame extends JFrame {
     private static final String TITLE = "Fractals";
@@ -116,17 +117,36 @@ public class MainFrame extends JFrame {
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             fileChooser.setAcceptAllFileFilterUsed(false);
             fileChooser.setFileFilter(new FileNameExtensionFilter("Fractals", "fractals"));
-            int returnValue = fileChooser.showOpenDialog(this);
+            int returnValue = fileChooser.showOpenDialog(MainFrame.this);
             if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+
+                FileFilter fileFilter = fileChooser.getFileFilter();
+                if (fileFilter instanceof FileNameExtensionFilter && !fileFilter.accept(file)) {
+                    // if the filter doesn't accept the filename, that must be because it doesn't have the correct extension
+                    // so change the extension to the first extension offered by the filter.
+                    FileNameExtensionFilter fileNameExtensionFilter = (FileNameExtensionFilter) fileFilter;
+                    String extension = fileNameExtensionFilter.getExtensions()[0];
+
+                    String newName = file.getName() + "." + extension;
+                    file = new File(file.getParent(), newName);
+
+                }
+
                 try {
                     fractals = new Fractals(new FractalsSettings(fileChooser.getSelectedFile()));
+                    panel.removeAll();
+                    panel.add(new NewSurfacePanel(fractals));
+                    panel.revalidate();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erreur lors de l'ouverture du fichier\nErreur:\n"+ex, "Erreur lors de l'ouverture du fichier", JOptionPane.ERROR_MESSAGE);
-                    return;
+                    StackTraceElement[] trace = ex.getStackTrace();
+                    String[] lines = new String[trace.length + 1];
+                    lines[0] = ex.toString();
+                    for (int i = 1; i <= trace.length; i++) {
+                        lines[i] = "   at " + trace[i - 1];
+                    }
+                    JOptionPane.showMessageDialog(this, "Erreur lors de l'ouverture du fichier\nErreur:\n" + ex, "Erreur lors de l'ouverture du fichier", JOptionPane.ERROR_MESSAGE);
                 }
-                panel.removeAll();
-                panel.add(new NewSurfacePanel(fractals));
-                panel.revalidate();
             }
         });
 
@@ -137,12 +157,25 @@ public class MainFrame extends JFrame {
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             fileChooser.setAcceptAllFileFilterUsed(false);
             fileChooser.setFileFilter(new FileNameExtensionFilter("Fractals", "fractals"));
-            int returnValue = fileChooser.showSaveDialog(this);
+            int returnValue = fileChooser.showSaveDialog(MainFrame.this);
             if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+
+                FileFilter fileFilter = fileChooser.getFileFilter();
+                if (fileFilter instanceof FileNameExtensionFilter && !fileFilter.accept(file)) {
+                    // if the filter doesn't accept the filename, that must be because it doesn't have the correct extension
+                    // so change the extension to the first extension offered by the filter.
+                    FileNameExtensionFilter fileNameExtensionFilter = (FileNameExtensionFilter) fileFilter;
+                    String extension = fileNameExtensionFilter.getExtensions()[0];
+
+                    String newName = file.getName() + "." + extension;
+                    file = new File(file.getParent(), newName);
+                }
+
                 try {
-                    fractals.getSettings().save(fileChooser.getSelectedFile());
+                    fractals.getSettings().save(file);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement du fichier\nErreur:\n"+ex, "Erreur lors de l'enregistrement du fichier", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement du fichier\nErreur:\n" + ex, "Erreur lors de l'enregistrement du fichier", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
