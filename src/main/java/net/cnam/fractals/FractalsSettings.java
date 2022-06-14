@@ -70,7 +70,7 @@ public class FractalsSettings {
         if (deviation < 0) {
             throw new IllegalArgumentException("deviation must be positive");
         }
-        if (taille <= 0 || taille % 2 == 0) {
+        if (taille <= 0 || taille % 2 != 0) {
             throw new IllegalArgumentException("taille doit être supérieur à 0 et un multiple de 2");
         }
     }
