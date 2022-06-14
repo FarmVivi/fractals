@@ -4,8 +4,14 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
+import java.net.URI;
+import java.util.Map;
 
 public class Utils {
     // Méthode pour créer un dégradé de couleurs entre 2 couleurs
@@ -34,5 +40,31 @@ public class Utils {
         imageTranscoder.transcode(input, null);
 
         return imageTranscoder.getBufferedImage();
+    }
+
+    // Méthode pour ouvrir un lien dans un navigateur
+    public static void openLink(URI url) {
+        try {
+            Desktop.getDesktop().browse(url);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Impossible d'ouvrir le lien : " + url, "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Méthode qui retourne un JLabel avec un lien clickable
+    public static JLabel createLink(String text, String url) {
+        JLabel label = new JLabel(text);
+        label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        label.setForeground(Color.BLUE.darker());
+        Font font = label.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        label.setFont(font.deriveFont(attributes));
+        label.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                openLink(URI.create(url));
+            }
+        });
+        return label;
     }
 }

@@ -111,6 +111,14 @@ public class MainFrame extends JFrame {
 
         menuBar.add(viewMenu);
 
+        // Onglet Aide
+        JMenu helpMenu = new JMenu("Aide");
+
+        JMenuItem aboutItem = new JMenuItem("À propos");
+        helpMenu.add(aboutItem);
+
+        menuBar.add(helpMenu);
+
         // Actions
         // Onglet Fichier
         // Nouveau
@@ -186,11 +194,10 @@ public class MainFrame extends JFrame {
 
                     String newName = file.getName() + "." + extension;
                     file = new File(file.getParent(), newName);
-
                 }
 
                 try {
-                    fractals = new Fractals(new FractalsSettings(fileChooser.getSelectedFile()));
+                    fractals = new Fractals(new FractalsSettings(file));
                     panel.removeAll();
                     panel.add(new NewSurfacePanel(fractals));
                     panel.revalidate();
@@ -272,6 +279,13 @@ public class MainFrame extends JFrame {
             panel.removeAll();
             panel.add(new GamePanel(fractals));
             panel.revalidate();
+        });
+
+        // Onglet Aide
+        // A propos
+        aboutItem.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, new AboutPanel(),
+                    "À propos de Fractals", JOptionPane.PLAIN_MESSAGE);
         });
 
         this.setJMenuBar(menuBar);
