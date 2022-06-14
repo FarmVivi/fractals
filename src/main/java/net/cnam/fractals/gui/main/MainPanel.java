@@ -23,16 +23,12 @@ public class MainPanel extends JPanel {
 
     @Override
     public Component add(Component comp) {
-        if (comp.getBackground() != null) {
-            this.setBackground(comp.getBackground());
-        }
         super.remove(svgCanvas);
         return super.add(comp);
     }
 
     @Override
     public void removeAll() {
-        this.setBackground(null);
         super.removeAll();
         super.add(svgCanvas);
     }

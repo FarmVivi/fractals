@@ -13,6 +13,5 @@ public class StratesPanel extends JPanel {
         this.add(stratesComponent);
 
         this.setPreferredSize(stratesComponent.getSize());
-        this.setBackground(Color.BLACK);
     }
 }
