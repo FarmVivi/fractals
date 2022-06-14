@@ -3,20 +3,19 @@ package net.cnam.fractals.gui.main;
 import javax.swing.*;
 import java.awt.*;
 
-public class NouveauJDialog extends JDialog {
-
+public class FractalsSettingsDialog extends JDialog {
     private JTextField textFieldMaille = new JTextField();
     private JTextField textFieldDeviation = new JTextField();
     private JTextField textFieldTaille = new JTextField();
 
-    public NouveauJDialog(Frame owner) {
+    public FractalsSettingsDialog(Frame owner) {
         super(owner, "Nouveau...", true);
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setVisible(true);
+        this.setLocationRelativeTo(owner);
 
         JPanel contentPane = (JPanel) this.getContentPane();
-        contentPane.setLayout(new GridLayout(3,2,10,10));
+        contentPane.setLayout(new GridLayout(3, 2, 10, 10));
 
         contentPane.add(new JLabel("Maille : "));
         contentPane.add(textFieldMaille);
@@ -27,8 +26,7 @@ public class NouveauJDialog extends JDialog {
         contentPane.add(new JLabel("Taille : "));
         contentPane.add(textFieldTaille);
 
-        this.setLocationRelativeTo(owner);
-        //this.pack();
+        this.pack();
     }
 }
 

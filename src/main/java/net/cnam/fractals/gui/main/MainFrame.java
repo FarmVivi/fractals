@@ -104,6 +104,8 @@ public class MainFrame extends JFrame {
         // Onglet Fichier
         // Nouveau
         newItem.addActionListener(e -> {
+            FractalsSettingsDialog dialog = new FractalsSettingsDialog(this);
+            dialog.setVisible(true);
             fractals = new Fractals(new FractalsSettings());
             panel.removeAll();
             panel.add(new NewSurfacePanel(fractals));
