@@ -27,11 +27,11 @@ public class MainFrame extends JFrame {
     private final MainPanel panel;
     private final JMenuItem saveItem;
     private final JMenuItem closeItem;
-    private final JMenuItem mapItem;
-    private final JMenuItem stratesViewItem;
-    private final JMenuItem ombresViewItem;
-    private final JMenuItem filFerViewItem;
-    private final JMenuItem gameItem;
+    private final JRadioButtonMenuItem mapItem;
+    private final JRadioButtonMenuItem stratesViewItem;
+    private final JRadioButtonMenuItem ombresViewItem;
+    private final JRadioButtonMenuItem filFerViewItem;
+    private final JRadioButtonMenuItem gameItem;
 
     private Fractals fractals;
 
@@ -98,23 +98,23 @@ public class MainFrame extends JFrame {
         // Onglet Affichage
         JMenu viewMenu = new JMenu("Affichage");
 
-        this.mapItem = new JMenuItem("Carte");
+        this.mapItem = new JRadioButtonMenuItem("Carte");
         viewMenu.add(mapItem);
 
         viewMenu.addSeparator();
 
-        this.stratesViewItem = new JMenuItem("Vue en strates");
+        this.stratesViewItem = new JRadioButtonMenuItem("Vue en strates");
         viewMenu.add(stratesViewItem);
 
-        this.ombresViewItem = new JMenuItem("Vue en ombres");
+        this.ombresViewItem = new JRadioButtonMenuItem("Vue en ombres");
         viewMenu.add(ombresViewItem);
 
-        this.filFerViewItem = new JMenuItem("Vue en fil de fer");
+        this.filFerViewItem = new JRadioButtonMenuItem("Vue en fil de fer");
         viewMenu.add(filFerViewItem);
 
         viewMenu.addSeparator();
 
-        this.gameItem = new JMenuItem("Jeu");
+        this.gameItem = new JRadioButtonMenuItem("Jeu");
         viewMenu.add(gameItem);
 
         menuBar.add(viewMenu);
@@ -249,35 +249,45 @@ public class MainFrame extends JFrame {
         // Carte
         mapItem.addActionListener(e -> {
             panel.removeAll();
+            deselectMenuItems();
             panel.add(new CartePanel(fractals));
+            mapItem.setSelected(true);
             panel.revalidate();
         });
 
         // Vue en strates
         stratesViewItem.addActionListener(e -> {
             panel.removeAll();
+            deselectMenuItems();
             panel.add(new StratesPanel(fractals));
+            stratesViewItem.setSelected(true);
             panel.revalidate();
         });
 
         // Vue en ombres
         ombresViewItem.addActionListener(e -> {
             panel.removeAll();
+            deselectMenuItems();
             panel.add(new OmbresPanel(fractals));
+            ombresViewItem.setSelected(true);
             panel.revalidate();
         });
 
         // Vue en fil de fer
         filFerViewItem.addActionListener(e -> {
             panel.removeAll();
+            deselectMenuItems();
             panel.add(new FilFerPanel(fractals));
+            filFerViewItem.setSelected(true);
             panel.revalidate();
         });
 
         // Jeu
         gameItem.addActionListener(e -> {
             panel.removeAll();
+            deselectMenuItems();
             panel.add(new GamePanel(fractals));
+            gameItem.setSelected(true);
             panel.revalidate();
         });
 
@@ -318,6 +328,7 @@ public class MainFrame extends JFrame {
         gameItem.setEnabled(true);
 
         panel.removeAll();
+        deselectMenuItems();
         panel.add(new CartePanel(fractals));
         mapItem.setSelected(true);
         panel.revalidate();
@@ -333,7 +344,16 @@ public class MainFrame extends JFrame {
         ombresViewItem.setEnabled(false);
         filFerViewItem.setEnabled(false);
         gameItem.setEnabled(false);
+        deselectMenuItems();
         panel.removeAll();
         panel.revalidate();
+    }
+
+    private void deselectMenuItems() {
+        mapItem.setSelected(false);
+        stratesViewItem.setSelected(false);
+        ombresViewItem.setSelected(false);
+        filFerViewItem.setSelected(false);
+        gameItem.setSelected(false);
     }
 }
