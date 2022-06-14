@@ -348,7 +348,7 @@ public class Fractals {
         for (y = 0; y <= l; y++) {
             o1 = 0;
             o2 = 0;
-            for (x = l; x >= o; x--) {
+            for (x = l; x >= 0; x--) {
                 a = l - y + x;
                 if (a < 0 || a > magicC - 1) {
                     ombresPrivate();
@@ -522,9 +522,9 @@ public class Fractals {
     }
 
     public void viewOmbres(Graphics2D graphics) {
-        //if (!calculFractalDone) {
+        if (!calculFractalDone) {
             newSurface(null);
-        //}
+        }
 
         semaphore.acquireUninterruptibly();
 
