@@ -117,8 +117,11 @@ public class MainFrame extends JFrame {
         newItem.addActionListener(e -> {
             FractalsSettingsPanel fractalsSettingsPanel = new FractalsSettingsPanel();
             JPanel fractalsSettingsContentPanel = new JPanel();
-            fractalsSettingsContentPanel.setLayout(new BoxLayout(fractalsSettingsContentPanel, BoxLayout.Y_AXIS));
-            fractalsSettingsContentPanel.add(fractalsSettingsPanel);
+            fractalsSettingsContentPanel.setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            fractalsSettingsContentPanel.add(fractalsSettingsPanel, gbc);
             JButton randomButton = new JButton("Aléatoire");
             randomButton.addActionListener(e1 -> {
                 FractalsSettings randomSettings = new FractalsSettings();
@@ -128,8 +131,18 @@ public class MainFrame extends JFrame {
                 fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.GRAINE).setValuable(String.valueOf(randomSettings.getGraine()));
                 fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.TAILLE).setValuable(String.valueOf(randomSettings.getTaille()));
             });
-            randomButton.doClick();
-            fractalsSettingsContentPanel.add(randomButton);
+            if (this.fractals == null) {
+                randomButton.doClick();
+            } else {
+                FractalsSettings randomSettings = this.fractals.getSettings();
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.MAILLE).setValuable(String.valueOf(randomSettings.getMaille()));
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.HAUTEUR).setValuable(String.valueOf(randomSettings.getHauteur()));
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.DEVIATION).setValuable(String.valueOf(randomSettings.getDeviation()));
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.GRAINE).setValuable(String.valueOf(randomSettings.getGraine()));
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.TAILLE).setValuable(String.valueOf(randomSettings.getTaille()));
+            }
+            gbc.gridy = 1;
+            fractalsSettingsContentPanel.add(randomButton, gbc);
 
             int result = JOptionPane.showConfirmDialog(MainFrame.this, fractalsSettingsContentPanel,
                     "Nouvelle fractal", JOptionPane.OK_CANCEL_OPTION,
