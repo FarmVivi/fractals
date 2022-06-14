@@ -11,7 +11,6 @@ public class MainPanel extends JPanel {
 
     public MainPanel() {
         this.setLayout(new GridBagLayout());
-        this.setOpaque(true);
 
         this.svgCanvas = new JSVGCanvas();
         try {
@@ -25,7 +24,9 @@ public class MainPanel extends JPanel {
     @Override
     public Component add(Component comp) {
         super.remove(svgCanvas);
-        return super.add(comp);
+        Component component = super.add(comp);
+        super.repaint();
+        return component;
     }
 
     @Override
