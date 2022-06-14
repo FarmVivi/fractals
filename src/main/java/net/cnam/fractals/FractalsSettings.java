@@ -24,7 +24,7 @@ public class FractalsSettings {
                 Utils.randomInt(64, 128),
                 Utils.randomInt(1, 3),
                 new Random().nextLong(),
-                Utils.randomInt(128, 1024));
+                (int) Math.pow(2, Utils.randomInt(6, 10)));
     }
 
     public FractalsSettings(int maille, int hauteur, int deviation, long graine, int taille) {
@@ -70,8 +70,9 @@ public class FractalsSettings {
         if (deviation < 0) {
             throw new IllegalArgumentException("deviation must be positive");
         }
-        if (taille <= 0) {
-            throw new IllegalArgumentException("taille must be greater than 0");
+        // TODO Change sqrt
+        if (taille <= 0 || Math.sqrt(taille) == 0) {
+            throw new IllegalArgumentException("taille doit être supérieur à 0 et un multiple de 2");
         }
     }
 
