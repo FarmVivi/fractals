@@ -22,6 +22,5 @@ public class NewSurfaceComponent extends JComponent {
 
         Graphics2D g2d = (Graphics2D) g;
         fractals.newSurface(g2d);
-        g2d.dispose();
     }
 }

@@ -11,7 +11,8 @@ import javax.swing.*;
 public class GameFrame extends JFrame {
     @Deprecated
     public GameFrame(App app, Fractals fractals) {
-        GamePanel panel = new GamePanel(fractals);
+        GamePanel panel = new GamePanel(this, fractals);
+        this.addKeyListener(panel);
 
         // Caractéristiques de la fenêtre
         this.setTitle("Fractals - Le jeu");

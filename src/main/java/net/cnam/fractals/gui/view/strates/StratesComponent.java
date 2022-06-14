@@ -22,6 +22,5 @@ public class StratesComponent extends JComponent {
 
         Graphics2D g2d = (Graphics2D) g;
         fractals.viewStrates(g2d);
-        g2d.dispose();
     }
 }

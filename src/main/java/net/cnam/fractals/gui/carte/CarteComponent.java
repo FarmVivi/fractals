@@ -22,6 +22,5 @@ public class CarteComponent extends JComponent {
 
         Graphics2D g2d = (Graphics2D) g;
         fractals.map(g2d);
-        g2d.dispose();
     }
 }

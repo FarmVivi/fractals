@@ -1,8 +1,11 @@
 package net.cnam.fractals;
 
+import net.cnam.fractals.gui.main.MainFrame;
 import net.cnam.fractals.utils.Utils;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +19,7 @@ public class Fractals {
     private FractalsSettings settings;
     private int magicC;
     private boolean calculFractalDone;
+    private String direction;
 
     private int moveX;
     private int moveY;
@@ -73,6 +77,7 @@ public class Fractals {
 
     private void reset() {
         this.calculFractalDone = false;
+        this.direction = null;
         this.moveX = 0;
         this.moveY = 0;
         this.h1 = new int[settings.getTaille() + 1][settings.getTaille() + 1];
@@ -448,23 +453,70 @@ public class Fractals {
     }
 
     private void jeu(Graphics2D graphics, int componentHeight) {
+        // AFFICHAGE CABANE
+        Color cabaneColor = new Color(128, 128, 128);
+        plot(graphics, componentHeight, xm * 4, ym * 2, 4, 1, cabaneColor);
+        drawLine(graphics, componentHeight, (xm + 2) * 4, ym * 2, cabaneColor);
+        drawLine(graphics, componentHeight, (xm + 2) * 4, (ym + 2) * 2, cabaneColor);
+        drawLine(graphics, componentHeight, xm * 4, (ym + 2) * 2, cabaneColor);
+        drawLine(graphics, componentHeight, xm * 4, ym * 2, cabaneColor);
+
+        // PLACE JOUEUR
+        Color playerColor = Color.BLACK;
+        if (h1[xj][yj] < 5 && tr < 15) {
+            playerColor = new Color(128, 0, 0);
+        }
+        plot(graphics, componentHeight, xj * 4, yj * 2, playerColor);
+        // faire de 1500 à 1610
+        graphics.drawString("Altitude: " + h1[xj][yj] * 100 + "m", 5, 15);
+        graphics.drawString("PV: " + pv, 5, 25);
+        if (direction != null) {
+            graphics.drawString("Direction: " + direction, 5, 35);
+        }
+        if (h1[xj][yj] < 5 && tr < 15) {
+            graphics.drawString("EAU !", 5, 45);
+        }
+    }
+
+    public void initGame() {
         pv = 100;
+        // CABANE
         xm = (int) (Math.random() * 20) + 5;
         ym = (int) (Math.random() * 10) + 5;
 
-        // AFFICHAGE CABANE
-        plot(graphics, componentHeight, xm * 4, ym * 2, 13);
-        move(xm * 4, ym * 2);
-        drawLine(graphics, componentHeight, (xm + 2) * 4, ym * 2, 13);
-        drawLine(graphics, componentHeight, (xm + 2) * 4, (ym + 2) * 2, 13);
-        drawLine(graphics, componentHeight, xm * 4, (ym + 2) * 2, 13);
-        drawLine(graphics, componentHeight, xm * 4, ym * 2, 13);
-
-        // PLACE JOUEUR
+        // JOUEUR
         xj = (int) (Math.random() * 30) + 10;
         yj = (int) (Math.random() * 10) + 10;
-        plot(graphics, componentHeight, xj * 4, yj * 2, 1);
-        // faire de 1500 à 1610
+    }
+
+    public void moveGame(JFrame mainFrame, KeyListener gamePanel, int direction) {
+        switch (direction) {
+            case 0 -> {
+                if (yj > 0) {
+                    yj = yj - 1;
+                }
+                this.direction = "Nord";
+            }
+            case 1 -> {
+                if (yj < this.getSettings().getTaille()) {
+                    yj = yj + 1;
+                }
+                this.direction = "Sud";
+            }
+            case 2 -> {
+                if (xj < this.getSettings().getTaille()) {
+                    xj = xj + 1;
+                }
+                this.direction = "Est";
+            }
+            case 3 -> {
+                if (xj > 0) {
+                    xj = xj - 1;
+                }
+                this.direction = "Ouest";
+            }
+            default -> this.direction = "Inconnu";
+        }
 
         // RESULTATS
         pv = pv - 1;
@@ -474,16 +526,26 @@ public class Fractals {
         }
         // encore un locate en 1550
         if (pv <= 0) {
-            // ecrire "VOUS ETES MORT !"
-            System.exit(0);
+            // écrire "VOUS ETES MORT !"
+            JOptionPane.showMessageDialog(mainFrame, "Vous êtes mort !", "Game Over", JOptionPane.PLAIN_MESSAGE);
+            if (mainFrame instanceof MainFrame mainFrame2) {
+                mainFrame2.close();
+            } else {
+                mainFrame.setVisible(false);
+            }
+            mainFrame.removeKeyListener(gamePanel);
         }
-        plot(graphics, componentHeight, xj * 4, yj * 2, 3);
         ds = (int) ((Math.pow(xj - xm, 2)) + (Math.pow(yj - ym, 2)));
         if (ds < 3) {
-            // ecrire "SAUVE !"
-            System.exit(0);
+            // écrire "SAUVE !"
+            JOptionPane.showMessageDialog(mainFrame, "Vous avez sauvé !", "Game Over", JOptionPane.PLAIN_MESSAGE);
+            if (mainFrame instanceof MainFrame mainFrame2) {
+                mainFrame2.close();
+            } else {
+                mainFrame.setVisible(false);
+            }
+            mainFrame.removeKeyListener(gamePanel);
         }
-        // GOTO 1500
     }
 
     public void newSurface(Graphics2D graphics) {

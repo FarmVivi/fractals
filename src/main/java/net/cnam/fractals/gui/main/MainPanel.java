@@ -33,5 +33,6 @@ public class MainPanel extends JPanel {
     public void removeAll() {
         super.removeAll();
         super.add(svgCanvas);
+        super.repaint();
     }
 }

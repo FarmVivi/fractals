@@ -286,7 +286,9 @@ public class MainFrame extends JFrame {
         gameItem.addActionListener(e -> {
             panel.removeAll();
             deselectMenuItems();
-            panel.add(new GamePanel(fractals));
+            GamePanel gamePanel = new GamePanel(MainFrame.this, fractals);
+            panel.add(gamePanel);
+            MainFrame.this.addKeyListener(gamePanel);
             gameItem.setSelected(true);
             panel.revalidate();
         });

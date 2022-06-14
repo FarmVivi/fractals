@@ -22,6 +22,5 @@ public class OmbresComponent extends JComponent {
 
         Graphics2D g2d = (Graphics2D) g;
         fractals.viewOmbres(g2d);
-        g2d.dispose();
     }
 }
