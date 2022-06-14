@@ -309,6 +309,12 @@ public class Fractals {
 
     // lignes 980 à 1140
     private void strates(Graphics2D graphics, int componentHeight) {
+        Color baseColor = colors.get(0);
+        move(0, (this.getSettings().getTaille() + 1));
+        drawLine(graphics, componentHeight, (this.getSettings().getTaille() + 1) * 8 / 2, 0, baseColor);
+        drawLine(graphics, componentHeight, (this.getSettings().getTaille() + 1) * 8, (this.getSettings().getTaille() + 1), baseColor);
+        move((this.getSettings().getTaille() + 1) * 8 / 2, 0);
+
         nm = n * 4;
 
         // lignes 1000 à 1040
@@ -352,6 +358,11 @@ public class Fractals {
 
     // lignes 1150 à 1370
     private void ombres(Graphics2D graphics, int componentHeight) {
+        Color baseColor = new Color(0, 0, 255);
+        move(0, (this.getSettings().getTaille() + 1));
+        drawLine(graphics, componentHeight, (this.getSettings().getTaille() + 1) * 8 / 2, 0, baseColor);
+        drawLine(graphics, componentHeight, (this.getSettings().getTaille() + 1) * 8, (this.getSettings().getTaille() + 1), baseColor);
+        move((this.getSettings().getTaille() + 1) * 8 / 2, 0);
         // ligne 1180
         for (i = 0; i <= l; i++) {
             c1[l - i] = h1[0][i] + i - 2;
