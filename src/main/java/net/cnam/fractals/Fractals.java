@@ -170,6 +170,30 @@ public class Fractals {
         move(x, y);
     }
 
+    private void drawLine(Graphics2D graphics, int componentHeight, int x, int y, int size, int c) {
+        Color color = colors.get(c);
+        drawLine(graphics, componentHeight, x, y, size, color);
+    }
+
+    private void drawLine(Graphics2D graphics, int componentHeight, int x, int y, int size, Color color) {
+        if (size <= 0) {
+            return;
+        }
+        int saveX = moveX;
+        int saveY = moveY;
+        int saveDestX = 0;
+        int saveDestY = 0;
+        for (int i = 0; i < size; i++) {
+            move(saveX + i, saveY);
+            drawLine(graphics, componentHeight, x + i, y, color);
+            if (i == 0) {
+                saveDestX = moveX;
+                saveDestY = moveY;
+            }
+        }
+        move(saveDestX, saveDestY);
+    }
+
     // lignes 290 à 350
     private void surfaceDeBase(Graphics2D graphics, int componentHeight) {
         for (x = 0; x <= l; x += p) {
