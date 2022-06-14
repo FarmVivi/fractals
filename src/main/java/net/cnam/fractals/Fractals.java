@@ -172,22 +172,25 @@ public class Fractals {
     }
 
     private void drawLine(Graphics2D graphics, int componentHeight, int x, int y, int size, Color color) {
-        if (size <= 0) {
+        if (graphics == null || size <= 0) {
             return;
         }
-        int saveX = moveX;
-        int saveY = moveY;
-        int saveDestX = 0;
-        int saveDestY = 0;
-        for (int i = 0; i < size; i++) {
-            move(saveX + i, saveY);
-            drawLine(graphics, componentHeight, x + i, y, color);
-            if (i == 0) {
-                saveDestX = moveX;
-                saveDestY = moveY;
-            }
+
+        if (size == 1) {
+            drawLine(graphics, componentHeight, x, y, color);
+            return;
         }
-        move(saveDestX, saveDestY);
+
+        if (graphics.getColor() != color) {
+            graphics.setColor(color);
+        }
+        int height = y - moveY;
+        if (height < 0) {
+            height = moveY - y;
+        }
+        graphics.fillRect(moveX, componentHeight - moveY - y + moveY, size, height);
+
+        move(x, y);
     }
 
     // lignes 290 à 350
@@ -339,7 +342,7 @@ public class Fractals {
                     plot(graphics, componentHeight, a * 4, c1[a], 4, 1, c2);
                 }
                 if (h2 > c1[a]) {
-                    move(a * 4, c1[a] + 1);
+                    move(a * 4, c1[a]);
                     drawLine(graphics, componentHeight, a * 4, h2, 4, c2);
                     c1[a] = h2;
                 }
@@ -393,7 +396,7 @@ public class Fractals {
                     ombresPrivate();
                     continue;
                 }
-                move(a * 4, c1[a] - 1);
+                move(a * 4, c1[a] - 2);
                 drawLine(graphics, componentHeight, a * 4, h2, 4, color);
                 c1[a] = h2 + 2;
                 ombresPrivate();
