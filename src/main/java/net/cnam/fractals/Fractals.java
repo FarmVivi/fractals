@@ -37,8 +37,6 @@ public class Fractals {
     private int nm;
     private int nmx;
     private int a;
-    private int o;
-    private int k;
     private int t;
     private int fh;
     private int o1;
@@ -78,8 +76,8 @@ public class Fractals {
         this.moveX = 0;
         this.moveY = 0;
         this.h1 = new int[settings.getTaille() + 1][settings.getTaille() + 1];
-        this.magicC = settings.getTaille() * 2 + settings.getTaille() / 2;
-        this.c1 = new int[magicC + 1];
+        this.magicC = settings.getTaille() * 2;
+        this.c1 = new int[magicC + 2];
         this.m = settings.getMaille();
         this.p = (int) Math.pow(2, 7 - m);
         this.h2 = settings.getHauteur();
@@ -96,8 +94,6 @@ public class Fractals {
         this.nm = 0;
         this.nmx = 0;
         this.a = 0;
-        this.o = 0;
-        this.k = 0;
         this.t = 0;
         this.fh = 0;
         this.o1 = 0;
@@ -328,15 +324,12 @@ public class Fractals {
 
         // lignes 1050 à 1130
         for (y = 0; y <= l; y++) {
-            for (x = 0; x <= l - 1; x++) {
+            for (x = 0; x < l; x++) {
                 nmx = nm + x + y;
                 a = l - y + x;
-                if (a < 0 || a > magicC - 1) {
-                    continue;
-                }
                 h2 = h1[x][y] + x + y;
                 c2 = h1[x][y] / n;
-                if (c2 > colors.size() - 1) {
+                if (c2 >= colors.size()) {
                     c2 = colors.size() - 1;
                 }
                 if (h2 < nmx) {
@@ -347,13 +340,7 @@ public class Fractals {
                 }
                 if (h2 > c1[a]) {
                     move(a * 4, c1[a] + 1);
-                    drawLine(graphics, componentHeight, a * 4, h2, c2);
-                    move(a * 4 + 1, c1[a] + 1);
-                    drawLine(graphics, componentHeight, a * 4 + 1, h2, c2);
-                    move(a * 4 + 2, c1[a] + 1);
-                    drawLine(graphics, componentHeight, a * 4 + 2, h2, c2);
-                    move(a * 4 + 3, c1[a] + 1);
-                    drawLine(graphics, componentHeight, a * 4 + 3, h2, c2);
+                    drawLine(graphics, componentHeight, a * 4, h2, 4, c2);
                     c1[a] = h2;
                 }
             }
@@ -374,10 +361,6 @@ public class Fractals {
             o2 = 0;
             for (x = l; x >= 0; x--) {
                 a = l - y + x;
-                if (a < 0 || a > magicC - 1) {
-                    ombresPrivate();
-                    continue;
-                }
                 h2 = h1[x][y] + x + y;
                 c2 = 3;
                 if (h1[x][y] >= o1) {
@@ -390,7 +373,6 @@ public class Fractals {
                 } else {
                     c2 = 1;
                 }
-
 
                 if (h2 < c1[a]) {
                     c2 += 1;
@@ -406,20 +388,13 @@ public class Fractals {
                     color = new Color(0, 255, 255);
                 }
 
-
                 if (h2 < c1[a]) {
                     plot(graphics, componentHeight, a * 4, c1[a] - 2, 4, 1, color);
                     ombresPrivate();
                     continue;
                 }
                 move(a * 4, c1[a] - 1);
-                drawLine(graphics, componentHeight, a * 4, h2, color);
-                move(a * 4 + 1, c1[a] - 1);
-                drawLine(graphics, componentHeight, a * 4 + 1, h2, color);
-                move(a * 4 + 2, c1[a] - 1);
-                drawLine(graphics, componentHeight, a * 4 + 2, h2, color);
-                move(a * 4 + 3, c1[a] - 1);
-                drawLine(graphics, componentHeight, a * 4 + 3, h2, color);
+                drawLine(graphics, componentHeight, a * 4, h2, 4, color);
                 c1[a] = h2 + 2;
                 ombresPrivate();
             }
@@ -433,38 +408,23 @@ public class Fractals {
 
     // lignes 850 à 970
     private void filDeFer(Graphics2D graphics, int componentHeight) {
-        // 0, 40
-        move(0, magicC / 8);
-        // 160
-        o = magicC / 2;
-        // 0
-        k = 0;
-        // 320, 0
-        drawLine(graphics, componentHeight, magicC, 0, 1);
-        // 640, 40
-        drawLine(graphics, componentHeight, magicC * 2, magicC / 8, 1);
-        c1 = new int[magicC + 1];
-        // 0, 128
+        int o = c1.length / 2;
+        int k = 0;
+        c1 = new int[magicC + 2];
         for (y = 0; y <= l; y += 2) {
-            // - 320
-            move(o * 4 - magicC, c1[o + k]);
-            // 0
+            move(o * 4, c1[o + k]);
             k = 0;
-            // 160
-            o = magicC / 2 - y;
+            o = c1.length / 2 - y;
             if (o < 0)
                 k = -o;
-            // k, 128
             for (x = k; x <= l; x += 2) {
                 t = h1[x][y] + y + x;
                 h2 = Math.max(c1[x + o], t);
                 c1[x + o] = h2;
-                // - 320
-                drawLine(graphics, componentHeight, (o + x) * 4 - magicC, h2, 1);
+                drawLine(graphics, componentHeight, (o + x) * 4, h2, 1);
             }
             if (y != 0)
-                // - 322
-                drawLine(graphics, componentHeight, (o + x) * 4 - magicC - 2, fh, 1);
+                drawLine(graphics, componentHeight, (o + x) * 4 - 2, fh, 1);
             fh = h2;
         }
     }
