@@ -11,6 +11,7 @@ public class MainPanel extends JPanel {
 
     public MainPanel() {
         this.setLayout(new GridBagLayout());
+        this.setOpaque(true);
 
         this.svgCanvas = new JSVGCanvas();
         try {
