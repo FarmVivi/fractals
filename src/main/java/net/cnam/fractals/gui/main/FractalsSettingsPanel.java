@@ -2,12 +2,14 @@ package net.cnam.fractals.gui.main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FractalsSettingsPanel extends JPanel {
     enum FieldTitle {
-        MAILLE("Maille",0,3),
+        MAILLE("Maille", 0, 3),
         HAUTEUR("Hauteur"),
         DEVIATION("Deviation"),
         GRAINE("Graine"),
@@ -15,20 +17,22 @@ public class FractalsSettingsPanel extends JPanel {
 
         private final String title;
         private final boolean slider;
+        private final boolean onlyNumbers;
         private final int minimumValue;
         private final int maximumValue;
 
         FieldTitle(String title) {
             this.title = title;
             this.slider = false;
+            this.onlyNumbers = true;
             this.minimumValue = 0;
             this.maximumValue = 0;
-
         }
 
         FieldTitle(String title, int minimumValue, int maximumValue) {
             this.title = title;
             this.slider = true;
+            this.onlyNumbers = false;
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
         }
@@ -48,7 +52,13 @@ public class FractalsSettingsPanel extends JPanel {
         public boolean isSlider() {
             return slider;
         }
-    };
+
+        public boolean isOnlyNumbers() {
+            return onlyNumbers;
+        }
+    }
+
+    ;
 
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
@@ -66,10 +76,23 @@ public class FractalsSettingsPanel extends JPanel {
             add(new JLabel(fieldTitle.getTitle() + " :", JLabel.LEFT), gbc);
             gbc = createGbc(1, i);
             ValuableComponent valuable;
-            if (!fieldTitle.isSlider()){
-                valuable = new ValuableJTextField(10);
+            if (!fieldTitle.isSlider()) {
+                ValuableJTextField valuableJTextField = new ValuableJTextField(10);
+
+                if (fieldTitle.isOnlyNumbers()) {
+                    valuableJTextField.addKeyListener(new KeyAdapter() {
+                        public void keyTyped(KeyEvent e) {
+                            char c = e.getKeyChar();
+                            if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+                                e.consume();
+                            }
+                        }
+                    });
+                }
+
+                valuable = valuableJTextField;
             } else {
-                ValuableJSlider valuableJSlider= new ValuableJSlider();
+                ValuableJSlider valuableJSlider = new ValuableJSlider();
                 valuableJSlider.setMinimum(fieldTitle.getMinimumValue());
                 valuableJSlider.setMaximum(fieldTitle.getMaximumValue());
                 valuableJSlider.setPaintTicks(true);
