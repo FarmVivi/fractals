@@ -90,11 +90,6 @@ public class MainFrame extends JFrame {
         // Onglet Affichage
         JMenu viewMenu = new JMenu("Affichage");
 
-        JMenuItem newSurfaceItem = new JMenuItem("Nouvelle surface");
-        viewMenu.add(newSurfaceItem);
-
-        viewMenu.addSeparator();
-
         JMenuItem mapItem = new JMenuItem("Carte");
         viewMenu.add(mapItem);
 
@@ -135,7 +130,7 @@ public class MainFrame extends JFrame {
             }
             fractals = new Fractals(new FractalsSettings());
             panel.removeAll();
-            panel.add(new NewSurfacePanel(fractals));
+            panel.add(new CartePanel(fractals));
             panel.revalidate();
         });
 
@@ -212,13 +207,6 @@ public class MainFrame extends JFrame {
         });
 
         // Onglet Affichage
-        // Nouvelle surface
-        newSurfaceItem.addActionListener(e -> {
-            panel.removeAll();
-            panel.add(new NewSurfacePanel(fractals));
-            panel.revalidate();
-        });
-
         // Carte
         mapItem.addActionListener(e -> {
             panel.removeAll();
