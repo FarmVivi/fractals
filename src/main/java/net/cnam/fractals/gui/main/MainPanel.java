@@ -18,7 +18,7 @@ public class MainPanel extends JPanel {
 
     @Override
     public void removeAll() {
-        this.setBackground(Color.WHITE);
+        this.setBackground(null);
         super.removeAll();
     }
 }

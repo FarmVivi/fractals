@@ -1,5 +1,7 @@
 package net.cnam.fractals;
 
+import net.cnam.fractals.utils.Utils;
+
 import java.io.*;
 import java.util.Random;
 

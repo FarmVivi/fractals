@@ -10,12 +10,17 @@ import net.cnam.fractals.gui.view.filfer.FilFerPanel;
 import net.cnam.fractals.gui.view.ombres.OmbresPanel;
 import net.cnam.fractals.gui.view.strates.StratesPanel;
 import net.cnam.fractals.old.App;
+import net.cnam.fractals.utils.Utils;
+import org.apache.batik.transcoder.TranscoderException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainFrame extends JFrame {
     private static final String TITLE = "Fractals";
@@ -36,6 +41,17 @@ public class MainFrame extends JFrame {
         this.setSize(width, height);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        try {
+            String iconSVGURI = MainFrame.class.getResource("/assets/svg/logo.svg").toURI().toString();
+            List<Image> logos = new ArrayList<>();
+            logos.add(Utils.loadImage(iconSVGURI, 16, 16));
+            logos.add(Utils.loadImage(iconSVGURI, 32, 32));
+            logos.add(Utils.loadImage(iconSVGURI, 64, 64));
+            logos.add(Utils.loadImage(iconSVGURI, 128, 128));
+            this.setIconImages(logos);
+        } catch (URISyntaxException | TranscoderException ex) {
+            ex.printStackTrace();
+        }
 
         // Menu
         // Onglet Fichier
@@ -141,12 +157,6 @@ public class MainFrame extends JFrame {
                     panel.add(new NewSurfacePanel(fractals));
                     panel.revalidate();
                 } catch (Exception ex) {
-                    StackTraceElement[] trace = ex.getStackTrace();
-                    String[] lines = new String[trace.length + 1];
-                    lines[0] = ex.toString();
-                    for (int i = 1; i <= trace.length; i++) {
-                        lines[i] = "   at " + trace[i - 1];
-                    }
                     JOptionPane.showMessageDialog(this, "Erreur lors de l'ouverture du fichier\nErreur:\n" + ex, "Erreur lors de l'ouverture du fichier", JOptionPane.ERROR_MESSAGE);
                 }
             }
