@@ -4,9 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FractalsSettingsDialog extends JDialog {
-    private JTextField textFieldMaille = new JTextField();
     private JTextField textFieldDeviation = new JTextField();
     private JTextField textFieldTaille = new JTextField();
+    private JTextField textFieldHauteur = new JTextField();
+    private JTextField textFieldGraine = new JTextField();
 
     public FractalsSettingsDialog(Frame owner) {
         super(owner, "Nouveau...", true);
@@ -15,16 +16,31 @@ public class FractalsSettingsDialog extends JDialog {
         this.setLocationRelativeTo(owner);
 
         JPanel contentPane = (JPanel) this.getContentPane();
-        contentPane.setLayout(new GridLayout(3, 2, 10, 10));
+        contentPane.setLayout(new GridLayout(6, 2, 10, 10));
 
         contentPane.add(new JLabel("Maille : "));
-        contentPane.add(textFieldMaille);
+        JSlider slideMaille = new JSlider();
+        slideMaille.setMinimum(0);
+        slideMaille.setMaximum(3);
+        slideMaille.setPaintTicks(true);
+        slideMaille.setPaintLabels(true);
+        slideMaille.setMajorTickSpacing(1);
+        contentPane.add(slideMaille);
 
         contentPane.add(new JLabel("Deviation : "));
         contentPane.add(textFieldDeviation);
 
         contentPane.add(new JLabel("Taille : "));
         contentPane.add(textFieldTaille);
+
+        contentPane.add(new JLabel("Hauteur : "));
+        contentPane.add(textFieldHauteur);
+
+        contentPane.add(new JLabel("Graine : "));
+        contentPane.add(textFieldGraine);
+
+        contentPane.add(new JButton("Valider"));
+        contentPane.add(new JButton("Annuler"));
 
         this.pack();
     }
