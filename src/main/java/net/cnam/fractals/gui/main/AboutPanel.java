@@ -16,8 +16,7 @@ public class AboutPanel extends JPanel {
 
         JPanel troudeballe = new JPanel();
 
-        TitledBorder titledBorder = BorderFactory.createTitledBorder("CrÃ©dits");
-        titledBorder.setTitleColor(Color.magenta);
+        TitledBorder titledBorder = BorderFactory.createTitledBorder("Crédits");
         titledBorder.setTitleFont( titledBorder.getTitleFont().deriveFont(Font.BOLD));
         troudeballe.setBorder(BorderFactory.createCompoundBorder(
                 titledBorder,
@@ -44,7 +43,6 @@ public class AboutPanel extends JPanel {
         JPanel troudeballeV2 = new JPanel();
 
         titledBorder = BorderFactory.createTitledBorder("Fractals");
-        titledBorder.setTitleColor(Color.magenta);
         titledBorder.setTitleFont( titledBorder.getTitleFont().deriveFont(Font.BOLD));
         troudeballeV2.setBorder(BorderFactory.createCompoundBorder(
                 titledBorder,
