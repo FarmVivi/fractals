@@ -522,9 +522,9 @@ public class Fractals {
     }
 
     public void viewOmbres(Graphics2D graphics) {
-        if (!calculFractalDone) {
+        //if (!calculFractalDone) {
             newSurface(null);
-        }
+        //}
 
         semaphore.acquireUninterruptibly();
 

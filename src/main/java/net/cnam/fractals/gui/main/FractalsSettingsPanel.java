@@ -123,7 +123,7 @@ public class FractalsSettingsPanel extends JPanel {
         return gbc;
     }
 
-    public String getFieldText(FieldTitle fieldTitle) {
-        return fieldMap.get(fieldTitle).getValuable();
+    public ValuableComponent getValuableComponent(FieldTitle fieldTitle) {
+        return fieldMap.get(fieldTitle);
     }
 }

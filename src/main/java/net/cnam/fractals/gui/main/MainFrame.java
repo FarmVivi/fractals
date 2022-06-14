@@ -116,18 +116,32 @@ public class MainFrame extends JFrame {
         // Nouveau
         newItem.addActionListener(e -> {
             FractalsSettingsPanel fractalsSettingsPanel = new FractalsSettingsPanel();
+            JPanel fractalsSettingsContentPanel = new JPanel();
+            fractalsSettingsContentPanel.setLayout(new BoxLayout(fractalsSettingsContentPanel, BoxLayout.Y_AXIS));
+            fractalsSettingsContentPanel.add(fractalsSettingsPanel);
+            JButton randomButton = new JButton("Aléatoire");
+            randomButton.addActionListener(e1 -> {
+                FractalsSettings randomSettings = new FractalsSettings();
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.MAILLE).setValuable(String.valueOf(randomSettings.getMaille()));
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.HAUTEUR).setValuable(String.valueOf(randomSettings.getHauteur()));
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.DEVIATION).setValuable(String.valueOf(randomSettings.getDeviation()));
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.GRAINE).setValuable(String.valueOf(randomSettings.getGraine()));
+                fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.TAILLE).setValuable(String.valueOf(randomSettings.getTaille()));
+            });
+            randomButton.doClick();
+            fractalsSettingsContentPanel.add(randomButton);
 
-            int result = JOptionPane.showConfirmDialog(MainFrame.this, fractalsSettingsPanel,
+            int result = JOptionPane.showConfirmDialog(MainFrame.this, fractalsSettingsContentPanel,
                     "Nouvelle fractal", JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION) {
                 try {
                     fractals = new Fractals(new FractalsSettings(
-                            Integer.parseInt(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.MAILLE)),
-                            Integer.parseInt(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.HAUTEUR)),
-                            Integer.parseInt(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.DEVIATION)),
-                            Long.parseLong(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.GRAINE)),
-                            Integer.parseInt(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.TAILLE))
+                            Integer.parseInt(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.MAILLE).getValuable()),
+                            Integer.parseInt(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.HAUTEUR).getValuable()),
+                            Integer.parseInt(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.DEVIATION).getValuable()),
+                            Long.parseLong(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.GRAINE).getValuable()),
+                            Integer.parseInt(fractalsSettingsPanel.getValuableComponent(FractalsSettingsPanel.FieldTitle.TAILLE).getValuable())
                     ));
                     panel.removeAll();
                     panel.add(new CartePanel(fractals));

@@ -28,7 +28,12 @@ public class ValuableJSlider extends JSlider implements ValuableComponent {
     }
 
     @Override
-    public String getValuable(){
+    public String getValuable() {
         return "" + super.getValue();
+    }
+
+    @Override
+    public void setValuable(String value) {
+        super.setValue(Integer.parseInt(value));
     }
 }

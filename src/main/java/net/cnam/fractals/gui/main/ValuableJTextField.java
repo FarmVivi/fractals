@@ -28,4 +28,9 @@ public class ValuableJTextField extends JTextField implements ValuableComponent 
     public String getValuable() {
         return super.getText();
     }
+
+    @Override
+    public void setValuable(String value) {
+        super.setText(value);
+    }
 }
