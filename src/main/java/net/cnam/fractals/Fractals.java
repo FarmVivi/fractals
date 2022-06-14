@@ -139,7 +139,7 @@ public class Fractals {
         if (graphics.getColor() != color) {
             graphics.setColor(color);
         }
-        graphics.fillRect(x, componentHeight - y, width, height);
+        graphics.fillRect(x, componentHeight - y - 1, width, height);
 
         move(x, y);
     }
@@ -161,7 +161,7 @@ public class Fractals {
         if (graphics.getColor() != color) {
             graphics.setColor(color);
         }
-        graphics.drawLine(moveX, componentHeight - moveY, x, componentHeight - y);
+        graphics.drawLine(moveX, componentHeight - moveY - 1, x, componentHeight - y - 1);
 
         move(x, y);
     }
@@ -188,7 +188,7 @@ public class Fractals {
         if (height < 0) {
             height = moveY - y + 1;
         }
-        graphics.fillRect(moveX, componentHeight - moveY - y + moveY, size, height);
+        graphics.fillRect(moveX, componentHeight - moveY - y + moveY - 1, size, height);
 
         move(x, y);
     }
@@ -411,8 +411,12 @@ public class Fractals {
 
     // lignes 850 à 970
     private void filDeFer(Graphics2D graphics, int componentHeight) {
+        Color color = new Color(128, 128, 255);
         int o = c1.length / 2;
         int k = 0;
+        move(0, (this.getSettings().getTaille() + 1));
+        drawLine(graphics, componentHeight, (this.getSettings().getTaille() + 1) * 8 / 2, 0, color);
+        drawLine(graphics, componentHeight, (this.getSettings().getTaille() + 1) * 8, (this.getSettings().getTaille() + 1), color);
         c1 = new int[magicC + 2];
         for (y = 0; y <= l; y += 2) {
             move(o * 4, c1[o + k]);
@@ -424,10 +428,10 @@ public class Fractals {
                 t = h1[x][y] + y + x;
                 h2 = Math.max(c1[x + o], t);
                 c1[x + o] = h2;
-                drawLine(graphics, componentHeight, (o + x) * 4, h2, 1);
+                drawLine(graphics, componentHeight, (o + x) * 4, h2, color);
             }
             if (y != 0)
-                drawLine(graphics, componentHeight, (o + x) * 4 - 2, fh, 1);
+                drawLine(graphics, componentHeight, (o + x) * 4 - 2, fh, color);
             fh = h2;
         }
     }
