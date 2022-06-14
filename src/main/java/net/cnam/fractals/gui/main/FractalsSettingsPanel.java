@@ -58,10 +58,9 @@ public class FractalsSettingsPanel extends JPanel {
         }
     }
 
-    ;
-
     private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
     private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
+
     private final Map<FieldTitle, ValuableComponent> fieldMap = new HashMap<>();
 
     public FractalsSettingsPanel() {
@@ -127,5 +126,4 @@ public class FractalsSettingsPanel extends JPanel {
     public String getFieldText(FieldTitle fieldTitle) {
         return fieldMap.get(fieldTitle).getValuable();
     }
-
 }

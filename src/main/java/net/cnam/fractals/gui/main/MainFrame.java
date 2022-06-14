@@ -117,21 +117,26 @@ public class MainFrame extends JFrame {
         newItem.addActionListener(e -> {
             FractalsSettingsPanel fractalsSettingsPanel = new FractalsSettingsPanel();
 
-            int result = JOptionPane.showConfirmDialog(null, fractalsSettingsPanel,
+            int result = JOptionPane.showConfirmDialog(MainFrame.this, fractalsSettingsPanel,
                     "Nouvelle fractal", JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION) {
-
-                for (FractalsSettingsPanel.FieldTitle fieldTitle :
-                        FractalsSettingsPanel.FieldTitle.values()) {
-                    System.out.printf("%10s: %s%n", fieldTitle.getTitle(),
-                            fractalsSettingsPanel.getFieldText(fieldTitle));
+                try {
+                    fractals = new Fractals(new FractalsSettings(
+                            Integer.parseInt(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.MAILLE)),
+                            Integer.parseInt(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.HAUTEUR)),
+                            Integer.parseInt(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.DEVIATION)),
+                            Long.parseLong(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.GRAINE)),
+                            Integer.parseInt(fractalsSettingsPanel.getFieldText(FractalsSettingsPanel.FieldTitle.TAILLE))
+                    ));
+                    panel.removeAll();
+                    panel.add(new CartePanel(fractals));
+                    panel.revalidate();
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(MainFrame.this, ex.getMessage(),
+                            "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            fractals = new Fractals(new FractalsSettings());
-            panel.removeAll();
-            panel.add(new CartePanel(fractals));
-            panel.revalidate();
         });
 
         // Ouvrir
