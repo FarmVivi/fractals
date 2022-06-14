@@ -120,8 +120,19 @@ public class MainFrame extends JFrame {
         // Onglet Fichier
         // Nouveau
         newItem.addActionListener(e -> {
-            FractalsSettingsDialog dialog = new FractalsSettingsDialog(this);
-            dialog.setVisible(true);
+            FractalsSettingsPanel fractalsSettingsPanel = new FractalsSettingsPanel();
+
+            int result = JOptionPane.showConfirmDialog(null, fractalsSettingsPanel,
+                    "Nouvelle fractal", JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE);
+            if (result == JOptionPane.OK_OPTION) {
+
+                for (FractalsSettingsPanel.FieldTitle fieldTitle :
+                        FractalsSettingsPanel.FieldTitle.values()) {
+                    System.out.printf("%10s: %s%n", fieldTitle.getTitle(),
+                            fractalsSettingsPanel.getFieldText(fieldTitle));
+                }
+            }
             fractals = new Fractals(new FractalsSettings());
             panel.removeAll();
             panel.add(new NewSurfacePanel(fractals));
