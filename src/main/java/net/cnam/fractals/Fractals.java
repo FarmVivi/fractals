@@ -538,7 +538,7 @@ public class Fractals {
         ds = (int) ((Math.pow(xj - xm, 2)) + (Math.pow(yj - ym, 2)));
         if (ds < 3) {
             // écrire "SAUVE !"
-            JOptionPane.showMessageDialog(mainFrame, "Vous avez sauvé !", "Game Over", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(mainFrame, "Vous êtes sauvé !", "Game Over", JOptionPane.PLAIN_MESSAGE);
             if (mainFrame instanceof MainFrame mainFrame2) {
                 mainFrame2.close();
             } else {
